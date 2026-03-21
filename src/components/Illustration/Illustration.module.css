@@ -1,0 +1,12 @@
+.wrapper {
+  padding: 16px 0 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.banner {
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+  border-radius: 12px;
+}

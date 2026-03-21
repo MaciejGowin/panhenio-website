@@ -1,0 +1,43 @@
+.footer {
+  border-top: 1px solid var(--gray-200);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  background: var(--white);
+}
+
+.logo {
+  height: 28px;
+  width: auto;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.link {
+  text-decoration: none;
+  color: var(--gray-500);
+  font-size: 0.875rem;
+  transition: color 0.15s;
+}
+
+.link:hover {
+  color: var(--navy);
+}
+
+.dot {
+  color: var(--gray-500);
+  font-size: 0.875rem;
+  user-select: none;
+}
