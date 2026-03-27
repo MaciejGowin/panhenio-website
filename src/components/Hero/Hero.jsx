@@ -3,60 +3,37 @@ import styles from './Hero.module.css'
 
 export default function Hero() {
   const [query, setQuery] = useState('')
-  const [results, setResults] = useState(null)
 
-  async function handleSearch() {
-    const res = await fetch('/data/events.json')
-    const events = await res.json()
-    const q = query.trim().toLowerCase()
-    setResults(q ? events.filter(e =>
-      e.name.toLowerCase().includes(q) ||
-      e.location.toLowerCase().includes(q) ||
-      e.city.toLowerCase().includes(q)
-    ) : events)
+  function handleSearch() {
+    const phrase = query.trim()
+    const hash = phrase ? `#szukaj?phrase=${encodeURIComponent(phrase)}` : '#szukaj'
+    window.location.hash = hash
   }
 
   return (
-    <>
-      <section className={styles.hero}>
-        <h1 className={styles.title}>Pan Henio</h1>
-        <p className={styles.subtitle}>
-          Znajdź ciekawe wydarzenia dla seniorów w mieście
-        </p>
-        <div className={styles.searchRow}>
-          <input
-            type="text"
-            className={styles.input}
-            placeholder="Szukaj wydarzeń, zajęć lub miejsca"
-            value={query}
-            onChange={e => setQuery(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && handleSearch()}
-          />
-          <button className={styles.button} onClick={handleSearch}>
-            <SearchIcon />
-            Szukaj
-          </button>
-        </div>
-      </section>
-
-      {results !== null && (
-        <div className={styles.results}>
-          {results.length === 0 ? (
-            <p className={styles.noResults}>Brak wyników.</p>
-          ) : (
-            <ul className={styles.cards}>
-              {results.map((event, i) => (
-                <li key={i} className={styles.card}>
-                  <span className={styles.cardName}>{event.name}</span>
-                  <span className={styles.cardMeta}>{event.location}, {event.city}</span>
-                  <span className={styles.cardMeta}>{event.date} · {event.time}</span>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      )}
-    </>
+    <section className={styles.hero}>
+      <h1 className={styles.title}>Pan Henio</h1>
+      <p className={styles.subtitle}>
+        Znajdź ciekawe wydarzenia dla seniorów w mieście
+      </p>
+      <div className={styles.searchRow}>
+        <input
+          type="text"
+          className={styles.input}
+          placeholder="Szukaj wydarzeń, zajęć lub miejsca"
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && handleSearch()}
+        />
+        <button className={styles.button} onClick={handleSearch}>
+          <SearchIcon />
+          Szukaj
+        </button>
+      </div>
+      <a href="#szukaj" className={styles.browseAll}>
+        lub przeglądaj wszystkie wydarzenia →
+      </a>
+    </section>
   )
 }
 

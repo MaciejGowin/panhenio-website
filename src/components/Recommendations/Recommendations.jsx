@@ -1,23 +1,29 @@
+import { useEffect, useState } from 'react'
 import styles from './Recommendations.module.css'
 
-const items = [
-  'Spacer nordic waking',
-  'Biblioteka – Klub Książki',
-  'Warsztaty smartfona',
-]
-
 export default function Recommendations() {
+  const [items, setItems] = useState([])
+
+  useEffect(() => {
+    fetch('/api/events/latest')
+      .then((res) => res.json())
+      .then((data) => setItems(data))
+      .catch(() => {})
+  }, [])
+
   return (
     <section className={styles.section}>
       <h2 className={styles.heading}>
         <StarIcon filled className={styles.headingStar} />
-        Pan Henio poleca dziś
+        Pan Henio poleca
       </h2>
       <ul className={styles.list}>
         {items.map((item) => (
-          <li key={item} className={styles.item}>
+          <li key={item.id} className={styles.item}>
             <StarIcon className={styles.star} />
-            <span>{item}</span>
+            <a href={`#wydarzenie/${encodeURIComponent(item.source.id)}/${encodeURIComponent(item.id)}`} className={styles.link}>
+              {item.name}
+            </a>
           </li>
         ))}
       </ul>

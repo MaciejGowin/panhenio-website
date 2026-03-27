@@ -44,3 +44,79 @@
 .link:hover {
   color: var(--orange);
 }
+
+.linkBold {
+  font-weight: 700;
+}
+
+/* Hamburger button — mobile only */
+.menuButton {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--navy);
+  border-radius: 2px;
+  transition: opacity 0.15s, transform 0.2s;
+  transform-origin: center;
+}
+
+.barTop {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.barMid {
+  opacity: 0;
+}
+
+.barBot {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Dropdown — mobile only */
+.dropdown {
+  list-style: none;
+  display: none;
+  flex-direction: column;
+  background: var(--white);
+  border-top: 1px solid var(--gray-200);
+  padding: 8px 0;
+}
+
+.dropdownLink {
+  display: block;
+  padding: 12px 24px;
+  text-decoration: none;
+  color: var(--navy);
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+
+.dropdownLink:hover {
+  color: var(--orange);
+}
+
+@media (max-width: 480px) {
+  .links {
+    display: none;
+  }
+
+  .menuButton {
+    display: flex;
+  }
+
+  .dropdown {
+    display: flex;
+  }
+}

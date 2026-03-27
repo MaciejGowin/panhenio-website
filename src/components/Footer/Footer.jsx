@@ -4,7 +4,7 @@ import logo from '/panhenio-logo.png'
 const links = [
   { label: 'Kontakt', href: '#kontakt' },
   { label: 'O projekcie', href: '#o-projekcie' },
-  { label: 'Partnerzy', href: '#partnerzy' },
+  { label: 'Polityka prywatności', href: '#polityka-prywatnosci' },
 ]
 
 export default function Footer() {

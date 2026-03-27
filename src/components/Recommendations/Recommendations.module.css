@@ -45,6 +45,11 @@
   opacity: 0.75;
 }
 
+.link {
+  color: var(--navy);
+  text-decoration: none;
+}
+
 .star {
   color: var(--orange);
   flex-shrink: 0;

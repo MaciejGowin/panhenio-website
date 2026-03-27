@@ -1,0 +1,83 @@
+.page {
+  flex: 1;
+  padding: 40px 24px 80px;
+}
+
+.inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.back {
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--navy);
+  text-decoration: none;
+  margin-bottom: 28px;
+}
+
+.back:hover {
+  color: var(--orange);
+}
+
+.loading,
+.error {
+  font-size: 0.95rem;
+  color: var(--gray-500);
+}
+
+.card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 28px 28px 32px;
+  box-shadow: 0 2px 12px rgba(30, 58, 110, 0.09);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.category {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--orange);
+  margin: 0;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.3;
+  margin: 0;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.9rem;
+  color: var(--gray-500);
+}
+
+.description {
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.75;
+  margin: 0;
+}
+
+.sourceLink {
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--orange);
+  text-decoration: none;
+  margin-top: 4px;
+}
+
+.sourceLink:hover {
+  color: var(--orange-dark);
+}
