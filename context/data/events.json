@@ -1,170 +1,310 @@
 [
   {
-    "name": "Nordic walking z Teresą Tadeuszyk",
-    "location": "Park Szczytnicki",
-    "city": "Wrocław",
+    "id": "seniorzy-2026-03-03-nordic-walking",
+    "source": {
+      "id": "www-seniorzy-wroclaw-pl",
+      "url": "https://www.seniorzy.wroclaw.pl/Biuletyn-marzec-2026"
+    },
+    "name": "Nordic walking z Teresą Tadeuszyk – projekt „Opowieści ruchem pisane”",
+    "description": "Spacer nordic walking dla seniorów poprawiający kondycję, koordynację ruchową oraz pamięć. Zajęcia odbywają się na świeżym powietrzu i są dostosowane do możliwości uczestników.",
+    "location": "Park Szczytnicki, zbiórka przy przystanku tramwajowym Chopina",
+    "city": {
+      "id": "wroclaw",
+      "name": "Wrocław"
+    },
     "date": "2026-03-03",
-    "time": "10:00"
+    "time": "10:00",
+    "cost": "bezpłatnie",
+    "category": {
+      "id": "aktywnosc",
+      "name": "Aktywność"
+    },
+    "createdAt": "2026-03-11T12:13:00.123123Z"
   },
   {
-    "name": "Nordic walking z Teresą Tadeuszyk",
-    "location": "Park Szczytnicki",
-    "city": "Wrocław",
-    "date": "2026-03-06",
-    "time": "10:00"
-  },
-  {
-    "name": "Nordic walking z Teresą Tadeuszyk",
-    "location": "Park Szczytnicki",
-    "city": "Wrocław",
-    "date": "2026-03-10",
-    "time": "10:00"
-  },
-  {
-    "name": "Nordic walking z Teresą Tadeuszyk",
-    "location": "Park Zachodni",
-    "city": "Wrocław",
-    "date": "2026-03-11",
-    "time": "11:00"
-  },
-  {
-    "name": "Nordic walking z Teresą Tadeuszyk",
-    "location": "Park Szczytnicki",
-    "city": "Wrocław",
-    "date": "2026-03-13",
-    "time": "10:00"
-  },
-  {
-    "name": "Nordic walking z Teresą Tadeuszyk",
-    "location": "Park Szczytnicki",
-    "city": "Wrocław",
-    "date": "2026-03-17",
-    "time": "10:00"
-  },
-  {
-    "name": "Nordic walking z Teresą Tadeuszyk",
-    "location": "Park Zachodni",
-    "city": "Wrocław",
-    "date": "2026-03-18",
-    "time": "11:00"
-  },
-  {
-    "name": "Nordic walking z Teresą Tadeuszyk",
-    "location": "Park Szczytnicki",
-    "city": "Wrocław",
-    "date": "2026-03-20",
-    "time": "10:00"
-  },
-  {
+    "id": "seniorzy-2026-03-05-sardynia",
+    "source": {
+      "id": "www-seniorzy-wroclaw-pl",
+      "url": "https://www.seniorzy.wroclaw.pl/Biuletyn-marzec-2026"
+    },
     "name": "Spotkanie podróżnicze – Sardynia wyspa długowieczności",
-    "location": "WCRS – pl. Dominikański 6",
-    "city": "Wrocław",
+    "description": "Prelekcja podróżnicza o Sardynii – jej kulturze, tradycjach, kuchni oraz fenomenie długowieczności mieszkańców.",
+    "location": "Wrocławskie Centrum Seniora, pl. Dominikański 6, sala 27",
+    "city": {
+      "id": "wroclaw",
+      "name": "Wrocław"
+    },
     "date": "2026-03-05",
-    "time": "11:00"
+    "time": "11:00",
+    "cost": "bezpłatnie",
+    "category": {
+      "id": "pozdroze",
+      "name": "Podróże"
+    },
+    "createdAt": "2026-03-11T12:13:00.123123Z"
   },
   {
-    "name": "Dzień Kobiet – spotkanie literacko-muzyczne",
-    "location": "WCRS – pl. Dominikański 6",
-    "city": "Wrocław",
+    "id": "seniorzy-2026-03-06-nordic-walking",
+    "source": {
+      "id": "www-seniorzy-wroclaw-pl",
+      "url": "https://www.seniorzy.wroclaw.pl/Biuletyn-marzec-2026"
+    },
+    "name": "Nordic walking z Teresą Tadeuszyk – projekt „Opowieści ruchem pisane”",
+    "description": "Spacer nordic walking dla seniorów poprawiający kondycję, koordynację ruchową oraz pamięć.",
+    "location": "Park Szczytnicki, zbiórka przy przystanku tramwajowym Chopina",
+    "city": {
+      "id": "wroclaw",
+      "name": "Wrocław"
+    },
     "date": "2026-03-06",
-    "time": "15:00"
+    "time": "10:00",
+    "cost": "bezpłatnie",
+    "category": {
+      "id": "aktywnosc",
+      "name": "Aktywność"
+    },
+    "createdAt": "2026-03-11T12:13:00.123123Z"
   },
   {
+    "id": "seniorzy-2026-03-06-dzien-kobiet",
+    "source": {
+      "id": "www-seniorzy-wroclaw-pl",
+      "url": "https://www.seniorzy.wroclaw.pl/Biuletyn-marzec-2026"
+    },
+    "name": "Dzień Kobiet – spotkanie literacko-muzyczne",
+    "description": "Spotkanie z okazji Dnia Kobiet z literaturą, recytacją oraz muzyką w serdecznej atmosferze.",
+    "location": "Wrocławskie Centrum Seniora, pl. Dominikański 6, sala 210",
+    "city": {
+      "id": "wroclaw",
+      "name": "Wrocław"
+    },
+    "date": "2026-03-06",
+    "time": "15:00",
+    "cost": "bezpłatnie",
+    "category": {
+      "id": "kultura",
+      "name": "Kultura"
+    },
+    "createdAt": "2026-03-11T12:13:00.123123Z"
+  },
+  {
+    "id": "seniorzy-2026-03-09-ziolowa-apteczka",
+    "source": {
+      "id": "www-seniorzy-wroclaw-pl",
+      "url": "https://www.seniorzy.wroclaw.pl/Biuletyn-marzec-2026"
+    },
     "name": "Ziołowa Apteczka Kawonu",
-    "location": "WCRS – pl. Dominikański 6",
-    "city": "Wrocław",
+    "description": "Prelekcja i warsztaty o właściwościach ziół, sposobach ich przechowywania oraz wykorzystania w codziennym życiu.",
+    "location": "Wrocławskie Centrum Seniora, pl. Dominikański 6, sala 27",
+    "city": {
+      "id": "wroclaw",
+      "name": "Wrocław"
+    },
     "date": "2026-03-09",
-    "time": "11:00"
+    "time": "11:00",
+    "cost": "bezpłatnie",
+    "category": {
+      "id": "zdrowie",
+      "name": "Zdrowie"
+    },
+    "createdAt": "2026-03-11T12:13:00.123123Z"
   },
   {
+    "id": "seniorzy-2026-03-10-endless-mind",
+    "source": {
+      "id": "www-seniorzy-wroclaw-pl",
+      "url": "https://www.seniorzy.wroclaw.pl/Biuletyn-marzec-2026"
+    },
     "name": "Warsztaty z Endless Mind",
-    "location": "WCRS – pl. Dominikański 6",
-    "city": "Wrocław",
+    "description": "Warsztaty dotyczące oddechu, redukcji stresu i równowagi emocjonalnej.",
+    "location": "Wrocławskie Centrum Seniora, pl. Dominikański 6, sala 210",
+    "city": {
+      "id": "wroclaw",
+      "name": "Wrocław"
+    },
     "date": "2026-03-10",
-    "time": "10:00"
+    "time": "10:00",
+    "cost": "bezpłatnie",
+    "category": {
+      "id": "zdrowie",
+      "name": "Zdrowie"
+    },
+    "createdAt": "2026-03-11T12:13:00.123123Z"
   },
   {
-    "name": "Masaż Kobido – spotkanie",
-    "location": "WCRS – pl. Dominikański 6",
-    "city": "Wrocław",
+    "id": "seniorzy-2026-03-10-nordic-walking",
+    "source": {
+      "id": "www-seniorzy-wroclaw-pl",
+      "url": "https://www.seniorzy.wroclaw.pl/Biuletyn-marzec-2026"
+    },
+    "name": "Nordic walking z Teresą Tadeuszyk – projekt „Opowieści ruchem pisane”",
+    "description": "Spacer nordic walking dla seniorów poprawiający kondycję i integrację uczestników.",
+    "location": "Park Szczytnicki, zbiórka przy przystanku tramwajowym Chopina",
+    "city": {
+      "id": "wroclaw",
+      "name": "Wrocław"
+    },
     "date": "2026-03-10",
-    "time": "13:00"
+    "time": "10:00",
+    "cost": "bezpłatnie",
+    "category": {
+      "id": "aktywnosc",
+      "name": "Aktywność"
+    },
+    "createdAt": "2026-03-11T12:13:00.123123Z"
   },
   {
-    "name": "Warsztaty z kreatywnego pisania",
-    "location": "WCRS – pl. Dominikański 6",
-    "city": "Wrocław",
+    "id": "seniorzy-2026-03-10-kobido",
+    "source": {
+      "id": "www-seniorzy-wroclaw-pl",
+      "url": "https://www.seniorzy.wroclaw.pl/Biuletyn-marzec-2026"
+    },
+    "name": "Masaż Kobido – spotkanie i pokaz",
+    "description": "Spotkanie o zdrowotnym wpływie masażu Kobido wraz z pokazem technik masażu.",
+    "location": "Wrocławskie Centrum Seniora, pl. Dominikański 6, sala 27",
+    "city": {
+      "id": "wroclaw",
+      "name": "Wrocław"
+    },
+    "date": "2026-03-10",
+    "time": "13:00",
+    "cost": "bezpłatnie",
+    "category": {
+      "id": "zdrowie",
+      "name": "Zdrowie"
+    },
+    "createdAt": "2026-03-11T12:13:00.123123Z"
+  },
+  {
+    "id": "seniorzy-2026-03-12-kreatywne-pisanie",
+    "source": {
+      "id": "www-seniorzy-wroclaw-pl",
+      "url": "https://www.seniorzy.wroclaw.pl/Biuletyn-marzec-2026"
+    },
+    "name": "Warsztaty kreatywnego pisania",
+    "description": "Warsztaty literackie rozwijające kreatywność oraz umiejętności pisania różnych form literackich.",
+    "location": "Wrocławskie Centrum Seniora, pl. Dominikański 6, sala 27",
+    "city": {
+      "id": "wroclaw",
+      "name": "Wrocław"
+    },
     "date": "2026-03-12",
-    "time": "17:30"
+    "time": "17:30",
+    "cost": "bezpłatnie",
+    "category": {
+      "id": "edukacja",
+      "name": "Edukacja"
+    },
+    "createdAt": "2026-03-11T12:13:00.123123Z"
   },
   {
-    "name": "Warsztaty z kreatywnego pisania",
-    "location": "WCRS – pl. Dominikański 6",
-    "city": "Wrocław",
-    "date": "2026-03-19",
-    "time": "17:30"
-  },
-  {
-    "name": "Galeria Twórczości Seniora – spotkanie z Mirosławem Wojtowiczem",
-    "location": "Miejska Biblioteka Publiczna, ul. Piłsudskiego 105",
-    "city": "Wrocław",
+    "id": "seniorzy-2026-03-13-wojtowicz",
+    "source": {
+      "id": "www-seniorzy-wroclaw-pl",
+      "url": "https://www.seniorzy.wroclaw.pl/Biuletyn-marzec-2026"
+    },
+    "name": "Spotkanie z Mirosławem Wojtowiczem – Galeria Twórczości Seniora",
+    "description": "Spotkanie z artystą wokół wystawy „Ptakom podobne” oraz rozmowa o inspiracjach twórczych.",
+    "location": "Miejska Biblioteka Publiczna we Wrocławiu, Filia nr 12, ul. Piłsudskiego 105",
+    "city": {
+      "id": "wroclaw",
+      "name": "Wrocław"
+    },
     "date": "2026-03-13",
-    "time": "17:00"
+    "time": "17:00",
+    "cost": "bezpłatnie",
+    "category": {
+      "id": "kultura",
+      "name": "Kultura"
+    },
+    "createdAt": "2026-03-11T12:13:00.123123Z"
   },
   {
+    "id": "seniorzy-2026-03-16-votum",
+    "source": {
+      "id": "www-seniorzy-wroclaw-pl",
+      "url": "https://www.seniorzy.wroclaw.pl/Biuletyn-marzec-2026"
+    },
     "name": "Prelekcja VOTUM – świadczenie wspierające",
-    "location": "WCRS – pl. Dominikański 6",
-    "city": "Wrocław",
+    "description": "Spotkanie informacyjne o świadczeniu wspierającym, wymaganych dokumentach i procedurze składania wniosków.",
+    "location": "Wrocławskie Centrum Seniora, pl. Dominikański 6, sala 27",
+    "city": {
+      "id": "wroclaw",
+      "name": "Wrocław"
+    },
     "date": "2026-03-16",
-    "time": "10:00"
+    "time": "10:00",
+    "cost": "bezpłatnie",
+    "category": {
+      "id": "informacje",
+      "name": "Informacje"
+    },
+    "createdAt": "2026-03-11T12:13:00.123123Z"
   },
   {
-    "name": "Prelekcja Strefa Zdrowia – sprzęt rehabilitacyjny",
-    "location": "WCRS – pl. Dominikański 6",
-    "city": "Wrocław",
+    "id": "seniorzy-2026-03-17-rehabilitacja",
+    "source": {
+      "id": "www-seniorzy-wroclaw-pl",
+      "url": "https://www.seniorzy.wroclaw.pl/Biuletyn-marzec-2026"
+    },
+    "name": "Prelekcja – sprzęt rehabilitacyjny i refundacja",
+    "description": "Spotkanie o sprzęcie rehabilitacyjnym i możliwościach uzyskania refundacji.",
+    "location": "Wrocławskie Centrum Seniora, pl. Dominikański 6, sala 27",
+    "city": {
+      "id": "wroclaw",
+      "name": "Wrocław"
+    },
     "date": "2026-03-17",
-    "time": "10:00"
+    "time": "10:00",
+    "cost": "bezpłatnie",
+    "category": {
+      "id": "zdrowie",
+      "name": "Zdrowie"
+    },
+    "createdAt": "2026-03-11T12:13:00.123123Z"
   },
   {
+    "id": "seniorzy-2026-03-19-filozofia",
+    "source": {
+      "id": "www-seniorzy-wroclaw-pl",
+      "url": "https://www.seniorzy.wroclaw.pl/Biuletyn-marzec-2026"
+    },
     "name": "Warsztaty filozoficzne – Obudzić myślenie",
-    "location": "WCRS – pl. Dominikański 6",
-    "city": "Wrocław",
+    "description": "Warsztaty filozoficzne o samorozwoju, równowadze życiowej oraz koncepcjach pracy nad sobą.",
+    "location": "Wrocławskie Centrum Seniora, pl. Dominikański 6, sala 27",
+    "city": {
+      "id": "wroclaw",
+      "name": "Wrocław"
+    },
     "date": "2026-03-19",
-    "time": "10:30"
+    "time": "10:30",
+    "cost": "bezpłatnie",
+    "category": {
+      "id": "edukacja",
+      "name": "Edukacja"
+    },
+    "createdAt": "2026-03-11T12:13:00.123123Z"
   },
   {
-    "name": "Pożegnanie zimy i powitanie wiosny",
+    "id": "seniorzy-2026-03-21-powitanie-wiosny",
+    "source": {
+      "id": "www-seniorzy-wroclaw-pl",
+      "url": "https://www.seniorzy.wroclaw.pl/Biuletyn-marzec-2026"
+    },
+    "name": "Pożegnanie zimy i powitanie wiosny – Polskie obyczaje i tradycje",
+    "description": "Plenerowe spotkanie poświęcone tradycjom powitania wiosny z elementami spaceru i rozmów o dawnych zwyczajach.",
     "location": "skrzyżowanie ul. Braci Gierymskich i ul. Pankiewicza (Biskupin)",
-    "city": "Wrocław",
+    "city": {
+      "id": "wroclaw",
+      "name": "Wrocław"
+    },
     "date": "2026-03-21",
-    "time": "11:00"
-  },
-  {
-    "name": "Dowozimy GTV Bus – podróż dla seniorów",
-    "location": "WCRS – pl. Dominikański 6",
-    "city": "Wrocław",
-    "date": "2026-03-23",
-    "time": "10:00"
-  },
-  {
-    "name": "Masz doświadczenie – masz znaczenie (wolontariat onkologiczny)",
-    "location": "WCRS – pl. Dominikański 6",
-    "city": "Wrocław",
-    "date": "2026-03-24",
-    "time": "11:00"
-  },
-  {
-    "name": "Fizjoterapia w leczeniu nietrzymania moczu u kobiet",
-    "location": "WCRS – pl. Dominikański 6",
-    "city": "Wrocław",
-    "date": "2026-03-30",
-    "time": "10:00"
-  },
-  {
-    "name": "Warsztaty filozoficzne – Obudzić myślenie",
-    "location": "WCRS – pl. Dominikański 6",
-    "city": "Wrocław",
-    "date": "2026-03-31",
-    "time": "10:30"
+    "time": "11:00",
+    "cost": "bezpłatnie",
+    "category": {
+      "id": "edukacja",
+      "name": "Edukacja"
+    },
+    "createdAt": "2026-03-11T12:13:00.123123Z"
   }
 ]
