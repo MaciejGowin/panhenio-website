@@ -35,6 +35,15 @@ function getPage() {
   return { name: 'home' }
 }
 
+const PAGE_TITLES = {
+  home: 'Pan Henio – wydarzenia dla seniorów',
+  'o-projekcie': 'O projekcie – Pan Henio',
+  'polityka-prywatnosci': 'Polityka prywatności – Pan Henio',
+  'cyfrowy-henio': 'Cyfrowy Henio – Pan Henio',
+  szukaj: 'Szukaj wydarzeń – Pan Henio',
+  wydarzenie: 'Wydarzenie – Pan Henio',
+}
+
 export default function App() {
   const [page, setPage] = useState(getPage)
 
@@ -43,6 +52,10 @@ export default function App() {
     window.addEventListener('hashchange', handler)
     return () => window.removeEventListener('hashchange', handler)
   }, [])
+
+  useEffect(() => {
+    document.title = PAGE_TITLES[page.name] ?? 'Pan Henio – wydarzenia dla seniorów'
+  }, [page.name])
 
   return (
     <div className={styles.app}>
