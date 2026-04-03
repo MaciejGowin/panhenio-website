@@ -1,4 +1,7 @@
+'use client'
+
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import styles from './SearchPage.module.css'
 
 export default function SearchPage({ initialPhrase = '', initialCityId = '', initialCategoryId = '' }) {
@@ -9,6 +12,7 @@ export default function SearchPage({ initialPhrase = '', initialCityId = '', ini
   const [categories, setCategories] = useState([])
   const [results, setResults] = useState(null)
   const [loading, setLoading] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     fetch('/api/cities').then(r => r.json()).then(setCities).catch(() => {})
@@ -19,18 +23,18 @@ export default function SearchPage({ initialPhrase = '', initialCityId = '', ini
     search(initialPhrase, initialCityId, initialCategoryId)
   }, [])
 
-  function buildHash(p, c, cat) {
+  function buildUrl(p, c, cat) {
     const params = new URLSearchParams()
     if (p) params.set('phrase', p)
     if (c) params.set('cityId', c)
     if (cat) params.set('categoryId', cat)
     const qs = params.toString()
-    return qs ? `#szukaj?${qs}` : '#szukaj'
+    return qs ? `/szukaj?${qs}` : '/szukaj'
   }
 
   function handleSearch(e) {
     e?.preventDefault()
-    window.history.replaceState(null, '', buildHash(phrase, cityId, categoryId))
+    router.replace(buildUrl(phrase, cityId, categoryId))
     search(phrase, cityId, categoryId)
   }
 
@@ -54,7 +58,7 @@ export default function SearchPage({ initialPhrase = '', initialCityId = '', ini
   return (
     <div className={styles.page}>
       <div className={styles.inner}>
-        <a href="#" className={styles.back}>← Strona główna</a>
+        <a href="/" className={styles.back}>← Strona główna</a>
         <h1 className={styles.title}>Szukaj wydarzeń</h1>
 
         <form className={styles.form} onSubmit={handleSearch}>
@@ -124,7 +128,7 @@ export default function SearchPage({ initialPhrase = '', initialCityId = '', ini
                   <span className={styles.cardMeta}>{event.location}, {event.city.name}</span>
                   <span className={styles.cardMeta}>{event.date}{event.startTime ? ` · ${event.startTime}` : ''}{event.endTime ? `–${event.endTime}` : ''}</span>
                   <a
-                    href={`#wydarzenie/${encodeURIComponent(event.source.id)}/${encodeURIComponent(event.id)}?back=${encodeURIComponent(buildHash(phrase, cityId, categoryId))}`}
+                    href={`/wydarzenie/${encodeURIComponent(event.source.id)}/${encodeURIComponent(event.id)}?back=${encodeURIComponent(buildUrl(phrase, cityId, categoryId))}`}
                     className={styles.cardLink}
                   >
                     Zobacz szczegóły →

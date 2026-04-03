@@ -1,16 +1,15 @@
 import styles from './Footer.module.css'
-import logo from '/panhenio-logo.png'
 
 const links = [
-  { label: 'Kontakt', href: '#kontakt' },
-  { label: 'O projekcie', href: '#o-projekcie' },
-  { label: 'Polityka prywatności', href: '#polityka-prywatnosci' },
+  { label: 'Kontakt', href: '/o-projekcie' },
+  { label: 'O projekcie', href: '/o-projekcie' },
+  { label: 'Polityka prywatności', href: '/polityka-prywatnosci' },
 ]
 
 export default function Footer() {
   return (
     <footer className={styles.footer}>
-      <img src={logo} alt="Pan Henio" className={styles.logo} />
+      <img src="/panhenio-logo.png" alt="Pan Henio" className={styles.logo} />
       <nav className={styles.links} aria-label="Stopka">
         {links.map((link, i) => (
           <span key={link.label} className={styles.item}>

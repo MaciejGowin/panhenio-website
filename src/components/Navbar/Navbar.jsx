@@ -1,10 +1,11 @@
+'use client'
+
 import { useState } from 'react'
 import styles from './Navbar.module.css'
-import logo from '/panhenio-logo.png'
 
 const navLinks = [
-  { label: 'Cyfrowy Henio', href: '#cyfrowy-henio', bold: true },
-  { label: 'O projekcie', href: '#o-projekcie' },
+  { label: 'Cyfrowy Henio', href: '/cyfrowy-henio', bold: true },
+  { label: 'O projekcie', href: '/o-projekcie' },
 ]
 
 export default function Navbar() {
@@ -14,7 +15,7 @@ export default function Navbar() {
     <nav className={styles.navbar}>
       <div className={styles.inner}>
         <a href="/" className={styles.logoLink}>
-          <img src={logo} alt="Pan Henio" className={styles.logo} />
+          <img src="/panhenio-logo.png" alt="Pan Henio" className={styles.logo} />
         </a>
         <ul className={styles.links}>
           {navLinks.map((link) => (

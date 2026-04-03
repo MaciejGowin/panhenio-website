@@ -7,8 +7,8 @@ build:
 	npm run build
 
 # Serve the production build locally
-preview:
-	npm run preview   
+start:
+	npm run start
 
 # Deploy to S3 bucket
 deploy: build

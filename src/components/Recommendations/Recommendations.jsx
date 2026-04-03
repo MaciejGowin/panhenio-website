@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import styles from './Recommendations.module.css'
 
@@ -21,7 +23,7 @@ export default function Recommendations() {
         {items.map((item) => (
           <li key={item.id} className={styles.item}>
             <StarIcon className={styles.star} />
-            <a href={`#wydarzenie/${encodeURIComponent(item.source.id)}/${encodeURIComponent(item.id)}`} className={styles.link}>
+            <a href={`/wydarzenie/${encodeURIComponent(item.source.id)}/${encodeURIComponent(item.id)}`} className={styles.link}>
               {item.title}
             </a>
           </li>

@@ -1,13 +1,17 @@
+'use client'
+
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import styles from './Hero.module.css'
 
 export default function Hero() {
   const [query, setQuery] = useState('')
+  const router = useRouter()
 
   function handleSearch() {
     const phrase = query.trim()
-    const hash = phrase ? `#szukaj?phrase=${encodeURIComponent(phrase)}` : '#szukaj'
-    window.location.hash = hash
+    const url = phrase ? `/szukaj?phrase=${encodeURIComponent(phrase)}` : '/szukaj'
+    router.push(url)
   }
 
   return (
@@ -30,7 +34,7 @@ export default function Hero() {
           Szukaj
         </button>
       </div>
-      <a href="#szukaj" className={styles.browseAll}>
+      <a href="/szukaj" className={styles.browseAll}>
         lub przeglądaj wszystkie wydarzenia →
       </a>
     </section>

@@ -15,11 +15,10 @@
   --gray-200: #e2e6ef;
   --gray-500: #8892a4;
   --text: #1a2540;
-  --font: 'Inter', system-ui, sans-serif;
 }
 
 body {
-  font-family: var(--font);
+  font-family: var(--font), system-ui, sans-serif;
   color: var(--text);
   background: var(--white);
   min-height: 100vh;
