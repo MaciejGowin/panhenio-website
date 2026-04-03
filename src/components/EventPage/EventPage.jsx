@@ -26,12 +26,16 @@ export default function EventPage({ sourceId, eventId, backHref = '#szukaj' }) {
         {event && (
           <article className={styles.card}>
             <p className={styles.category}>{event.category.name}</p>
-            <h1 className={styles.title}>{event.name}</h1>
+            <h1 className={styles.title}>{event.title}</h1>
             <div className={styles.meta}>
-              <span>{event.date}{event.time ? ` · ${event.time}` : ''}</span>
+              <span>{event.date}{event.startTime ? ` · ${event.startTime}` : ''}{event.endTime ? `–${event.endTime}` : ''}</span>
               <span>{event.location}, {event.city.name}</span>
-              {event.cost && <span>{event.cost}</span>}
+              {event.entryCost && <span>{event.entryCost}</span>}
+              {event.facilitator && <span>{event.facilitator}</span>}
             </div>
+            {event.registration && (
+              <p className={styles.registration}>{event.registration}</p>
+            )}
             {event.description && (
               <p className={styles.description}>{event.description}</p>
             )}

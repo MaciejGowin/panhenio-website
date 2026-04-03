@@ -1,5 +1,5 @@
 # Start development server (Vite HMR)
-run-server:
+run:
 	npm run dev
 
 # Production build -> dist/
@@ -12,5 +12,4 @@ preview:
 
 # Deploy to S3 bucket
 deploy: build
-	aws s3 rm s3://panhenio-website-prod --recursive
-	aws s3 cp ./dist s3://panhenio-website-prod --recursive
+	aws s3 sync ./dist/ s3://panhenio-website-prod --delete

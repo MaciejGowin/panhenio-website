@@ -42,26 +42,29 @@ This endpoint returns data in the following format:
 ```json
 [
   {
-    "id": "seniorzy-2026-03-03-nordic-walking",
+    "id": "mozaika-tworzenie-obrazow-2026-05-19",
     "source": {
-      "id": "www-seniorzy-wroclaw-pl",
-      "url": "https://www.seniorzy.wroclaw.pl/Biuletyn-marzec-2026"
+      "id": "odracentrum-org",
+      "url": "https://odracentrum.org/seniorzy-w-odra-centrum/"
     },
-    "name": "Nordic walking z Teresą Tadeuszyk – projekt „Opowieści ruchem pisane”",
-    "description": "Spacer nordic walking dla seniorów poprawiający kondycję, koordynację ruchową oraz pamięć. Zajęcia odbywają się na świeżym powietrzu i są dostosowane do możliwości uczestników.",
-    "location": "Park Szczytnicki, zbiórka przy przystanku tramwajowym Chopina",
+    "title": "Mozaika – tworzenie obrazów.",
+    "description": "Wspólnie tworzenie obrazów inspirowanych Odrą. To warsztat międzypokoleniowy, na który można zabrać wnuki lub dzieci, aby razem tworzyć, rozmawiać i spędzać czas w dobrym towarzystwie.",
+    "location": "Odra Centrum, Wybrzeże Juliusza Słowackiego 5B, Wrocław (tuż obok Mostu Grunwaldzkiego)",
     "city": {
       "id": "wroclaw",
       "name": "Wrocław"
     },
-    "date": "2026-03-03",
-    "time": "10:00",
-    "cost": "bezpłatnie",
+    "date": "2026-05-19",
+    "startTime": "15:00",
+    "endTime": "17:00",
+    "entryCost": "bezpłatne",
+    "facilitator": "Jan Kowalski",
+    "registration": "Obowiązują wcześniejsze zapisy. Decyduje kolejność zgłoszeń. Każde zgłoszenie jest potwierdzane – odpowiedź może zająć chwilę. Telefonicznie: 506 563 518 E-mail: michalina@onwater.pl",
     "category": {
-      "id": "aktywnosc",
-      "name": "Aktywność"
+      "id": "warsztaty",
+      "name": "Warsztaty"
     },
-    "createdAt": "2026-03-11T12:13:00.123123Z"
+    "createdAt": "2026-04-01T12:00:00Z"
   }
 ]
 ```
@@ -88,26 +91,29 @@ This endpoint returns data in the following format:
 
 ```json
 {
-  "id": "seniorzy-2026-03-03-nordic-walking",
+  "id": "mozaika-tworzenie-obrazow-2026-05-19",
   "source": {
-    "id": "www-seniorzy-wroclaw-pl",
-    "url": "https://www.seniorzy.wroclaw.pl/Biuletyn-marzec-2026"
+    "id": "odracentrum-org",
+    "url": "https://odracentrum.org/seniorzy-w-odra-centrum/"
   },
-  "name": "Nordic walking z Teresą Tadeuszyk – projekt „Opowieści ruchem pisane”",
-  "description": "Spacer nordic walking dla seniorów poprawiający kondycję, koordynację ruchową oraz pamięć. Zajęcia odbywają się na świeżym powietrzu i są dostosowane do możliwości uczestników.",
-  "location": "Park Szczytnicki, zbiórka przy przystanku tramwajowym Chopina",
+  "title": "Mozaika – tworzenie obrazów.",
+  "description": "Wspólnie tworzenie obrazów inspirowanych Odrą. To warsztat międzypokoleniowy, na który można zabrać wnuki lub dzieci, aby razem tworzyć, rozmawiać i spędzać czas w dobrym towarzystwie.",
+  "location": "Odra Centrum, Wybrzeże Juliusza Słowackiego 5B, Wrocław (tuż obok Mostu Grunwaldzkiego)",
   "city": {
     "id": "wroclaw",
     "name": "Wrocław"
   },
-  "date": "2026-03-03",
-  "time": "10:00",
-  "cost": "bezpłatnie",
+  "date": "2026-05-19",
+  "startTime": "15:00",
+  "endTime": "17:00",
+  "entryCost": "bezpłatne",
+  "facilitator": "Jan Kowalski",
+  "registration": "Obowiązują wcześniejsze zapisy. Decyduje kolejność zgłoszeń. Każde zgłoszenie jest potwierdzane – odpowiedź może zająć chwilę. Telefonicznie: 506 563 518 E-mail: michalina@onwater.pl",
   "category": {
-    "id": "aktywnosc",
-    "name": "Aktywność"
+    "id": "warsztaty",
+    "name": "Warsztaty"
   },
-  "createdAt": "2026-03-11T12:13:00.123123Z"
+  "createdAt": "2026-04-01T12:00:00Z"
 }
 ```
 

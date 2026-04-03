@@ -22,7 +22,7 @@ export default function Recommendations() {
           <li key={item.id} className={styles.item}>
             <StarIcon className={styles.star} />
             <a href={`#wydarzenie/${encodeURIComponent(item.source.id)}/${encodeURIComponent(item.id)}`} className={styles.link}>
-              {item.name}
+              {item.title}
             </a>
           </li>
         ))}

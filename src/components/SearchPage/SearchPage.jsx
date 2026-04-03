@@ -120,9 +120,9 @@ export default function SearchPage({ initialPhrase = '', initialCityId = '', ini
               {results.map((event, i) => (
                 <li key={i} className={styles.card}>
                   <span className={styles.cardCategory}>{event.category.name}</span>
-                  <span className={styles.cardName}>{event.name}</span>
+                  <span className={styles.cardName}>{event.title}</span>
                   <span className={styles.cardMeta}>{event.location}, {event.city.name}</span>
-                  <span className={styles.cardMeta}>{event.date}{event.time ? ` · ${event.time}` : ''}</span>
+                  <span className={styles.cardMeta}>{event.date}{event.startTime ? ` · ${event.startTime}` : ''}{event.endTime ? `–${event.endTime}` : ''}</span>
                   <a
                     href={`#wydarzenie/${encodeURIComponent(event.source.id)}/${encodeURIComponent(event.id)}?back=${encodeURIComponent(buildHash(phrase, cityId, categoryId))}`}
                     className={styles.cardLink}

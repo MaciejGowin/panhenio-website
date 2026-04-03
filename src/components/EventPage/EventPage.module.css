@@ -69,6 +69,15 @@
   margin: 0;
 }
 
+.registration {
+  font-size: 0.9rem;
+  color: var(--gray-500);
+  line-height: 1.6;
+  margin: 0;
+  border-left: 3px solid var(--orange);
+  padding-left: 12px;
+}
+
 .sourceLink {
   display: inline-block;
   font-size: 0.9rem;
