@@ -33,7 +33,7 @@ export async function generateMetadata({ params }) {
 export default async function WydarzeniePage({ params, searchParams }) {
   const { sourceId, id } = await params
   const sp = await searchParams
-  const backHref = sp.back || '/szukaj'
+  const backHref = sp.back || '/szukaj-wydarzen'
   const event = await fetchEvent(sourceId, id)
 
   const jsonLd = event

@@ -16,7 +16,7 @@ export default function Categories() {
     <nav className={styles.categories} aria-label="Kategorie">
       {categories.map((cat, i) => (
         <span key={cat.id} className={styles.item}>
-          <a href={`/szukaj?categoryId=${encodeURIComponent(cat.id)}`} className={styles.link}>{cat.name}</a>
+          <a href={`/szukaj-wydarzen?kategoria=${encodeURIComponent(cat.id)}`} className={styles.link}>{cat.name}</a>
           {i < categories.length - 1 && (
             <span className={styles.dot} aria-hidden="true">·</span>
           )}

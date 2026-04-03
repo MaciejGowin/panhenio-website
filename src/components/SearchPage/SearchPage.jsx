@@ -25,11 +25,11 @@ export default function SearchPage({ initialPhrase = '', initialCityId = '', ini
 
   function buildUrl(p, c, cat) {
     const params = new URLSearchParams()
-    if (p) params.set('phrase', p)
-    if (c) params.set('cityId', c)
-    if (cat) params.set('categoryId', cat)
+    if (p) params.set('fraza', p)
+    if (c) params.set('miasto', c)
+    if (cat) params.set('kategoria', cat)
     const qs = params.toString()
-    return qs ? `/szukaj?${qs}` : '/szukaj'
+    return qs ? `/szukaj-wydarzen?${qs}` : '/szukaj-wydarzen'
   }
 
   function handleSearch(e) {

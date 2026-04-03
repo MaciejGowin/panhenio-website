@@ -9,9 +9,9 @@ export default async function SzukajPage({ searchParams }) {
   const params = await searchParams
   return (
     <SearchPage
-      initialPhrase={params.phrase || ''}
-      initialCityId={params.cityId || ''}
-      initialCategoryId={params.categoryId || ''}
+      initialPhrase={params.fraza || ''}
+      initialCityId={params.miasto || ''}
+      initialCategoryId={params.kategoria || ''}
     />
   )
 }

@@ -10,7 +10,7 @@ export default function Hero() {
 
   function handleSearch() {
     const phrase = query.trim()
-    const url = phrase ? `/szukaj?phrase=${encodeURIComponent(phrase)}` : '/szukaj'
+    const url = phrase ? `/szukaj-wydarzen?fraza=${encodeURIComponent(phrase)}` : '/szukaj-wydarzen'
     router.push(url)
   }
 
@@ -34,7 +34,7 @@ export default function Hero() {
           Szukaj
         </button>
       </div>
-      <a href="/szukaj" className={styles.browseAll}>
+      <a href="/szukaj-wydarzen" className={styles.browseAll}>
         lub przeglądaj wszystkie wydarzenia →
       </a>
     </section>

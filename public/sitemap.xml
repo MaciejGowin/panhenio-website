@@ -6,18 +6,13 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.panhenio.pl/#o-projekcie</loc>
+    <loc>https://www.panhenio.pl/o-projekcie</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.panhenio.pl/#cyfrowy-henio</loc>
+    <loc>https://www.panhenio.pl/cyfrowy-henio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.panhenio.pl/#polityka-prywatnosci</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
   </url>
 </urlset>
