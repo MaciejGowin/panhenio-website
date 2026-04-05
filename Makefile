@@ -27,16 +27,16 @@ build:
 build-sam:
 	sam build -b deployments/
 
-build-WebsiteFunction:
+build-WebsiteSsrFunction:
 	cp -r .open-next/server-functions/default/* $(ARTIFACTS_DIR)/
 	cp -r .open-next/server-functions/default/.next $(ARTIFACTS_DIR)/
 
 deploy-sam:
 	sam deploy \
 		--template-file deployments/template.yaml \
-		--stack-name "${PROJECT}-WEBSITE-LAMBDAS-${ENVIRONMENT}" \
+		--stack-name "${PROJECT}-WEBSITE-SSR-${ENVIRONMENT}" \
 		--s3-bucket ${BUCKET} \
-		--s3-prefix website-lambdas \
+		--s3-prefix website-ssr \
 		--parameter-overrides Project=${PROJECT} Environment=${ENVIRONMENT} \
 		--capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND
 

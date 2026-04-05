@@ -9,17 +9,17 @@ Parameters:
     Type: String
 
 Resources:
-  WebsiteFunction:
+  WebsiteSsrFunction:
     Type: 'AWS::Serverless::Function'
     Properties:
-      FunctionName: !Sub '${Project}-WEBSITE-${Environment}'
+      FunctionName: !Sub '${Project}-WEBSITE-SSR-${Environment}'
       AutoPublishAlias: live
       CodeUri: .
       Handler: index.handler
       Runtime: nodejs20.x
       Architectures:
         - arm64
-      Timeout: 5
+      Timeout: 30
       Policies:
         - AWSLambdaBasicExecutionRole
         - AWSLambda_ReadOnlyAccess
@@ -27,33 +27,33 @@ Resources:
     Metadata:
       BuildMethod: makefile
 
-  WebsiteIntegration:
+  WebsiteSsrIntegration:
     Type: 'AWS::ApiGatewayV2::Integration'
     Properties:
       ApiId:
         Fn::ImportValue: !Sub '${Project}-${Environment}::ApiGateway::Website:Id'
-      Description: API Lambda Integration
+      Description: Website SSR Lambda Integration
       IntegrationType: AWS_PROXY
       IntegrationUri: !Sub
         - 'arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${Function}/invocations'
-        - Function: !GetAtt WebsiteFunctionAliaslive.AliasArn
+        - Function: !GetAtt WebsiteSsrFunctionAliaslive.AliasArn
       RequestParameters:
         "overwrite:path": "$request.path"
       PayloadFormatVersion: '2.0'
 
-  WebsiteRoute:
+  WebsiteSsrRoute:
     Type: 'AWS::ApiGatewayV2::Route'
     Properties:
       ApiId:
         Fn::ImportValue: !Sub '${Project}-${Environment}::ApiGateway::Website:Id'
       RouteKey: ANY /{proxy+}
-      Target: !Sub "integrations/${WebsiteIntegration}"
+      Target: !Sub "integrations/${WebsiteSsrIntegration}"
 
   ApiGatewayFunctionPermission:
     Type: 'AWS::Lambda::Permission'
     Properties:
       Action: 'lambda:InvokeFunction'
-      FunctionName: !Ref WebsiteFunctionAliaslive
+      FunctionName: !Ref WebsiteSsrFunctionAliaslive
       Principal: 'apigateway.amazonaws.com'
       SourceArn: !Sub
         - "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGateway}/*"
