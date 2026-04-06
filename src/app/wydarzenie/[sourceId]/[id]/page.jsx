@@ -72,7 +72,7 @@ export default async function WydarzeniePage({ params, searchParams }) {
         {!event && <p className={styles.error}>Nie udało się załadować wydarzenia.</p>}
         {event && (
           <article className={styles.card}>
-            <p className={styles.category}>{event.category.name}</p>
+            <p className={styles.category}>{event.categories?.map(c => c.name).join(', ')}</p>
             <h1 className={styles.title}>{event.title}</h1>
             <div className={styles.meta}>
               <span>{event.date}{event.startTime ? ` · ${event.startTime}` : ''}{event.endTime ? `–${event.endTime}` : ''}</span>

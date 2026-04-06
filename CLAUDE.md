@@ -60,10 +60,10 @@ This endpoint returns data in the following format:
     "entryCost": "bezpłatne",
     "facilitator": "Jan Kowalski",
     "registration": "Obowiązują wcześniejsze zapisy. Decyduje kolejność zgłoszeń. Każde zgłoszenie jest potwierdzane – odpowiedź może zająć chwilę. Telefonicznie: 506 563 518 E-mail: michalina@onwater.pl",
-    "category": {
+    "categories": [{
       "id": "warsztaty",
       "name": "Warsztaty"
-    },
+    }],
     "createdAt": "2026-04-01T12:00:00Z"
   }
 ]
@@ -109,10 +109,10 @@ This endpoint returns data in the following format:
   "entryCost": "bezpłatne",
   "facilitator": "Jan Kowalski",
   "registration": "Obowiązują wcześniejsze zapisy. Decyduje kolejność zgłoszeń. Każde zgłoszenie jest potwierdzane – odpowiedź może zająć chwilę. Telefonicznie: 506 563 518 E-mail: michalina@onwater.pl",
-  "category": {
+  "categories": [{
     "id": "warsztaty",
     "name": "Warsztaty"
-  },
+  }],
   "createdAt": "2026-04-01T12:00:00Z"
 }
 ```
