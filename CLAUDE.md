@@ -22,31 +22,45 @@ No linting or test suite is configured.
 - Default (`/`) → Home page (Navbar + Hero + Categories + Recommendations + Illustration + Footer)
 - `#o-projekcie` → About page (Navbar + OProjekcie + Footer)
 
-### APIs
+### Components
 
-#### Events API
+Each component lives in `src/components/<Name>/` with its own `.jsx` and `.module.css`. Styling uses CSS Modules throughout; global tokens (colors, font) are defined as CSS custom properties in `src/index.css`.
 
-To get all events for search phrase, use the following endpoint:
+- **Hero** — the only stateful component; handles search input, fetches events, filters by `name`/`location`/`city` (case-insensitive substring)
+- **Categories** — decorative only; category links are non-functional (`href="#"`)
+- **Recommendations** — hardcoded list of three events, not driven by data
+
+### Styling
+
+Layout is mobile-first, max-width 480px. Key CSS variables: `--navy`, `--orange`, `--text`, `--font` (Inter). All component styles are scoped via CSS Modules.
+
+## APIs
+
+### Events API
+
+#### Get all events by search phrase, cityId or categoryId
+
+Operation:
 
 ```
-    GET https://www.panhenio.pl/api/events?phrase=Wrocław
+GET https://www.panhenio.pl/api/events?phrase=Wrocław
 ```
 
-API allows to search by query parameters:
+Request query parameters:
 - `phrase` (optional) — search phrase to filter events by `name`, `location`, `city`, etc. (case-insensitive substring match)
 - `categoryId` (optional) — filter events by category id (e.g. `aktywnosc`, `kultura`, etc.)
 - `cityId` (optional) — filter events by city id (e.g. `wroclaw`, `poznan`, etc.)
 
-This endpoint returns data in the following format:
+Response body format:
 
 ```json
 [
   {
     "id": "mozaika-tworzenie-obrazow-2026-05-19",
-    "source": {
-      "id": "odracentrum-org",
-      "url": "https://odracentrum.org/seniorzy-w-odra-centrum/"
+    "organizer": {
+      "id": "odra-centrum"
     },
+    "monthId": "2026-05",
     "title": "Mozaika – tworzenie obrazów.",
     "description": "Wspólnie tworzenie obrazów inspirowanych Odrą. To warsztat międzypokoleniowy, na który można zabrać wnuki lub dzieci, aby razem tworzyć, rozmawiać i spędzać czas w dobrym towarzystwie.",
     "location": "Odra Centrum, Wybrzeże Juliusza Słowackiego 5B, Wrocław (tuż obok Mostu Grunwaldzkiego)",
@@ -60,6 +74,7 @@ This endpoint returns data in the following format:
     "entryCost": "bezpłatne",
     "facilitator": "Jan Kowalski",
     "registration": "Obowiązują wcześniejsze zapisy. Decyduje kolejność zgłoszeń. Każde zgłoszenie jest potwierdzane – odpowiedź może zająć chwilę. Telefonicznie: 506 563 518 E-mail: michalina@onwater.pl",
+    "sourceUrl": "https://odracentrum.org/seniorzy-w-odra-centrum/",
     "categories": [{
       "id": "warsztaty",
       "name": "Warsztaty"
@@ -69,33 +84,38 @@ This endpoint returns data in the following format:
 ]
 ```
 
-#### Latest Events API
+#### Get latest events
 
-To get latest events, use the following endpoint:
-
-```
-    GET https://www.panhenio.pl/api/events/latest
-```
-
-This endpoint returns data in the same format as the Events API, but only the 3 random events after or today.
-
-#### Event API
-
-To get event use the following endpoint:
+Operation:
 
 ```
-    GET https://www.panhenio.pl/api/events/<sourceId>/<id>
+GET https://www.panhenio.pl/api/events/latest
 ```
 
-This endpoint returns data in the following format:
+Response body format:
+
+This endpoint returns data in the same format as the "Get all events", but only the 3 random events after or today.
+
+#### Get event
+
+```
+GET https://www.panhenio.pl/api/events/:organizerId/:monthId/:eventId
+```
+
+Request path parameters:
+- `organizerId` (string, required) — organizer ID
+- `monthId` (string, required) — month in `YYYY-MM` format
+- `eventId` (string, required) — event ID
+
+Response body format:
 
 ```json
 {
   "id": "mozaika-tworzenie-obrazow-2026-05-19",
-  "source": {
-    "id": "odracentrum-org",
-    "url": "https://odracentrum.org/seniorzy-w-odra-centrum/"
+  "organizer": {
+    "id": "odra-centrum"
   },
+  "monthId": "2026-05",
   "title": "Mozaika – tworzenie obrazów.",
   "description": "Wspólnie tworzenie obrazów inspirowanych Odrą. To warsztat międzypokoleniowy, na który można zabrać wnuki lub dzieci, aby razem tworzyć, rozmawiać i spędzać czas w dobrym towarzystwie.",
   "location": "Odra Centrum, Wybrzeże Juliusza Słowackiego 5B, Wrocław (tuż obok Mostu Grunwaldzkiego)",
@@ -109,6 +129,7 @@ This endpoint returns data in the following format:
   "entryCost": "bezpłatne",
   "facilitator": "Jan Kowalski",
   "registration": "Obowiązują wcześniejsze zapisy. Decyduje kolejność zgłoszeń. Każde zgłoszenie jest potwierdzane – odpowiedź może zająć chwilę. Telefonicznie: 506 563 518 E-mail: michalina@onwater.pl",
+  "sourceUrl": "https://odracentrum.org/seniorzy-w-odra-centrum/",
   "categories": [{
     "id": "warsztaty",
     "name": "Warsztaty"
@@ -117,15 +138,17 @@ This endpoint returns data in the following format:
 }
 ```
 
-#### Cities API
+### Cities API
 
-To get all cities use the following endpoint:
+#### Get all cities
+
+Operation:
 
 ```
     GET https://www.panhenio.pl/api/cities
 ```
 
-This endpoint returns data in the following format:
+Response body format:
 
 ```json
 [
@@ -136,15 +159,17 @@ This endpoint returns data in the following format:
 ]
 ```
 
-#### Categories API
+### Categories API
 
-To get all categories use the following endpoint:
+#### Get all categories use the following endpoint:
+
+Operation:
 
 ```
-    GET https://www.panhenio.pl/api/categories
+GET https://www.panhenio.pl/api/categories
 ```
 
-This endpoint returns data in the following format:
+Response body format:
 
 ```json
 [
@@ -154,17 +179,3 @@ This endpoint returns data in the following format:
   }
 ]
 ```
-
-
-
-### Components
-
-Each component lives in `src/components/<Name>/` with its own `.jsx` and `.module.css`. Styling uses CSS Modules throughout; global tokens (colors, font) are defined as CSS custom properties in `src/index.css`.
-
-- **Hero** — the only stateful component; handles search input, fetches events, filters by `name`/`location`/`city` (case-insensitive substring)
-- **Categories** — decorative only; category links are non-functional (`href="#"`)
-- **Recommendations** — hardcoded list of three events, not driven by data
-
-### Styling
-
-Layout is mobile-first, max-width 480px. Key CSS variables: `--navy`, `--orange`, `--text`, `--font` (Inter). All component styles are scoped via CSS Modules.

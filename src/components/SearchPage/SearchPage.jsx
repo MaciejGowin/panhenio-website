@@ -128,7 +128,7 @@ export default function SearchPage({ initialPhrase = '', initialCityId = '', ini
                   <span className={styles.cardMeta}>{event.location}, {event.city.name}</span>
                   <span className={styles.cardMeta}>{event.date}{event.startTime ? ` · ${event.startTime}` : ''}{event.endTime ? `–${event.endTime}` : ''}</span>
                   <a
-                    href={`/wydarzenie/${encodeURIComponent(event.source.id)}/${encodeURIComponent(event.id)}?back=${encodeURIComponent(buildUrl(phrase, cityId, categoryId))}`}
+                    href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.monthId)}/${encodeURIComponent(event.id)}?back=${encodeURIComponent(buildUrl(phrase, cityId, categoryId))}`}
                     className={styles.cardLink}
                   >
                     Zobacz szczegóły →

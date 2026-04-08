@@ -1,11 +1,11 @@
-import styles from '../../../../components/EventPage/EventPage.module.css'
+import styles from '../../../../../components/EventPage/EventPage.module.css'
 
 const BASE_URL = 'https://www.panhenio.pl'
 
-async function fetchEvent(sourceId, id) {
+async function fetchEvent(organizerId, monthId, id) {
   try {
     const res = await fetch(
-      `${BASE_URL}/api/events/${encodeURIComponent(sourceId)}/${encodeURIComponent(id)}`,
+      `${BASE_URL}/api/events/${encodeURIComponent(organizerId)}/${encodeURIComponent(monthId)}/${encodeURIComponent(id)}`,
       { next: { revalidate: 3600 } }
     )
     if (!res.ok) return null
@@ -16,8 +16,8 @@ async function fetchEvent(sourceId, id) {
 }
 
 export async function generateMetadata({ params }) {
-  const { sourceId, id } = await params
-  const event = await fetchEvent(sourceId, id)
+  const { organizerId, monthId, id } = await params
+  const event = await fetchEvent(organizerId, monthId, id)
   if (!event) return { title: 'Wydarzenie – Pan Henio' }
   return {
     title: `${event.title} – Pan Henio`,
@@ -25,16 +25,16 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: `${event.title} – Pan Henio`,
       description: event.description,
-      url: `${BASE_URL}/wydarzenie/${sourceId}/${id}`,
+      url: `${BASE_URL}/wydarzenie/${organizerId}/${monthId}/${id}`,
     },
   }
 }
 
 export default async function WydarzeniePage({ params, searchParams }) {
-  const { sourceId, id } = await params
+  const { organizerId, monthId, id } = await params
   const sp = await searchParams
   const backHref = sp.back || '/szukaj-wydarzen'
-  const event = await fetchEvent(sourceId, id)
+  const event = await fetchEvent(organizerId, monthId, id)
 
   const jsonLd = event
     ? {
@@ -55,7 +55,7 @@ export default async function WydarzeniePage({ params, searchParams }) {
         },
         ...(event.facilitator ? { organizer: { '@type': 'Person', name: event.facilitator } } : {}),
         isAccessibleForFree: event.entryCost === 'bezpłatnie' || event.entryCost === 'bezpłatne',
-        url: `${BASE_URL}/wydarzenie/${sourceId}/${id}`,
+        url: `${BASE_URL}/wydarzenie/${organizerId}/${monthId}/${id}`,
       }
     : null
 
@@ -86,8 +86,8 @@ export default async function WydarzeniePage({ params, searchParams }) {
             {event.description && (
               <p className={styles.description}>{event.description}</p>
             )}
-            {event.source?.url && (
-              <a href={event.source.url} target="_blank" rel="noopener noreferrer" className={styles.sourceLink}>
+            {event.sourceUrl && (
+              <a href={event.sourceUrl} target="_blank" rel="noopener noreferrer" className={styles.sourceLink}>
                 Źródło wydarzenia →
               </a>
             )}
