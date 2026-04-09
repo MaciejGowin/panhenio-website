@@ -124,7 +124,7 @@ export default function SearchPage({ initialPhrase = '', initialCityId = '', ini
               {results.map((event, i) => (
                 <li key={i}>
                   <a
-                    href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.monthId)}/${encodeURIComponent(event.id)}?back=${encodeURIComponent(buildUrl(phrase, cityId, categoryId))}`}
+                    href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}?back=${encodeURIComponent(buildUrl(phrase, cityId, categoryId))}`}
                     className={styles.card}
                   >
                     <span className={styles.cardCategory}>{event.categories?.map(c => c.name).join(', ')}</span>

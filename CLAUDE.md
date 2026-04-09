@@ -66,7 +66,7 @@ Response body format:
     "organizer": {
       "id": "odra-centrum"
     },
-    "monthId": "2026-05",
+    "month": "2026-05",
     "title": "Mozaika – tworzenie obrazów.",
     "description": "Wspólnie tworzenie obrazów inspirowanych Odrą. To warsztat międzypokoleniowy, na który można zabrać wnuki lub dzieci, aby razem tworzyć, rozmawiać i spędzać czas w dobrym towarzystwie.",
     "location": "Odra Centrum, Wybrzeże Juliusza Słowackiego 5B, Wrocław (tuż obok Mostu Grunwaldzkiego)",
@@ -105,12 +105,12 @@ This endpoint returns data in the same format as the "Get all events", but only 
 #### Get event
 
 ```
-GET https://www.panhenio.pl/api/events/:organizerId/:monthId/:eventId
+GET https://www.panhenio.pl/api/events/:organizerId/:month/:eventId
 ```
 
 Request path parameters:
 - `organizerId` (string, required) — organizer ID
-- `monthId` (string, required) — month in `YYYY-MM` format
+- `month` (string, required) — month in `YYYY-MM` format
 - `eventId` (string, required) — event ID
 
 Response body format:
@@ -121,7 +121,7 @@ Response body format:
   "organizer": {
     "id": "odra-centrum"
   },
-  "monthId": "2026-05",
+  "month": "2026-05",
   "title": "Mozaika – tworzenie obrazów.",
   "description": "Wspólnie tworzenie obrazów inspirowanych Odrą. To warsztat międzypokoleniowy, na który można zabrać wnuki lub dzieci, aby razem tworzyć, rozmawiać i spędzać czas w dobrym towarzystwie.",
   "location": "Odra Centrum, Wybrzeże Juliusza Słowackiego 5B, Wrocław (tuż obok Mostu Grunwaldzkiego)",
@@ -167,7 +167,7 @@ Response body format:
 
 ### Categories API
 
-#### Get all categories use the following endpoint:
+#### Get all categories
 
 Operation:
 
@@ -182,6 +182,27 @@ Response body format:
   {
     "id": "aktywnosc",
     "name": "Aktywność"
+  }
+]
+```
+
+### Organizer API
+
+#### Get all organizers
+
+Operation:
+
+```
+GET https://www.panhenio.pl/api/organizers
+```
+
+Response body format:
+
+```json
+[
+  {
+    "id": "odra-centrum",
+    "name": "ODRA Centrum"
   }
 ]
 ```

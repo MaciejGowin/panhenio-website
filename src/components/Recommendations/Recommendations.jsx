@@ -24,7 +24,7 @@ export default function Recommendations() {
           <li key={item.id} className={styles.item}>
             <StarIcon className={styles.star} />
             <div className={styles.itemBody}>
-              <a href={`/wydarzenie/${encodeURIComponent(item.organizer.id)}/${encodeURIComponent(item.monthId)}/${encodeURIComponent(item.id)}`} className={styles.link}>
+              <a href={`/wydarzenie/${encodeURIComponent(item.organizer.id)}/${encodeURIComponent(item.month)}/${encodeURIComponent(item.id)}`} className={styles.link}>
                 {item.title}
               </a>
               <span className={styles.meta}>

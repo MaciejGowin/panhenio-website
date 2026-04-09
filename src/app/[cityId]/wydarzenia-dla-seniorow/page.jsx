@@ -87,7 +87,7 @@ export default async function CityEventsPage({ params }) {
             addressCountry: 'PL',
           },
         },
-        url: `${BASE_URL}/wydarzenie/${event.organizer.id}/${event.monthId}/${event.id}`,
+        url: `${BASE_URL}/wydarzenie/${event.organizer.id}/${event.month}/${event.id}`,
       },
     })),
   }
@@ -115,7 +115,7 @@ export default async function CityEventsPage({ params }) {
                 {group.map((event, i) => (
                   <li key={i}>
                     <a
-                      href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.monthId)}/${encodeURIComponent(event.id)}?back=${encodeURIComponent(backHref)}`}
+                      href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}?back=${encodeURIComponent(backHref)}`}
                       className={styles.card}
                     >
                       <span className={styles.cardCategory}>
