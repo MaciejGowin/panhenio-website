@@ -2,12 +2,11 @@ import styles from '../../../../../components/EventPage/EventPage.module.css'
 
 const BASE_URL = 'https://www.panhenio.pl'
 
-async function fetchEvent(organizerId, monthId, id) {
+async function fetchEvent(organizerId, monthId, id, previewAccessToken) {
   try {
-    const res = await fetch(
-      `${BASE_URL}/api/events/${encodeURIComponent(organizerId)}/${encodeURIComponent(monthId)}/${encodeURIComponent(id)}`,
-      { next: { revalidate: 3600 } }
-    )
+    const url = new URL(`${BASE_URL}/api/events/${encodeURIComponent(organizerId)}/${encodeURIComponent(monthId)}/${encodeURIComponent(id)}`)
+    if (previewAccessToken) url.searchParams.set('previewAccessToken', previewAccessToken)
+    const res = await fetch(url.toString(), { cache: 'no-store' })
     if (!res.ok) return null
     return res.json()
   } catch {
@@ -15,9 +14,10 @@ async function fetchEvent(organizerId, monthId, id) {
   }
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata({ params, searchParams }) {
   const { organizerId, monthId, id } = await params
-  const event = await fetchEvent(organizerId, monthId, id)
+  const { previewAccessToken } = await searchParams
+  const event = await fetchEvent(organizerId, monthId, id, previewAccessToken)
   if (!event) return { title: 'Wydarzenie – Pan Henio' }
   return {
     title: `${event.title} – Pan Henio`,
@@ -34,7 +34,7 @@ export default async function WydarzeniePage({ params, searchParams }) {
   const { organizerId, monthId, id } = await params
   const sp = await searchParams
   const backHref = sp.back || '/szukaj-wydarzen'
-  const event = await fetchEvent(organizerId, monthId, id)
+  const event = await fetchEvent(organizerId, monthId, id, sp.previewAccessToken)
 
   const jsonLd = event
     ? {

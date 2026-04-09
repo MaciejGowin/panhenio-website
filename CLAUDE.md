@@ -113,6 +113,9 @@ Request path parameters:
 - `month` (string, required) — month in `YYYY-MM` format
 - `eventId` (string, required) — event ID
 
+Request query parameters:
+- `previewAccessToken` (optional) — preview access token to load draft event (e.g. `123-abc`, etc.)
+
 Response body format:
 
 ```json
