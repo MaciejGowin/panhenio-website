@@ -1,15 +1,24 @@
-'use client'
-
-import { useState } from 'react'
 import styles from './Navbar.module.css'
+import NavbarCitiesDropdown from './NavbarCitiesDropdown'
+import NavbarMobileMenu from './NavbarMobileMenu'
 
 const navLinks = [
   { label: 'Cyfrowy Henio', href: '/cyfrowy-henio', bold: true },
   { label: 'O projekcie', href: '/o-projekcie' },
 ]
 
-export default function Navbar() {
-  const [open, setOpen] = useState(false)
+async function fetchCities() {
+  try {
+    const res = await fetch('https://www.panhenio.pl/api/cities', { cache: 'no-store' })
+    if (!res.ok) return []
+    return res.json()
+  } catch {
+    return []
+  }
+}
+
+export default async function Navbar() {
+  const cities = await fetchCities()
 
   return (
     <nav className={styles.navbar}>
@@ -18,7 +27,8 @@ export default function Navbar() {
           <img src="/panhenio-logo.png" alt="Pan Henio" className={styles.logo} />
         </a>
         <ul className={styles.links}>
-          {navLinks.map((link) => (
+          <NavbarCitiesDropdown cities={cities} />
+          {navLinks.map(link => (
             <li key={link.label}>
               <a
                 href={link.href}
@@ -29,32 +39,8 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
-        <button
-          className={styles.menuButton}
-          onClick={() => setOpen((o) => !o)}
-          aria-label="Menu"
-          aria-expanded={open}
-        >
-          <span className={`${styles.bar} ${open ? styles.barTop : ''}`} />
-          <span className={`${styles.bar} ${open ? styles.barMid : ''}`} />
-          <span className={`${styles.bar} ${open ? styles.barBot : ''}`} />
-        </button>
+        <NavbarMobileMenu cities={cities} navLinks={navLinks} />
       </div>
-      {open && (
-        <ul className={styles.dropdown}>
-          {navLinks.map((link) => (
-            <li key={link.label}>
-              <a
-                href={link.href}
-                className={`${styles.dropdownLink}${link.bold ? ` ${styles.linkBold}` : ''}`}
-                onClick={() => setOpen(false)}
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
     </nav>
   )
 }

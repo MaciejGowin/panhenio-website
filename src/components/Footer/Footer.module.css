@@ -1,22 +1,25 @@
 .footer {
-  border-top: 1px solid var(--gray-200);
-  padding: 20px 24px;
+  background: var(--navy-dark);
+  padding: 28px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  background: var(--white);
+  gap: 14px;
 }
 
 .logo {
   height: 28px;
   width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
 }
 
 .links {
   display: flex;
   align-items: center;
   gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .item {
@@ -27,17 +30,17 @@
 
 .link {
   text-decoration: none;
-  color: var(--gray-500);
+  color: rgba(255, 255, 255, 0.55);
   font-size: 0.875rem;
   transition: color 0.15s;
 }
 
 .link:hover {
-  color: var(--navy);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .dot {
-  color: var(--gray-500);
+  color: rgba(255, 255, 255, 0.25);
   font-size: 0.875rem;
   user-select: none;
 }

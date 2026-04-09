@@ -23,9 +23,14 @@ export default function Recommendations() {
         {items.map((item) => (
           <li key={item.id} className={styles.item}>
             <StarIcon className={styles.star} />
-            <a href={`/wydarzenie/${encodeURIComponent(item.organizer.id)}/${encodeURIComponent(item.monthId)}/${encodeURIComponent(item.id)}`} className={styles.link}>
-              {item.title}
-            </a>
+            <div className={styles.itemBody}>
+              <a href={`/wydarzenie/${encodeURIComponent(item.organizer.id)}/${encodeURIComponent(item.monthId)}/${encodeURIComponent(item.id)}`} className={styles.link}>
+                {item.title}
+              </a>
+              <span className={styles.meta}>
+                {item.date}{item.city?.name ? ` · ${item.city.name}` : ''}
+              </span>
+            </div>
           </li>
         ))}
       </ul>

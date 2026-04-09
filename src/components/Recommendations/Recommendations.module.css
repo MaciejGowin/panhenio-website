@@ -32,11 +32,10 @@
 
 .item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
   font-size: 0.95rem;
   color: var(--navy);
-  cursor: pointer;
   padding: 2px 0;
   transition: opacity 0.15s;
 }
@@ -45,9 +44,20 @@
   opacity: 0.75;
 }
 
+.itemBody {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
 .link {
   color: var(--navy);
   text-decoration: none;
+}
+
+.meta {
+  font-size: 0.8rem;
+  color: var(--gray-500);
 }
 
 .star {

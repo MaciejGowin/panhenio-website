@@ -34,6 +34,12 @@ Each component lives in `src/components/<Name>/` with its own `.jsx` and `.modul
 
 Layout is mobile-first, max-width 480px. Key CSS variables: `--navy`, `--orange`, `--text`, `--font` (Inter). All component styles are scoped via CSS Modules.
 
+## Deployment
+
+The app runs on **serverless infrastructure (Lambda)**. Next.js data cache does not persist between Lambda invocations, so `next: { revalidate }` has no effect.
+
+Always use `{ cache: 'no-store' }` on `fetch` calls in server components — never `{ next: { revalidate: N } }`. Page-level caching should be handled at the CDN layer (e.g. CloudFront), not inside Next.js.
+
 ## APIs
 
 ### Events API
