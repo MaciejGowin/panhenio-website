@@ -129,7 +129,7 @@ export default function SearchPage({ initialPhrase = '', initialCityId = '', ini
                   >
                     <span className={styles.cardCategory}>{event.categories?.map(c => c.name).join(', ')}</span>
                     <span className={styles.cardName}>{event.title}</span>
-                    <span className={styles.cardMeta}>{event.location}, {event.city.name}</span>
+                    <span className={styles.cardMeta}>{[event.location, event.city.name].filter(Boolean).join(', ')}</span>
                     <span className={styles.cardMeta}>{event.date}{event.startTime ? ` · ${event.startTime}` : ''}{event.endTime ? `–${event.endTime}` : ''}</span>
                   </a>
                 </li>

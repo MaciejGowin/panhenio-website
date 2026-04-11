@@ -21,7 +21,7 @@ export async function generateMetadata({ params, searchParams }) {
   if (!event) return { title: 'Wydarzenie – Pan Henio' }
   return {
     title: `${event.title} – Pan Henio`,
-    description: event.description || `${event.date} · ${event.location}, ${event.city.name}`,
+    description: event.description || `${event.date} · ${[event.location, event.city.name].filter(Boolean).join(', ')}`,
     openGraph: {
       title: `${event.title} – Pan Henio`,
       description: event.description,
@@ -76,7 +76,7 @@ export default async function WydarzeniePage({ params, searchParams }) {
             <h1 className={styles.title}>{event.title}</h1>
             <div className={styles.meta}>
               <span>{event.date}{event.startTime ? ` · ${event.startTime}` : ''}{event.endTime ? `–${event.endTime}` : ''}</span>
-              <span>{event.location}, {event.city.name}</span>
+              <span>{[event.location, event.city.name].filter(Boolean).join(', ')}</span>
               {event.entryCost && <span>{event.entryCost}</span>}
               {event.facilitator && <span>{event.facilitator}</span>}
             </div>

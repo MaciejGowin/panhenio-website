@@ -51,6 +51,35 @@
   text-transform: capitalize;
 }
 
+.monthTabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.monthTab {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--navy);
+  background: var(--white);
+  border: 1.5px solid var(--gray-200);
+  border-radius: 20px;
+  padding: 6px 14px;
+  text-decoration: none;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+.monthTab:hover {
+  border-color: var(--navy);
+}
+
+.monthTabActive {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--white);
+}
+
 .empty {
   font-size: 0.95rem;
   color: var(--gray-500);

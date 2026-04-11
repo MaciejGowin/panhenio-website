@@ -51,6 +51,71 @@
   text-transform: capitalize;
 }
 
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.monthTabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.viewToggle {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.viewTab {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--navy);
+  background: var(--white);
+  border: 1.5px solid var(--gray-200);
+  border-radius: 20px;
+  padding: 6px 14px;
+  text-decoration: none;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+.viewTab:hover {
+  border-color: var(--navy);
+}
+
+.viewTabActive {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: var(--white);
+}
+
+.monthTab {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--navy);
+  background: var(--white);
+  border: 1.5px solid var(--gray-200);
+  border-radius: 20px;
+  padding: 6px 14px;
+  text-decoration: none;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+.monthTab:hover {
+  border-color: var(--navy);
+}
+
+.monthTabActive {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--white);
+}
+
 .empty {
   font-size: 0.95rem;
   color: var(--gray-500);
@@ -109,4 +174,86 @@
   font-weight: 600;
   color: var(--navy);
   margin-top: 2px;
+}
+
+/* Calendar */
+
+.calendar {
+  overflow-x: auto;
+}
+
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  min-width: 480px;
+}
+
+.calendarDayName {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--gray-500);
+  text-align: center;
+  padding: 6px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.calendarCell {
+  min-height: 80px;
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1.5px solid transparent;
+}
+
+.calendarCellHasEvents {
+  border-color: var(--gray-200);
+}
+
+.calendarDayNum {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--navy);
+  align-self: flex-end;
+}
+
+.calendarCell:not(.calendarCellHasEvents) .calendarDayNum {
+  color: var(--gray-500);
+  font-weight: 400;
+}
+
+.calendarEvent {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--navy);
+  border-radius: 4px;
+  padding: 3px 5px;
+  text-decoration: none;
+  color: var(--white);
+  transition: background 0.15s;
+}
+
+.calendarEvent:hover {
+  background: var(--orange);
+}
+
+.calendarEventTime {
+  font-size: 0.7rem;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.calendarEventTitle {
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.3;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }

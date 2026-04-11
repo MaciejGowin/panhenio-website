@@ -13,17 +13,30 @@ async function fetchCities() {
   }
 }
 
-async function fetchEvents(cityId) {
+async function fetchEvents(cityId, month) {
   try {
-    const res = await fetch(
-      `${BASE_URL}/api/events?cityId=${encodeURIComponent(cityId)}`,
-      { cache: 'no-store' }
-    )
+    const url = new URL(`${BASE_URL}/api/events`)
+    url.searchParams.set('cityId', cityId)
+    if (month) url.searchParams.set('month', month)
+    const res = await fetch(url.toString(), { cache: 'no-store' })
     if (!res.ok) return []
     return res.json()
   } catch {
     return []
   }
+}
+
+function getAvailableMonths() {
+  const now = new Date()
+  const current = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`
+  const next = new Date(now.getFullYear(), now.getMonth() + 1, 1)
+  const nextMonth = `${next.getFullYear()}-${String(next.getMonth() + 1).padStart(2, '0')}`
+  return [current, nextMonth]
+}
+
+function formatMonth(month) {
+  const date = new Date(`${month}-01T00:00:00`)
+  return date.toLocaleDateString('pl-PL', { month: 'long', year: 'numeric' })
 }
 
 function groupByDate(events) {
@@ -57,9 +70,11 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default async function CityEventsPage({ params }) {
+export default async function CityEventsPage({ params, searchParams }) {
   const { cityId } = await params
-  const [cities, events] = await Promise.all([fetchCities(), fetchEvents(cityId)])
+  const { miesiac: month } = await searchParams
+  const months = getAvailableMonths()
+  const [cities, events] = await Promise.all([fetchCities(), fetchEvents(cityId, month)])
   const city = cities.find(c => c.id === cityId)
   if (!city) notFound()
   const cityName = city.name
@@ -104,6 +119,18 @@ export default async function CityEventsPage({ params }) {
           Wydarzenia dla seniorów
           <span className={styles.city}>{cityName}</span>
         </h1>
+
+        <div className={styles.monthTabs}>
+          {months.map(m => (
+            <a
+              key={m}
+              href={`/${cityId}/wydarzenia-dla-seniorow?miesiac=${m}`}
+              className={`${styles.monthTab} ${month === m ? styles.monthTabActive : ''}`}
+            >
+              {formatMonth(m)}
+            </a>
+          ))}
+        </div>
 
         {events.length === 0 ? (
           <p className={styles.empty}>Brak nadchodzących wydarzeń w tym mieście.</p>

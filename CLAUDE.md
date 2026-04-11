@@ -55,6 +55,7 @@ GET https://www.panhenio.pl/api/events?phrase=Wrocław
 Request query parameters:
 - `phrase` (optional) — search phrase to filter events by `name`, `location`, `city`, etc. (case-insensitive substring match)
 - `organizerId` (optional) — filter events by organizer id (e.g. `odra-centrum`, `cal-borek`, etc.)
+- `month` (optional) — filter events by month id (e.g. `2026-04`, `2026-05`, etc.)
 - `categoryId` (optional) — filter events by category id (e.g. `aktywnosc`, `kultura`, etc.)
 - `cityId` (optional) — filter events by city id (e.g. `wroclaw`, `poznan`, etc.)
 
@@ -208,5 +209,25 @@ Response body format:
     "id": "odra-centrum",
     "name": "ODRA Centrum"
   }
+]
+```
+
+#### Get organizer months
+
+Operation:
+
+```
+GET https://www.panhenio.pl/api/organizers/:organizerId/months
+```
+
+Request query parameters:
+- `organizerId` (string, required) — organizer ID
+
+Response body format:
+
+```json
+[
+  "2026-04",
+  "2026-05"
 ]
 ```
