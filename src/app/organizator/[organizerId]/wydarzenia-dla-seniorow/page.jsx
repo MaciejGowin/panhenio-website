@@ -205,7 +205,7 @@ export default async function OrganizerEventsPage({ params, searchParams }) {
                       >
                         {organizerName}
                       </a>
-                      <span className={styles.cardMeta}>{event.location}</span>
+                      <span className={styles.cardMeta}>{[event.location, event.city?.name].filter(Boolean).join(', ')}</span>
                       <span className={styles.cardMeta}>
                         {event.startTime ? event.startTime : ''}
                         {event.endTime ? `–${event.endTime}` : ''}
