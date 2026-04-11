@@ -54,6 +54,7 @@ GET https://www.panhenio.pl/api/events?phrase=Wrocław
 
 Request query parameters:
 - `phrase` (optional) — search phrase to filter events by `name`, `location`, `city`, etc. (case-insensitive substring match)
+- `organizerId` (optional) — filter events by organizer id (e.g. `odra-centrum`, `cal-borek`, etc.)
 - `categoryId` (optional) — filter events by category id (e.g. `aktywnosc`, `kultura`, etc.)
 - `cityId` (optional) — filter events by city id (e.g. `wroclaw`, `poznan`, etc.)
 
