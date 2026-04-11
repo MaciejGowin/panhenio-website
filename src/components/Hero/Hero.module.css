@@ -1,7 +1,7 @@
 .hero {
   text-align: center;
   padding: 72px 24px 56px;
-  background: linear-gradient(180deg, #eaf0fd 0%, var(--gray-50) 100%);
+  background: var(--gray-50);
   border-bottom: 1px solid var(--gray-200);
 }
 
@@ -76,6 +76,12 @@
 
 .button:active {
   transform: scale(0.98);
+}
+
+@media (max-width: 480px) {
+  .buttonLabel {
+    display: none;
+  }
 }
 
 .browseAll {

@@ -141,14 +141,22 @@ export default async function CityEventsPage({ params, searchParams }) {
               <ul className={styles.cards}>
                 {group.map((event, i) => (
                   <li key={i}>
-                    <a
-                      href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}?back=${encodeURIComponent(backHref)}`}
-                      className={styles.card}
-                    >
+                    <div className={styles.card}>
                       <span className={styles.cardCategory}>
                         {event.categories?.map(c => c.name).join(', ')}
                       </span>
-                      <span className={styles.cardName}>{event.title}</span>
+                      <a
+                        href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}?back=${encodeURIComponent(backHref)}`}
+                        className={styles.cardName}
+                      >
+                        {event.title}
+                      </a>
+                      <a
+                        href={`/organizator/${encodeURIComponent(event.organizer.id)}/wydarzenia-dla-seniorow?miesiac=${event.month}`}
+                        className={styles.cardOrganizer}
+                      >
+                        {event.organizer.name}
+                      </a>
                       <span className={styles.cardMeta}>{event.location}</span>
                       <span className={styles.cardMeta}>
                         {event.startTime ? event.startTime : ''}
@@ -157,7 +165,7 @@ export default async function CityEventsPage({ params, searchParams }) {
                       {event.entryCost && (
                         <span className={styles.cardCost}>{event.entryCost}</span>
                       )}
-                    </a>
+                    </div>
                   </li>
                 ))}
               </ul>

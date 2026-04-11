@@ -78,6 +78,16 @@
   padding-left: 12px;
 }
 
+.organizerLink {
+  color: var(--orange);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.organizerLink:hover {
+  text-decoration: underline;
+}
+
 .sourceLink {
   display: inline-block;
   font-size: 0.9rem;

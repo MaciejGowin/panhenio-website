@@ -66,7 +66,8 @@ Response body format:
   {
     "id": "mozaika-tworzenie-obrazow-2026-05-19",
     "organizer": {
-      "id": "odra-centrum"
+      "id": "odra-centrum",
+      "name": "Odra Centrum"
     },
     "month": "2026-05",
     "title": "Mozaika – tworzenie obrazów.",
@@ -124,7 +125,8 @@ Response body format:
 {
   "id": "mozaika-tworzenie-obrazow-2026-05-19",
   "organizer": {
-    "id": "odra-centrum"
+    "id": "odra-centrum",
+    "name": "Odra Centrum"
   },
   "month": "2026-05",
   "title": "Mozaika – tworzenie obrazów.",

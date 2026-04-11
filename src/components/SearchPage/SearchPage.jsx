@@ -123,15 +123,23 @@ export default function SearchPage({ initialPhrase = '', initialCityId = '', ini
             <ul className={styles.cards}>
               {results.map((event, i) => (
                 <li key={i}>
-                  <a
-                    href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}?back=${encodeURIComponent(buildUrl(phrase, cityId, categoryId))}`}
-                    className={styles.card}
-                  >
+                  <div className={styles.card}>
                     <span className={styles.cardCategory}>{event.categories?.map(c => c.name).join(', ')}</span>
-                    <span className={styles.cardName}>{event.title}</span>
+                    <a
+                      href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}?back=${encodeURIComponent(buildUrl(phrase, cityId, categoryId))}`}
+                      className={styles.cardName}
+                    >
+                      {event.title}
+                    </a>
+                    <a
+                      href={`/organizator/${encodeURIComponent(event.organizer.id)}/wydarzenia-dla-seniorow?miesiac=${event.month}`}
+                      className={styles.cardOrganizer}
+                    >
+                      {event.organizer.name}
+                    </a>
                     <span className={styles.cardMeta}>{[event.location, event.city.name].filter(Boolean).join(', ')}</span>
                     <span className={styles.cardMeta}>{event.date}{event.startTime ? ` · ${event.startTime}` : ''}{event.endTime ? `–${event.endTime}` : ''}</span>
-                  </a>
+                  </div>
                 </li>
               ))}
             </ul>

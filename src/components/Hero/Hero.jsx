@@ -31,7 +31,7 @@ export default function Hero() {
         />
         <button className={styles.button} onClick={handleSearch}>
           <SearchIcon />
-          Szukaj
+          <span className={styles.buttonLabel}>Szukaj</span>
         </button>
       </div>
       <a href="/szukaj-wydarzen" className={styles.browseAll}>

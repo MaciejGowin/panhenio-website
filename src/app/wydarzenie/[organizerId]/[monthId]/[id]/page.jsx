@@ -77,6 +77,14 @@ export default async function WydarzeniePage({ params, searchParams }) {
             <div className={styles.meta}>
               <span>{event.date}{event.startTime ? ` · ${event.startTime}` : ''}{event.endTime ? `–${event.endTime}` : ''}</span>
               <span>{[event.location, event.city.name].filter(Boolean).join(', ')}</span>
+              {event.organizer.name && (
+                <a
+                  href={`/organizator/${encodeURIComponent(event.organizer.id)}/wydarzenia-dla-seniorow?miesiac=${event.month}`}
+                  className={styles.organizerLink}
+                >
+                  {event.organizer.name}
+                </a>
+              )}
               {event.entryCost && <span>{event.entryCost}</span>}
               {event.facilitator && <span>{event.facilitator}</span>}
             </div>
