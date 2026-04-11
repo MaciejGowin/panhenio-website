@@ -10,6 +10,21 @@ const inter = Inter({
   variable: '--font',
 })
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#1e3a6e',
+}
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Pan Henio',
+  url: 'https://www.panhenio.pl',
+  logo: 'https://www.panhenio.pl/panhenio-favicon.png',
+  description: 'Serwis z wydarzeniami dla seniorów w Polsce.',
+}
+
 export const metadata = {
   icons: { icon: '/panhenio-favicon.png' },
   metadataBase: new URL('https://www.panhenio.pl'),
@@ -36,6 +51,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pl" className={inter.variable}>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
         <div className={styles.wrapper}>
           <Navbar />
           {children}

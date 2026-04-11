@@ -1,3 +1,7 @@
+export const metadata = {
+  alternates: { canonical: 'https://www.panhenio.pl/' },
+}
+
 import Hero from '../components/Hero/Hero'
 import Categories from '../components/Categories/Categories'
 import Recommendations from '../components/Recommendations/Recommendations'

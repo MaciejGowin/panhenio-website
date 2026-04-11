@@ -22,10 +22,13 @@ export async function generateMetadata({ params, searchParams }) {
   return {
     title: `${event.title} – Pan Henio`,
     description: event.description || `${event.date} · ${[event.location, event.city.name].filter(Boolean).join(', ')}`,
+    alternates: { canonical: `${BASE_URL}/wydarzenie/${organizerId}/${monthId}/${id}` },
     openGraph: {
       title: `${event.title} – Pan Henio`,
       description: event.description,
       url: `${BASE_URL}/wydarzenie/${organizerId}/${monthId}/${id}`,
+      type: 'article',
+      publishedTime: event.createdAt,
     },
   }
 }
@@ -35,6 +38,18 @@ export default async function WydarzeniePage({ params, searchParams }) {
   const sp = await searchParams
   const backHref = sp.back || '/szukaj-wydarzen'
   const event = await fetchEvent(organizerId, monthId, id, sp.previewAccessToken)
+
+  const breadcrumbLd = event
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Pan Henio', item: BASE_URL },
+          { '@type': 'ListItem', position: 2, name: event.organizer.name, item: `${BASE_URL}/organizator/${organizerId}/wydarzenia-dla-seniorow` },
+          { '@type': 'ListItem', position: 3, name: event.title, item: `${BASE_URL}/wydarzenie/${organizerId}/${monthId}/${id}` },
+        ],
+      }
+    : null
 
   const jsonLd = event
     ? {
@@ -61,6 +76,7 @@ export default async function WydarzeniePage({ params, searchParams }) {
 
   return (
     <div className={styles.page}>
+      {breadcrumbLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />}
       {jsonLd && (
         <script
           type="application/ld+json"

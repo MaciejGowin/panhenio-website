@@ -34,6 +34,14 @@ const nextConfig = {
         source: '/wydarzenie/:path*',
         headers: [{ key: 'Cache-Control', value: 's-maxage=3600, stale-while-revalidate=86400' }],
       },
+      {
+        source: '/sitemap.xml',
+        headers: [{ key: 'Cache-Control', value: 's-maxage=86400, stale-while-revalidate=86400' }],
+      },
+      {
+        source: '/robots.txt',
+        headers: [{ key: 'Cache-Control', value: 's-maxage=86400, stale-while-revalidate=86400' }],
+      },
     ]
   },
 }

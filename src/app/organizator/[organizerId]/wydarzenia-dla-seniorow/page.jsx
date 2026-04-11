@@ -68,6 +68,7 @@ export async function generateMetadata({ params }) {
   return {
     title: `Wydarzenia dla seniorów – ${organizerName} – Pan Henio`,
     description: `Aktualne wydarzenia, warsztaty i spotkania dla seniorów organizowane przez ${organizerName}. Znajdź coś dla siebie z Pan Henio.`,
+    alternates: { canonical: `${BASE_URL}/organizator/${organizerId}/wydarzenia-dla-seniorow` },
     openGraph: {
       title: `Wydarzenia dla seniorów – ${organizerName} – Pan Henio`,
       description: `Aktualne wydarzenia dla seniorów organizowane przez ${organizerName}.`,
@@ -102,6 +103,15 @@ export default async function OrganizerEventsPage({ params, searchParams }) {
     return `/organizator/${organizerId}/wydarzenia-dla-seniorow${qs ? `?${qs}` : ''}`
   }
 
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Pan Henio', item: BASE_URL },
+      { '@type': 'ListItem', position: 2, name: organizerName, item: `${BASE_URL}/organizator/${organizerId}/wydarzenia-dla-seniorow` },
+    ],
+  }
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
@@ -131,10 +141,8 @@ export default async function OrganizerEventsPage({ params, searchParams }) {
 
   return (
     <div className={styles.page}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className={styles.inner}>
         <a href="/" className={styles.back}>← Strona główna</a>
         <h1 className={styles.title}>
