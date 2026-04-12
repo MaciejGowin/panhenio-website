@@ -12,7 +12,7 @@ const nextConfig = {
     return [
       {
         source: '/',
-        headers: [{ key: 'Cache-Control', value: 's-maxage=300, stale-while-revalidate=600' }],
+        headers: [{ key: 'Cache-Control', value: 's-maxage=1800, stale-while-revalidate=3600' }],
       },
       {
         source: '/o-projekcie',
@@ -24,11 +24,11 @@ const nextConfig = {
       },
       {
         source: '/:cityId/wydarzenia-dla-seniorow',
-        headers: [{ key: 'Cache-Control', value: 's-maxage=300, stale-while-revalidate=600' }],
+        headers: [{ key: 'Cache-Control', value: 's-maxage=1800, stale-while-revalidate=3600' }],
       },
       {
         source: '/organizator/:organizerId/wydarzenia-dla-seniorow',
-        headers: [{ key: 'Cache-Control', value: 's-maxage=300, stale-while-revalidate=600' }],
+        headers: [{ key: 'Cache-Control', value: 's-maxage=1800, stale-while-revalidate=3600' }],
       },
       {
         source: '/wydarzenie/:path*',
