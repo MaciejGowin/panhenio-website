@@ -26,7 +26,7 @@ const organizationSchema = {
 }
 
 export const metadata = {
-  icons: { icon: '/panhenio-favicon.png' },
+  icons: { icon: '/favicon.ico' },
   metadataBase: new URL('https://www.panhenio.pl'),
   title: 'Pan Henio – wydarzenia dla seniorów',
   description: 'Pan Henio – znajdź spacery, warsztaty, spotkania i inne wydarzenia dla seniorów we Wrocławiu i innych miastach Polski.',

@@ -24,7 +24,7 @@ export default async function Navbar() {
     <nav className={styles.navbar}>
       <div className={styles.inner}>
         <a href="/" className={styles.logoLink}>
-          <img src="/panhenio-logo.png" alt="Pan Henio" className={styles.logo} />
+          <img src="/panhenio-logo-text.png" alt="Pan Henio" className={styles.logo} />
         </a>
         <ul className={styles.links}>
           <NavbarCitiesDropdown cities={cities} />
