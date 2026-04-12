@@ -9,7 +9,7 @@ const links = [
 export default function Footer() {
   return (
     <footer className={styles.footer}>
-      <img src="/panhenio-logo-text.png" alt="Pan Henio" className={styles.logo} />
+      <img src="/panhenio-logo.png" alt="Pan Henio" className={styles.logo} />
       <nav className={styles.links} aria-label="Stopka">
         {links.map((link, i) => (
           <span key={link.label} className={styles.item}>

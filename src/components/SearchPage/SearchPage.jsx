@@ -111,7 +111,7 @@ export default function SearchPage({ initialPhrase = '', initialCityId = '', ini
 
         {loading && (
           <div className={styles.loading}>
-            <img src="/panhenio-favicon.png" alt="" className={styles.spinner} />
+            <img src="/panhenio-logo.png" alt="" className={styles.spinner} />
             <p className={styles.loadingText}>Szukamy…</p>
           </div>
         )}

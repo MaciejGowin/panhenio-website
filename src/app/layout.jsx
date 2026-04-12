@@ -21,7 +21,7 @@ const organizationSchema = {
   '@type': 'Organization',
   name: 'Pan Henio',
   url: 'https://www.panhenio.pl',
-  logo: 'https://www.panhenio.pl/panhenio-favicon.png',
+  logo: 'https://www.panhenio.pl/panhenio-logo.png',
   description: 'Serwis z wydarzeniami dla seniorów w Polsce.',
 }
 
