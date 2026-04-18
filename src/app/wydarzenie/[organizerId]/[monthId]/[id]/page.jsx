@@ -33,6 +33,67 @@ export async function generateMetadata({ params, searchParams }) {
   }
 }
 
+function formatEventDate(dateStr, startTime, endTime) {
+  const d = new Date(`${dateStr}T00:00:00`)
+  const today = new Date().toISOString().split('T')[0]
+  const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0]
+  let label
+  if (dateStr === today) label = 'Dziś'
+  else if (dateStr === tomorrow) label = 'Jutro'
+  else label = d.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' })
+  if (startTime) label += `, godz. ${startTime}`
+  if (endTime) label += `–${endTime}`
+  const weekday = d.toLocaleDateString('pl-PL', { weekday: 'long' })
+  return `${weekday}, ${label}`
+}
+
+function OrganizerIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+      <circle cx="12" cy="7" r="4" />
+    </svg>
+  )
+}
+
+function CalendarIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+      <line x1="16" y1="2" x2="16" y2="6" />
+      <line x1="8" y1="2" x2="8" y2="6" />
+      <line x1="3" y1="10" x2="21" y2="10" />
+    </svg>
+  )
+}
+
+function LocationIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+      <circle cx="12" cy="10" r="3" />
+    </svg>
+  )
+}
+
+function PersonIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+      <circle cx="12" cy="7" r="4" />
+    </svg>
+  )
+}
+
+function CostIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <line x1="12" y1="1" x2="12" y2="23" />
+      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+    </svg>
+  )
+}
+
 export default async function WydarzeniePage({ params, searchParams }) {
   const { organizerId, monthId, id } = await params
   const sp = await searchParams
@@ -88,31 +149,64 @@ export default async function WydarzeniePage({ params, searchParams }) {
         {!event && <p className={styles.error}>Nie udało się załadować wydarzenia.</p>}
         {event && (
           <article className={styles.card}>
-            <p className={styles.category}>{event.categories?.map(c => c.name).join(', ')}</p>
-            <h1 className={styles.title}>{event.title}</h1>
-            <div className={styles.meta}>
-              <span>{event.date}{event.startTime ? ` · ${event.startTime}` : ''}{event.endTime ? `–${event.endTime}` : ''}</span>
-              <span>{[event.location, event.city.name].filter(Boolean).join(', ')}</span>
-              {event.organizer.name && (
-                <a
-                  href={`/organizator/${encodeURIComponent(event.organizer.id)}/wydarzenia-dla-seniorow?miesiac=${event.month}`}
-                  className={styles.organizerLink}
-                >
-                  {event.organizer.name}
-                </a>
-              )}
-              {event.entryCost && <span>{event.entryCost}</span>}
-              {event.facilitator && <span>{event.facilitator}</span>}
+            <div className={styles.header}>
+              <div className={styles.badges}>
+                {event.categories?.map(c => (
+                  <span key={c.id} className={styles.badge}>{c.name}</span>
+                ))}
+              </div>
+              <a
+                href={`/organizator/${encodeURIComponent(event.organizer.id)}/wydarzenia-dla-seniorow?miesiac=${event.month}`}
+                className={styles.organizer}
+              >
+                <OrganizerIcon />
+                {event.organizer.name}
+              </a>
             </div>
-            {event.registration && (
-              <p className={styles.registration}>{event.registration}</p>
+
+            <h1 className={styles.title}>{event.title}</h1>
+
+            <div className={styles.row}>
+              <CalendarIcon />
+              <strong className={styles.rowBold}>
+                {formatEventDate(event.date, event.startTime, event.endTime)}
+              </strong>
+            </div>
+
+            {(event.location || event.city?.name) && (
+              <div className={styles.row}>
+                <LocationIcon />
+                <span>{[event.location, event.city?.name].filter(Boolean).join(', ')}</span>
+              </div>
             )}
+
+            {event.facilitator && (
+              <div className={styles.row}>
+                <PersonIcon />
+                <span>{event.facilitator}</span>
+              </div>
+            )}
+
+            {event.entryCost && (
+              <div className={styles.row}>
+                <CostIcon />
+                <span>{event.entryCost}</span>
+              </div>
+            )}
+
+            {(event.description || event.registration) && <hr className={styles.divider} />}
+
             {event.description && (
               <p className={styles.description}>{event.description}</p>
             )}
+
+            {event.registration && (
+              <p className={styles.registration}>{event.registration}</p>
+            )}
+
             {event.sourceUrl && (
               <a href={event.sourceUrl} target="_blank" rel="noopener noreferrer" className={styles.sourceLink}>
-                Źródło wydarzenia →
+                ŹRÓDŁO WYDARZENIA →
               </a>
             )}
           </article>

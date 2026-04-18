@@ -3,9 +3,9 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './SearchPage.module.css'
+import EventCard from '../EventCard/EventCard'
 
-export default function SearchPage({ initialPhrase = '', initialCityId = '', initialCategoryId = '' }) {
-  const [phrase, setPhrase] = useState(initialPhrase)
+export default function SearchPage({ initialCityId = '', initialCategoryId = '' }) {
   const [cityId, setCityId] = useState(initialCityId)
   const [categoryId, setCategoryId] = useState(initialCategoryId)
   const [cities, setCities] = useState([])
@@ -15,17 +15,25 @@ export default function SearchPage({ initialPhrase = '', initialCityId = '', ini
   const router = useRouter()
 
   useEffect(() => {
-    fetch('/api/cities').then(r => r.json()).then(setCities).catch(() => {})
+    fetch('/api/cities')
+      .then(r => r.json())
+      .then(data => {
+        setCities(data)
+        if (!initialCityId) {
+          const defaultCity = data.find(c => c.default)
+          if (defaultCity) setCityId(defaultCity.id)
+        }
+      })
+      .catch(() => {})
     fetch('/api/categories').then(r => r.json()).then(setCategories).catch(() => {})
   }, [])
 
   useEffect(() => {
-    search(initialPhrase, initialCityId, initialCategoryId)
+    search(initialCityId, initialCategoryId)
   }, [])
 
-  function buildUrl(p, c, cat) {
+  function buildUrl(c, cat) {
     const params = new URLSearchParams()
-    if (p) params.set('fraza', p)
     if (c) params.set('miasto', c)
     if (cat) params.set('kategoria', cat)
     const qs = params.toString()
@@ -34,13 +42,12 @@ export default function SearchPage({ initialPhrase = '', initialCityId = '', ini
 
   function handleSearch(e) {
     e?.preventDefault()
-    router.replace(buildUrl(phrase, cityId, categoryId))
-    search(phrase, cityId, categoryId)
+    router.replace(buildUrl(cityId, categoryId))
+    search(cityId, categoryId)
   }
 
-  async function search(p, c, cat) {
+  async function search(c, cat) {
     const params = new URLSearchParams()
-    if (p) params.set('phrase', p)
     if (c) params.set('cityId', c)
     if (cat) params.set('categoryId', cat)
     setLoading(true)
@@ -59,35 +66,15 @@ export default function SearchPage({ initialPhrase = '', initialCityId = '', ini
     <div className={styles.page}>
       <div className={styles.inner}>
         <a href="/" className={styles.back}>← Strona główna</a>
-        <h1 className={styles.title}>Szukaj wydarzeń</h1>
+        <h1 className={styles.title}>Szukaj wszystkich wydarzeń dla seniorów</h1>
 
         <form className={styles.form} onSubmit={handleSearch}>
-          <div className={styles.inputWrapper}>
-            <input
-              type="text"
-              className={styles.input}
-              placeholder="Szukaj wydarzeń, zajęć lub miejsca"
-              value={phrase}
-              onChange={e => setPhrase(e.target.value)}
-            />
-            {phrase && (
-              <button
-                type="button"
-                className={styles.clearButton}
-                onClick={() => setPhrase('')}
-                aria-label="Wyczyść frazę"
-              >
-                ×
-              </button>
-            )}
-          </div>
-          <div className={styles.selects}>
+          <div className={styles.filterRow}>
             <select
               className={styles.select}
               value={cityId}
               onChange={e => setCityId(e.target.value)}
             >
-              <option value="">Wszystkie miasta</option>
               {cities.map(city => (
                 <option key={city.id} value={city.id}>{city.name}</option>
               ))}
@@ -102,11 +89,11 @@ export default function SearchPage({ initialPhrase = '', initialCityId = '', ini
                 <option key={cat.id} value={cat.id}>{cat.name}</option>
               ))}
             </select>
+            <button type="submit" className={styles.button}>
+              <SearchIcon />
+              Filtruj
+            </button>
           </div>
-          <button type="submit" className={styles.button}>
-            <SearchIcon />
-            Szukaj
-          </button>
         </form>
 
         {loading && (
@@ -123,23 +110,11 @@ export default function SearchPage({ initialPhrase = '', initialCityId = '', ini
             <ul className={styles.cards}>
               {results.map((event, i) => (
                 <li key={i}>
-                  <div className={styles.card}>
-                    <span className={styles.cardCategory}>{event.categories?.map(c => c.name).join(', ')}</span>
-                    <a
-                      href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}?back=${encodeURIComponent(buildUrl(phrase, cityId, categoryId))}`}
-                      className={styles.cardName}
-                    >
-                      {event.title}
-                    </a>
-                    <a
-                      href={`/organizator/${encodeURIComponent(event.organizer.id)}/wydarzenia-dla-seniorow?miesiac=${event.month}`}
-                      className={styles.cardOrganizer}
-                    >
-                      {event.organizer.name}
-                    </a>
-                    <span className={styles.cardMeta}>{[event.location, event.city.name].filter(Boolean).join(', ')}</span>
-                    <span className={styles.cardMeta}>{event.date}{event.startTime ? ` · ${event.startTime}` : ''}{event.endTime ? `–${event.endTime}` : ''}</span>
-                  </div>
+                  <EventCard
+                    event={event}
+                    href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}?back=${encodeURIComponent(buildUrl(cityId, categoryId))}`}
+                    organizerHref={`/organizator/${encodeURIComponent(event.organizer.id)}/wydarzenia-dla-seniorow?miesiac=${event.month}`}
+                  />
                 </li>
               ))}
             </ul>

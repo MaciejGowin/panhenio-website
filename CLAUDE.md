@@ -93,17 +93,36 @@ Response body format:
 ]
 ```
 
-#### Get latest events
+#### Get latest events for today
 
 Operation:
 
 ```
-GET https://www.panhenio.pl/api/events/latest
+GET https://www.panhenio.pl/api/events/latest?cityId=wroclaw
 ```
+
+Request query parameters:
+- `cityId` (required) — filter events by city id (e.g. `wroclaw`, `poznan`, etc.)
 
 Response body format:
 
 This endpoint returns data in the same format as the "Get all events", but only the 3 random events after or today.
+
+#### Get promotes events
+
+Operation:
+
+```
+GET https://www.panhenio.pl/api/events/promoted?cityId=wroclaw
+```
+
+Request query parameters:
+- `cityId` (required) — filter events by city id (e.g. `wroclaw`, `poznan`, etc.)
+
+Response body format:
+
+This endpoint returns data in the same format as the "Get all events", but only the 3 random events after or today.
+
 
 #### Get event
 
@@ -167,7 +186,13 @@ Response body format:
 [
   {
     "id": "wroclaw",
-    "name": "Wrocław"
+    "name": "Wrocław",
+    "default": true
+  },
+  {
+    "id": "warszawa",
+    "name": "Warszawa",
+    "default": false
   }
 ]
 ```

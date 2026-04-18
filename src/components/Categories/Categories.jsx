@@ -13,15 +13,17 @@ export default function Categories() {
   if (categories.length === 0) return null
 
   return (
-    <nav className={styles.categories} aria-label="Kategorie">
-      {categories.map((cat, i) => (
-        <span key={cat.id} className={styles.item}>
-          <a href={`/szukaj-wydarzen?kategoria=${encodeURIComponent(cat.id)}`} className={styles.link}>{cat.name}</a>
-          {i < categories.length - 1 && (
-            <span className={styles.dot} aria-hidden="true">·</span>
-          )}
-        </span>
-      ))}
-    </nav>
+    <section className={styles.section}>
+      <div className={styles.inner}>
+        <h2 className={styles.heading}>Wszystkie kategorie</h2>
+        <nav className={styles.categories} aria-label="Kategorie">
+          {categories.map(cat => (
+            <a key={cat.id} href={`/szukaj-wydarzen?kategoria=${encodeURIComponent(cat.id)}`} className={styles.link}>
+              {cat.name}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </section>
   )
 }

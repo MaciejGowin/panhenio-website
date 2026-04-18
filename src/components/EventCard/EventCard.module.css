@@ -1,39 +1,17 @@
-.page {
-  flex: 1;
-  padding: 40px 24px 80px;
-}
-
-.inner {
-  max-width: 640px;
-  margin: 0 auto;
-}
-
-.back {
-  display: inline-block;
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--navy);
-  text-decoration: none;
-  margin-bottom: 28px;
-}
-
-.back:hover {
-  color: var(--orange);
-}
-
-.error {
-  font-size: 0.95rem;
-  color: var(--gray-500);
-}
-
 .card {
-  background: var(--white);
-  border-radius: var(--radius);
-  padding: 24px 24px 28px;
-  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
 }
 
 .header {
@@ -77,17 +55,21 @@
 }
 
 .title {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--navy);
-  line-height: 1.3;
-  margin: 0;
+  text-decoration: none;
+  line-height: 1.4;
+}
+
+.title:hover {
+  text-decoration: underline;
 }
 
 .row {
   display: flex;
   align-items: flex-start;
-  gap: 8px;
+  gap: 7px;
   font-size: 0.95rem;
   color: var(--text);
 }
@@ -101,32 +83,36 @@
   font-weight: 700;
 }
 
-.divider {
-  border: none;
-  border-top: 1px solid var(--gray-200);
-  margin: 2px 0;
-}
-
 .description {
   font-size: 0.95rem;
   color: var(--text);
-  line-height: 1.75;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   margin: 0;
 }
 
-.registration {
-  font-size: 0.9rem;
-  color: var(--text);
-  line-height: 1.6;
-  margin: 0;
-  border-left: 3px solid var(--orange);
-  padding-left: 12px;
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 4px;
 }
 
-.sourceLink {
+.added {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.85rem;
+  color: var(--navy-light);
+}
+
+.cta {
   display: inline-flex;
   align-items: center;
-  align-self: flex-start;
   padding: 11px 22px;
   background: var(--orange);
   color: var(--white);
@@ -135,10 +121,11 @@
   letter-spacing: 0.05em;
   text-decoration: none;
   border-radius: 8px;
+  white-space: nowrap;
   transition: background 0.15s;
-  margin-top: 4px;
+  flex-shrink: 0;
 }
 
-.sourceLink:hover {
+.cta:hover {
   background: var(--orange-dark);
 }

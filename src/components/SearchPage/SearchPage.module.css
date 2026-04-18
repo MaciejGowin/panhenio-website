@@ -10,8 +10,8 @@
 
 .back {
   display: inline-block;
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 1.05rem;
+  font-weight: 600;
   color: var(--navy);
   text-decoration: none;
   margin-bottom: 24px;
@@ -35,58 +35,15 @@
   margin-bottom: 32px;
 }
 
-.inputWrapper {
-  position: relative;
-}
-
-.input {
-  width: 100%;
-  padding: 13px 40px 13px 16px;
-  font-size: 0.95rem;
-  font-family: inherit;
-  border: 1.5px solid var(--gray-200);
-  border-radius: var(--radius);
-  outline: none;
-  color: var(--text);
-  background: var(--white);
-  box-sizing: border-box;
-  transition: border-color 0.15s;
-}
-
-.input:focus {
-  border-color: var(--navy-light);
-}
-
-.input::placeholder {
-  color: var(--gray-500);
-}
-
-.clearButton {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  line-height: 1;
-  color: var(--gray-500);
-  cursor: pointer;
-  padding: 4px 6px;
-}
-
-.clearButton:hover {
-  color: var(--text);
-}
-
-.selects {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.filterRow {
+  display: flex;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
 .select {
-  width: 100%;
+  flex: 1;
+  min-width: 160px;
   padding: 13px 16px;
   font-size: 0.95rem;
   font-family: inherit;

@@ -1,0 +1,43 @@
+.section {
+  padding: 24px 24px 56px;
+}
+
+.inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.headingRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.heading {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.seeAll {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--orange);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.seeAll:hover {
+  color: var(--orange-dark);
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

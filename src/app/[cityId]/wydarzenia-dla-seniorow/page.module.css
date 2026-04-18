@@ -10,8 +10,8 @@
 
 .back {
   display: inline-block;
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 1.05rem;
+  font-weight: 600;
   color: var(--navy);
   text-decoration: none;
   margin-bottom: 24px;
@@ -59,13 +59,13 @@
 }
 
 .monthTab {
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 600;
   color: var(--navy);
   background: var(--white);
-  border: 1.5px solid var(--gray-200);
+  border: 2px solid var(--gray-200);
   border-radius: 20px;
-  padding: 6px 14px;
+  padding: 10px 20px;
   text-decoration: none;
   transition: border-color 0.15s, background 0.15s, color 0.15s;
 }

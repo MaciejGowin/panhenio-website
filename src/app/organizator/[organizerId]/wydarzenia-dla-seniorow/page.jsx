@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import styles from './page.module.css'
 import CalendarGrid from './CalendarGrid'
+import EventCard from '../../../../components/EventCard/EventCard'
 
 const BASE_URL = 'https://www.panhenio.pl'
 
@@ -146,8 +147,7 @@ export default async function OrganizerEventsPage({ params, searchParams }) {
       <div className={styles.inner}>
         <a href="/" className={styles.back}>← Strona główna</a>
         <h1 className={styles.title}>
-          Wydarzenia dla seniorów
-          <span className={styles.organizer}>{organizerName}</span>
+          Wydarzenia dla seniorów organizowane przez {organizerName}
         </h1>
 
         <div className={styles.toolbar}>
@@ -197,31 +197,11 @@ export default async function OrganizerEventsPage({ params, searchParams }) {
               <ul className={styles.cards}>
                 {group.map((event, i) => (
                   <li key={i}>
-                    <div className={styles.card}>
-                      <span className={styles.cardCategory}>
-                        {event.categories?.map(c => c.name).join(', ')}
-                      </span>
-                      <a
-                        href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}?back=${encodeURIComponent(backHref)}`}
-                        className={styles.cardName}
-                      >
-                        {event.title}
-                      </a>
-                      <a
-                        href={`/organizator/${encodeURIComponent(event.organizer.id)}/wydarzenia-dla-seniorow?miesiac=${event.month}`}
-                        className={styles.cardOrganizer}
-                      >
-                        {organizerName}
-                      </a>
-                      <span className={styles.cardMeta}>{[event.location, event.city?.name].filter(Boolean).join(', ')}</span>
-                      <span className={styles.cardMeta}>
-                        {event.startTime ? event.startTime : ''}
-                        {event.endTime ? `–${event.endTime}` : ''}
-                      </span>
-                      {event.entryCost && (
-                        <span className={styles.cardCost}>{event.entryCost}</span>
-                      )}
-                    </div>
+                    <EventCard
+                      event={event}
+                      href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}?back=${encodeURIComponent(backHref)}`}
+                      organizerHref={`/organizator/${encodeURIComponent(event.organizer.id)}/wydarzenia-dla-seniorow?miesiac=${event.month}`}
+                    />
                   </li>
                 ))}
               </ul>
