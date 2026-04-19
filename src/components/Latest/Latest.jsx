@@ -1,5 +1,6 @@
 import styles from './Latest.module.css'
 import EventCard from '../EventCard/EventCard'
+import { cityAllEvents } from '../../config/cityTitles'
 
 const BASE_URL = 'https://www.panhenio.pl'
 
@@ -21,6 +22,7 @@ export default async function Latest({ cityId }) {
 
   const today = new Date().toISOString().split('T')[0]
   const cityHref = cityId ? `/${cityId}/wydarzenia-dla-seniorow?dzien=${today}` : '/szukaj-wydarzen'
+  const cityLabel = (cityId && cityAllEvents[cityId]) ?? `Wszystkie w lokalizacji ${cityId}`
 
   return (
     <section className={styles.section}>
@@ -28,7 +30,7 @@ export default async function Latest({ cityId }) {
         <div className={styles.headingRow}>
           <h2 className={styles.heading}>Dziś</h2>
           <a href={cityHref} className={styles.seeAll}>
-            Wszystkie w Twoim mieście
+            {cityLabel}
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <polyline points="9 18 15 12 9 6" />
             </svg>
