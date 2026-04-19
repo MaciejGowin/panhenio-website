@@ -6,11 +6,16 @@ import { fetchCities } from '../../../lib/api'
 
 const BASE_URL = 'https://www.panhenio.pl'
 
-async function fetchEvents(cityId, month) {
+async function fetchEvents(cityId, month, day) {
   try {
     const url = new URL(`${BASE_URL}/api/events`)
     url.searchParams.set('cityId', cityId)
-    if (month) url.searchParams.set('month', month)
+    if (day) {
+      url.searchParams.set('dateFrom', day)
+      url.searchParams.set('dateTo', day)
+    } else if (month) {
+      url.searchParams.set('month', month)
+    }
     const res = await fetch(url.toString(), { cache: 'no-store' })
     if (!res.ok) return []
     return res.json()
@@ -66,10 +71,12 @@ export async function generateMetadata({ params }) {
 
 export default async function CityEventsPage({ params, searchParams }) {
   const { cityId } = await params
-  const { miesiac: month } = await searchParams
+  const { miesiac: month, dzien: day } = await searchParams
   const months = getAvailableMonths()
   const activeMonth = month ?? months[0]
-  const [cities, events] = await Promise.all([fetchCities(), fetchEvents(cityId, activeMonth)])
+  const today = new Date().toISOString().split('T')[0]
+  const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0]
+  const [cities, events] = await Promise.all([fetchCities(), fetchEvents(cityId, activeMonth, day)])
   const city = cities.find(c => c.id === cityId)
   if (!city) notFound()
   const cityName = city.name
@@ -122,11 +129,23 @@ export default async function CityEventsPage({ params, searchParams }) {
         </h1>
 
         <div className={styles.monthTabs}>
+          <a
+            href={`/${cityId}/wydarzenia-dla-seniorow?dzien=${today}`}
+            className={`${styles.monthTab} ${day === today ? styles.monthTabActive : ''}`}
+          >
+            dziś
+          </a>
+          <a
+            href={`/${cityId}/wydarzenia-dla-seniorow?dzien=${tomorrow}`}
+            className={`${styles.monthTab} ${day === tomorrow ? styles.monthTabActive : ''}`}
+          >
+            jutro
+          </a>
           {months.map(m => (
             <a
               key={m}
               href={`/${cityId}/wydarzenia-dla-seniorow?miesiac=${m}`}
-              className={`${styles.monthTab} ${activeMonth === m ? styles.monthTabActive : ''}`}
+              className={`${styles.monthTab} ${!day && activeMonth === m ? styles.monthTabActive : ''}`}
             >
               {formatMonth(m)}
             </a>
