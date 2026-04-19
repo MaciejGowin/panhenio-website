@@ -50,6 +50,7 @@ export default function SearchPage({ initialCityId = '', initialCategoryId = '' 
     const params = new URLSearchParams()
     if (c) params.set('cityId', c)
     if (cat) params.set('categoryId', cat)
+    params.set('dateFrom', new Date().toISOString().split('T')[0])
     setLoading(true)
     try {
       const res = await fetch(`/api/events?${params.toString()}`)

@@ -56,7 +56,8 @@ Request query parameters:
 - `phrase` (optional) — search phrase to filter events by `name`, `location`, `city`, etc. (case-insensitive substring match)
 - `organizerId` (optional) — filter events by organizer id (e.g. `odra-centrum`, `cal-borek`, etc.)
 - `month` (optional) — filter events by month (e.g. `2026-04`, `2026-05`, etc.)
-- `date` (optional) — filter events by date (e.g. `2026-04-01`, `2026-05-05`, etc.), overrides `month` if both provided
+- `dateFrom` (optional) — filter events by date from (e.g. `2026-04-01`, `2026-05-05`, etc.), overrides `month` if both provided
+- `dateTo` (optional) — filter events by date to (e.g. `2026-04-01`, `2026-05-05`, etc.)
 - `categoryId` (optional) — filter events by category id (e.g. `aktywnosc`, `kultura`, etc.)
 - `cityId` (optional) — filter events by city id (e.g. `wroclaw`, `poznan`, etc.)
 
