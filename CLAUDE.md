@@ -5,8 +5,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-npm run dev       # Start development server (Vite HMR)
-npm run build     # Production build → dist/
+npm run dev       # Start development server (Next.js)
+npm run build     # Production build → .next/
 npm run preview   # Serve the production build locally
 ```
 
@@ -14,25 +14,66 @@ No linting or test suite is configured.
 
 ## Architecture
 
-**Pan Henio** is a senior-friendly event discovery SPA (React + Vite) for Wrocław, Poland. It is entirely client-side with no backend.
+**Pan Henio** is a senior-friendly event discovery app (Next.js 15, App Router) for Poland. SSR via server components, deployed on Lambda + CloudFront.
 
 ### Routing
 
-`App.jsx` implements hash-based routing manually using `window.location.hash` and a `hashchange` event listener. Currently two routes:
-- Default (`/`) → Home page (Navbar + Hero + Categories + Recommendations + Illustration + Footer)
-- `#o-projekcie` → About page (Navbar + OProjekcie + Footer)
+App Router with file-based routing under `src/app/`:
+
+| Route | Page |
+|---|---|
+| `/` | Home — Hero, Latest (today's events), Promoted, Categories |
+| `/[cityId]/wydarzenia-dla-seniorow` | City events list |
+| `/organizator/[organizerId]/wydarzenia-dla-seniorow` | Organizer events list + calendar view |
+| `/wydarzenie/[organizerId]/[monthId]/[id]` | Event detail |
+| `/szukaj-wydarzen` | Search (client component) |
+| `/o-projekcie` | About |
+| `/cyfrowy-henio` | Cyfrowy Henio info page |
+| `/polityka-prywatnosci` | Privacy policy |
+
+### Query parameters
+
+**City events page** (`/[cityId]/wydarzenia-dla-seniorow`):
+- `miesiac` — month filter (`YYYY-MM`), defaults to current month
+- `dzien` — day filter (`YYYY-MM-DD`); when present, overrides `miesiac` and passes `dateFrom`+`dateTo` to API
+
+**Organizer events page** (`/organizator/[organizerId]/wydarzenia-dla-seniorow`):
+- `miesiac` — month filter (`YYYY-MM`)
+- `dzien` — day filter (`YYYY-MM-DD`); overrides `miesiac`, passes `dateFrom`+`dateTo` to API
+- `widok` — view mode: `lista` (default) or `kalendarz`
+
+**Search page** (`/szukaj-wydarzen`):
+- `miasto` — initial city filter
+- `kategoria` — initial category filter
+- Always sends `dateFrom=<today>` to the events API
+
+### Data fetching
+
+All server-component fetches use `{ cache: 'no-store' }` (Lambda has no persistent cache).
+
+Shared fetch functions in `src/lib/api.js` are wrapped with React `cache()` to deduplicate calls within a single request (e.g. `fetchCities` used by both Navbar and the page component hits the network only once).
 
 ### Components
 
-Each component lives in `src/components/<Name>/` with its own `.jsx` and `.module.css`. Styling uses CSS Modules throughout; global tokens (colors, font) are defined as CSS custom properties in `src/index.css`.
+Each component lives in `src/components/<Name>/` with its own `.jsx` and `.module.css`. Styling uses CSS Modules; global tokens defined in `src/app/globals.css`.
 
-- **Hero** — the only stateful component; handles search input, fetches events, filters by `name`/`location`/`city` (case-insensitive substring)
-- **Categories** — decorative only; category links are non-functional (`href="#"`)
-- **Recommendations** — hardcoded list of three events, not driven by data
+- **Navbar** — async server component; fetches cities for the dropdown
+- **Latest** — async server component; shows today's events for the default city
+- **Promoted** — async server component; shows promoted events for the default city
+- **Categories** — client component; fetches categories on mount
+- **Hero** — client component; search input linking to `/szukaj-wydarzen`
+- **EventCard** — renders a single event tile; formats date as `dziś/jutro, DD miesiąc` or `weekday, DD miesiąc`
+- **SearchPage** — client component; filters by city, category, always with `dateFrom=today`
+
+### Configuration
+
+`src/config/cityTitles.js` exports:
+- `cityTitles` — page heading per city (e.g. `"Wydarzenia dla seniorów we Wrocławiu"`)
+- `cityAllEvents` — short label for "all events" link per city (e.g. `"Wszystkie we Wrocławiu"`)
 
 ### Styling
 
-Layout is mobile-first, max-width 480px. Key CSS variables: `--navy`, `--orange`, `--text`, `--font` (Inter). All component styles are scoped via CSS Modules.
+Mobile-first, max-width 480px. Key CSS variables: `--navy`, `--orange`, `--text`, `--font` (Inter via `next/font/google`). All component styles scoped via CSS Modules.
 
 ## Deployment
 
