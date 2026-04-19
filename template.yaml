@@ -16,7 +16,7 @@ Resources:
       AutoPublishAlias: live
       CodeUri: .
       Handler: index.handler
-      Runtime: nodejs20.x
+      Runtime: nodejs24.x
       MemorySize: 1024
       Architectures:
         - arm64
