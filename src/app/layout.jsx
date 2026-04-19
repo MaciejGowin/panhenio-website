@@ -36,14 +36,14 @@ export const metadata = {
     url: 'https://www.panhenio.pl',
     title: 'Pan Henio – wydarzenia dla seniorów',
     description: 'Znajdź spacery, warsztaty, spotkania i inne wydarzenia dla seniorów we Wrocławiu i innych miastach Polski.',
-    images: ['/panhenio-banner.png'],
+    images: ['/panhenio-logo-text.png'],
     locale: 'pl_PL',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Pan Henio – wydarzenia dla seniorów',
     description: 'Znajdź spacery, warsztaty, spotkania i inne wydarzenia dla seniorów we Wrocławiu i innych miastach Polski.',
-    images: ['/panhenio-banner.png'],
+    images: ['/panhenio-logo-text.png'],
   },
 }
 

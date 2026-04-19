@@ -6,12 +6,6 @@
   border-radius: var(--radius);
   padding: 18px 20px;
   box-shadow: var(--shadow-card);
-  transition: box-shadow 0.2s, transform 0.2s;
-}
-
-.card:hover {
-  box-shadow: var(--shadow-card-hover);
-  transform: translateY(-2px);
 }
 
 .header {
@@ -52,6 +46,7 @@
 
 .organizer:hover {
   color: var(--navy);
+  text-decoration: underline;
 }
 
 .title {

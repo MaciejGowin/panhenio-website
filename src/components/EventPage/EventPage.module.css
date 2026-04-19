@@ -74,6 +74,7 @@
 
 .organizer:hover {
   color: var(--navy);
+  text-decoration: underline;
 }
 
 .title {
