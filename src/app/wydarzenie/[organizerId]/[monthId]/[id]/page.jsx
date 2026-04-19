@@ -26,14 +26,15 @@ function formatEventDate(dateStr, startTime, endTime) {
   const d = new Date(`${dateStr}T00:00:00`)
   const today = new Date().toISOString().split('T')[0]
   const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0]
-  let label
-  if (dateStr === today) label = 'dziś'
-  else if (dateStr === tomorrow) label = 'jutro'
-  else label = d.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' })
+  const date = d.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' })
+  let dayLabel
+  if (dateStr === today) dayLabel = 'dziś'
+  else if (dateStr === tomorrow) dayLabel = 'jutro'
+  else dayLabel = d.toLocaleDateString('pl-PL', { weekday: 'long' })
+  let label = `${dayLabel}, ${date}`
   if (startTime) label += `, godz. ${startTime}`
   if (endTime) label += `–${endTime}`
-  const weekday = d.toLocaleDateString('pl-PL', { weekday: 'long' })
-  return `${weekday}, ${label}`
+  return label
 }
 
 function OrganizerIcon() {
