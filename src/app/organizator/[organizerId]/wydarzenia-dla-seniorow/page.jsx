@@ -28,11 +28,16 @@ async function fetchMonths(organizerId) {
   }
 }
 
-async function fetchEvents(organizerId, month) {
+async function fetchEvents(organizerId, month, day) {
   try {
     const url = new URL(`${BASE_URL}/api/events`)
     url.searchParams.set('organizerId', organizerId)
-    if (month) url.searchParams.set('month', month)
+    if (day) {
+      url.searchParams.set('dateFrom', day)
+      url.searchParams.set('dateTo', day)
+    } else if (month) {
+      url.searchParams.set('month', month)
+    }
     const res = await fetch(url.toString(), { cache: 'no-store' })
     if (!res.ok) return []
     return res.json()
@@ -80,12 +85,14 @@ export async function generateMetadata({ params }) {
 
 export default async function OrganizerEventsPage({ params, searchParams }) {
   const { organizerId } = await params
-  const { miesiac: month, widok } = await searchParams
+  const { miesiac: month, dzien: day, widok } = await searchParams
   const isCalendar = widok === 'kalendarz'
+  const today = new Date().toISOString().split('T')[0]
+  const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0]
   const [organizers, months, events] = await Promise.all([
     fetchOrganizers(),
     fetchMonths(organizerId),
-    fetchEvents(organizerId, month),
+    fetchEvents(organizerId, month, day),
   ])
   const organizer = organizers.find(o => o.id === organizerId)
   if (!organizer) notFound()
@@ -97,8 +104,9 @@ export default async function OrganizerEventsPage({ params, searchParams }) {
 
   function buildUrl(overrides) {
     const p = new URLSearchParams()
-    const merged = { miesiac: month, widok, ...overrides }
-    if (merged.miesiac) p.set('miesiac', merged.miesiac)
+    const merged = { miesiac: month, dzien: day, widok, ...overrides }
+    if (merged.dzien) p.set('dzien', merged.dzien)
+    else if (merged.miesiac) p.set('miesiac', merged.miesiac)
     if (merged.widok && merged.widok !== 'lista') p.set('widok', merged.widok)
     const qs = p.toString()
     return `/organizator/${organizerId}/wydarzenia-dla-seniorow${qs ? `?${qs}` : ''}`
@@ -151,19 +159,29 @@ export default async function OrganizerEventsPage({ params, searchParams }) {
         </h1>
 
         <div className={styles.toolbar}>
-          {months.length > 0 && (
-            <div className={styles.monthTabs}>
-              {months.map(m => (
-                <a
-                  key={m}
-                  href={buildUrl({ miesiac: m })}
-                  className={`${styles.monthTab} ${(month ?? months[0]) === m ? styles.monthTabActive : ''}`}
-                >
-                  {formatMonth(m)}
-                </a>
-              ))}
-            </div>
-          )}
+          <div className={styles.monthTabs}>
+            <a
+              href={buildUrl({ dzien: today, miesiac: undefined })}
+              className={`${styles.monthTab} ${day === today ? styles.monthTabActive : ''}`}
+            >
+              dziś
+            </a>
+            <a
+              href={buildUrl({ dzien: tomorrow, miesiac: undefined })}
+              className={`${styles.monthTab} ${day === tomorrow ? styles.monthTabActive : ''}`}
+            >
+              jutro
+            </a>
+            {months.map(m => (
+              <a
+                key={m}
+                href={buildUrl({ miesiac: m, dzien: undefined })}
+                className={`${styles.monthTab} ${!day && (month ?? months[0]) === m ? styles.monthTabActive : ''}`}
+              >
+                {formatMonth(m)}
+              </a>
+            ))}
+          </div>
 
           <div className={styles.viewToggle}>
             <a
