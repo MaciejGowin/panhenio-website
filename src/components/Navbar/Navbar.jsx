@@ -1,21 +1,12 @@
 import styles from './Navbar.module.css'
 import NavbarCitiesDropdown from './NavbarCitiesDropdown'
 import NavbarMobileMenu from './NavbarMobileMenu'
+import { fetchCities } from '../../lib/api'
 
 const navLinks = [
   { label: 'Cyfrowy Henio', href: '/cyfrowy-henio', bold: true },
   { label: 'O projekcie', href: '/o-projekcie' },
 ]
-
-async function fetchCities() {
-  try {
-    const res = await fetch('https://www.panhenio.pl/api/cities', { cache: 'no-store' })
-    if (!res.ok) return []
-    return res.json()
-  } catch {
-    return []
-  }
-}
 
 export default async function Navbar() {
   const cities = await fetchCities()

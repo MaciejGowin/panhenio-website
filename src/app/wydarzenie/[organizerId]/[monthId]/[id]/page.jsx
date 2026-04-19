@@ -1,18 +1,7 @@
 import styles from '../../../../../components/EventPage/EventPage.module.css'
+import { fetchEvent } from '../../../../../lib/api'
 
 const BASE_URL = 'https://www.panhenio.pl'
-
-async function fetchEvent(organizerId, monthId, id, previewAccessToken) {
-  try {
-    const url = new URL(`${BASE_URL}/api/events/${encodeURIComponent(organizerId)}/${encodeURIComponent(monthId)}/${encodeURIComponent(id)}`)
-    if (previewAccessToken) url.searchParams.set('previewAccessToken', previewAccessToken)
-    const res = await fetch(url.toString(), { cache: 'no-store' })
-    if (!res.ok) return null
-    return res.json()
-  } catch {
-    return null
-  }
-}
 
 export async function generateMetadata({ params, searchParams }) {
   const { organizerId, monthId, id } = await params
@@ -38,8 +27,8 @@ function formatEventDate(dateStr, startTime, endTime) {
   const today = new Date().toISOString().split('T')[0]
   const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0]
   let label
-  if (dateStr === today) label = 'Dziś'
-  else if (dateStr === tomorrow) label = 'Jutro'
+  if (dateStr === today) label = 'dziś'
+  else if (dateStr === tomorrow) label = 'jutro'
   else label = d.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' })
   if (startTime) label += `, godz. ${startTime}`
   if (endTime) label += `–${endTime}`

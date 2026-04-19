@@ -55,7 +55,8 @@ GET https://www.panhenio.pl/api/events?phrase=Wrocław
 Request query parameters:
 - `phrase` (optional) — search phrase to filter events by `name`, `location`, `city`, etc. (case-insensitive substring match)
 - `organizerId` (optional) — filter events by organizer id (e.g. `odra-centrum`, `cal-borek`, etc.)
-- `month` (optional) — filter events by month id (e.g. `2026-04`, `2026-05`, etc.)
+- `month` (optional) — filter events by month (e.g. `2026-04`, `2026-05`, etc.)
+- `date` (optional) — filter events by date (e.g. `2026-04-01`, `2026-05-05`, etc.), overrides `month` if both provided
 - `categoryId` (optional) — filter events by category id (e.g. `aktywnosc`, `kultura`, etc.)
 - `cityId` (optional) — filter events by city id (e.g. `wroclaw`, `poznan`, etc.)
 
@@ -103,6 +104,7 @@ GET https://www.panhenio.pl/api/events/latest?cityId=wroclaw
 
 Request query parameters:
 - `cityId` (required) — filter events by city id (e.g. `wroclaw`, `poznan`, etc.)
+- `limit` (optional) - limit number of events returned (default: 5, max: 10)
 
 Response body format:
 
@@ -118,6 +120,7 @@ GET https://www.panhenio.pl/api/events/promoted?cityId=wroclaw
 
 Request query parameters:
 - `cityId` (required) — filter events by city id (e.g. `wroclaw`, `poznan`, etc.)
+- `limit` (optional) - limit number of events returned (default: 3, max: 5)
 
 Response body format:
 

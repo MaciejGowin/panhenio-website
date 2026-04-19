@@ -2,18 +2,9 @@ import { notFound } from 'next/navigation'
 import styles from './page.module.css'
 import EventCard from '../../../components/EventCard/EventCard'
 import { cityTitles } from '../../../config/cityTitles'
+import { fetchCities } from '../../../lib/api'
 
 const BASE_URL = 'https://www.panhenio.pl'
-
-async function fetchCities() {
-  try {
-    const res = await fetch(`${BASE_URL}/api/cities`, { cache: 'no-store' })
-    if (!res.ok) return []
-    return res.json()
-  } catch {
-    return []
-  }
-}
 
 async function fetchEvents(cityId, month) {
   try {

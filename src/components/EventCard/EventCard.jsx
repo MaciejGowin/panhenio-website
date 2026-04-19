@@ -5,8 +5,8 @@ function formatEventDate(dateStr, startTime) {
   const today = new Date().toISOString().split('T')[0]
   const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0]
   let label
-  if (dateStr === today) label = 'Dziś'
-  else if (dateStr === tomorrow) label = 'Jutro'
+  if (dateStr === today) label = 'dziś'
+  else if (dateStr === tomorrow) label = 'jutro'
   else label = d.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long' })
   if (startTime) label += `, godz. ${startTime}`
   const weekday = d.toLocaleDateString('pl-PL', { weekday: 'long' })

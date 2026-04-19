@@ -17,6 +17,7 @@ Resources:
       CodeUri: .
       Handler: index.handler
       Runtime: nodejs20.x
+      MemorySize: 1024
       Architectures:
         - arm64
       Timeout: 30
