@@ -40,8 +40,14 @@
   font-size: 0.875rem;
   color: var(--navy-light);
   text-decoration: none;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.organizer span {
   white-space: nowrap;
-  flex-shrink: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .organizer:hover {

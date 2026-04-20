@@ -37,7 +37,7 @@ export default function EventCard({ event, href, organizerHref }) {
         </div>
         <a href={organizerHref} className={styles.organizer}>
           <OrganizerIcon />
-          {event.organizer.name}
+          <span>{event.organizer.name}</span>
         </a>
       </div>
 

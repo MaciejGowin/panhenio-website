@@ -150,7 +150,7 @@ export default async function WydarzeniePage({ params, searchParams }) {
                 className={styles.organizer}
               >
                 <OrganizerIcon />
-                {event.organizer.name}
+                <span>{event.organizer.name}</span>
               </a>
             </div>
 
