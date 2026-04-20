@@ -135,8 +135,7 @@ export default async function WydarzeniePage({ params, searchParams }) {
         />
       )}
       <div className={styles.inner}>
-        <a href={backHref} className={styles.back}>← Wróć</a>
-        {!event && <p className={styles.error}>Nie udało się załadować wydarzenia.</p>}
+{!event && <p className={styles.error}>Nie udało się załadować wydarzenia.</p>}
         {event && (
           <article className={styles.card}>
             <div className={styles.header}>

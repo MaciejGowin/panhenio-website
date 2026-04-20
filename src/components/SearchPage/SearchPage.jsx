@@ -113,7 +113,7 @@ export default function SearchPage({ initialCityId = '', initialCategoryId = '' 
                 <li key={i}>
                   <EventCard
                     event={event}
-                    href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}?back=${encodeURIComponent(buildUrl(cityId, categoryId))}`}
+                    href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}`}
                     organizerHref={`/organizator/${encodeURIComponent(event.organizer.id)}/wydarzenia-dla-seniorow?miesiac=${event.month}`}
                   />
                 </li>

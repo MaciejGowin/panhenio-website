@@ -123,7 +123,6 @@ export default async function CityEventsPage({ params, searchParams }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className={styles.inner}>
-        <a href="/" className={styles.back}>← Strona główna</a>
         <h1 className={styles.title}>
           {cityTitles[cityId] ?? `Wydarzenia dla seniorów w lokalizacji ${cityName}`}
         </h1>

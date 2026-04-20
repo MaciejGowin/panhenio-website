@@ -153,7 +153,6 @@ export default async function OrganizerEventsPage({ params, searchParams }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className={styles.inner}>
-        <a href="/" className={styles.back}>← Strona główna</a>
         <h1 className={styles.title}>
           Wydarzenia dla seniorów organizowane przez {organizerName}
         </h1>
