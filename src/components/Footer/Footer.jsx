@@ -1,6 +1,8 @@
 import styles from './Footer.module.css'
 
 const links = [
+  { label: 'Miasta', href: '/miasta' },
+  { label: 'Organizatorzy', href: '/organizatorzy' },
   { label: 'Cyfrowy Henio', href: '/cyfrowy-henio' },
   { label: 'O projekcie', href: '/o-projekcie' },
   { label: 'Polityka prywatności', href: '/polityka-prywatnosci' },

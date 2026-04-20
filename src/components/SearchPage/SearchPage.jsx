@@ -66,8 +66,7 @@ export default function SearchPage({ initialCityId = '', initialCategoryId = '' 
   return (
     <div className={styles.page}>
       <div className={styles.inner}>
-        <a href="/" className={styles.back}>← Strona główna</a>
-        <h1 className={styles.title}>Szukaj wszystkich wydarzeń dla seniorów</h1>
+<h1 className={styles.title}>Szukaj wszystkich wydarzeń dla seniorów</h1>
 
         <form className={styles.form} onSubmit={handleSearch}>
           <div className={styles.filterRow}>

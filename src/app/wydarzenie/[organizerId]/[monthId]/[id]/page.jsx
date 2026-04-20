@@ -87,7 +87,6 @@ function CostIcon() {
 export default async function WydarzeniePage({ params, searchParams }) {
   const { organizerId, monthId, id } = await params
   const sp = await searchParams
-  const backHref = sp.back || '/szukaj-wydarzen'
   const event = await fetchEvent(organizerId, monthId, id, sp.previewAccessToken)
 
   const breadcrumbLd = event

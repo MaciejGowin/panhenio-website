@@ -38,7 +38,7 @@ export default async function Latest({ cityId }) {
         </div>
         <ul className={styles.list}>
           {events.map(event => (
-            <li key={event.id}>
+            <li key={`${event.organizer.id}-${event.month}-${event.id}`}>
               <EventCard
                 event={event}
                 href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}`}

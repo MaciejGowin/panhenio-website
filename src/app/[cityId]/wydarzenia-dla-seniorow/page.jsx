@@ -80,8 +80,6 @@ export default async function CityEventsPage({ params, searchParams }) {
   const city = cities.find(c => c.id === cityId)
   if (!city) notFound()
   const cityName = city.name
-  const backHref = `/${cityId}/wydarzenia-dla-seniorow`
-
   const breadcrumbLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -162,7 +160,7 @@ export default async function CityEventsPage({ params, searchParams }) {
                   <li key={i}>
                     <EventCard
                       event={event}
-                      href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}?back=${encodeURIComponent(backHref)}`}
+                      href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}`}
                       organizerHref={`/organizator/${encodeURIComponent(event.organizer.id)}/wydarzenia-dla-seniorow?miesiac=${event.month}`}
                     />
                   </li>

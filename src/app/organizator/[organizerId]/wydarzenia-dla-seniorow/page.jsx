@@ -97,8 +97,6 @@ export default async function OrganizerEventsPage({ params, searchParams }) {
   const organizer = organizers.find(o => o.id === organizerId)
   if (!organizer) notFound()
   const organizerName = organizer.name
-  const backHref = `/organizator/${organizerId}/wydarzenia-dla-seniorow`
-
   // Calendar requires a month — default to first available when none selected
   const calendarMonth = month ?? months[0] ?? null
 
@@ -203,7 +201,6 @@ export default async function OrganizerEventsPage({ params, searchParams }) {
             month={calendarMonth}
             events={events}
             organizerId={organizerId}
-            backHref={backHref}
           />
         ) : events.length === 0 ? (
           <p className={styles.empty}>Brak nadchodzących wydarzeń tego organizatora.</p>
@@ -216,7 +213,7 @@ export default async function OrganizerEventsPage({ params, searchParams }) {
                   <li key={i}>
                     <EventCard
                       event={event}
-                      href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}?back=${encodeURIComponent(backHref)}`}
+                      href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}`}
                       organizerHref={`/organizator/${encodeURIComponent(event.organizer.id)}/wydarzenia-dla-seniorow?miesiac=${event.month}`}
                     />
                   </li>

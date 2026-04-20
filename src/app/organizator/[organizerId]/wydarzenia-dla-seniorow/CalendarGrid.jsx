@@ -2,7 +2,7 @@ import styles from './page.module.css'
 
 const DAY_NAMES = ['Pn', 'Wt', 'Śr', 'Cz', 'Pt', 'So', 'Nd']
 
-export default function CalendarGrid({ month, events, organizerId, backHref }) {
+export default function CalendarGrid({ month, events, organizerId }) {
   const [year, monthNum] = month.split('-').map(Number)
   const firstDay = new Date(year, monthNum - 1, 1)
   const daysInMonth = new Date(year, monthNum, 0).getDate()
@@ -37,7 +37,7 @@ export default function CalendarGrid({ month, events, organizerId, backHref }) {
               {dayEvents.map((event, j) => (
                 <a
                   key={j}
-                  href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}?back=${encodeURIComponent(backHref)}`}
+                  href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}`}
                   className={styles.calendarEvent}
                   title={event.title}
                 >
