@@ -1,5 +1,6 @@
 import styles from '../../../../../components/EventPage/EventPage.module.css'
-import { fetchEvent } from '../../../../../lib/api'
+import { fetchEvent, fetchCities } from '../../../../../lib/api'
+import Newsletter from '../../../../../components/Newsletter/Newsletter'
 
 const BASE_URL = 'https://www.panhenio.pl'
 
@@ -87,7 +88,10 @@ function CostIcon() {
 export default async function WydarzeniePage({ params, searchParams }) {
   const { organizerId, monthId, id } = await params
   const sp = await searchParams
-  const event = await fetchEvent(organizerId, monthId, id, sp.previewAccessToken)
+  const [event, cities] = await Promise.all([
+    fetchEvent(organizerId, monthId, id, sp.previewAccessToken),
+    fetchCities(),
+  ])
 
   const breadcrumbLd = event
     ? {
@@ -200,6 +204,7 @@ export default async function WydarzeniePage({ params, searchParams }) {
           </article>
         )}
       </div>
+      <Newsletter cities={cities} defaultCityId={event?.city?.id ?? null} />
     </div>
   )
 }

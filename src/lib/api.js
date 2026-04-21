@@ -23,3 +23,19 @@ export const fetchEvent = cache(async (organizerId, monthId, id, previewAccessTo
     return null
   }
 })
+
+export async function activateSubscriber(activationCode) {
+  try {
+    const res = await fetch(`${BASE_URL}/api/v1/subscribers/activations`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ activationCode }),
+      cache: 'no-store',
+    })
+    if (res.ok) return 'success'
+    if (res.status >= 400 && res.status < 500) return 'invalid'
+    return 'error'
+  } catch {
+    return 'error'
+  }
+}

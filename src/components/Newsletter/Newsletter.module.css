@@ -1,0 +1,108 @@
+.section {
+  padding: 32px 24px 48px;
+}
+
+.inner {
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--navy);
+  border-radius: var(--radius);
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.heading {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+
+.desc {
+  font-size: 1rem;
+  color: var(--gray-200);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.select {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background: var(--white);
+  color: var(--text);
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.select:focus {
+  border-color: var(--orange);
+}
+
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background: var(--white);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.input:focus {
+  border-color: var(--orange);
+}
+
+.input::placeholder {
+  color: var(--gray-500);
+}
+
+.button {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: inherit;
+  background: var(--orange);
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.button:hover:not(:disabled) {
+  background: var(--orange-dark);
+}
+
+.button:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.success {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white);
+  padding: 16px 0 4px;
+}
+
+.error {
+  font-size: 0.9rem;
+  color: #ffb3b3;
+  margin-top: 4px;
+}

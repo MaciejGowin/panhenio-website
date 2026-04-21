@@ -303,3 +303,49 @@ Response body format:
   "2026-05"
 ]
 ```
+
+### Subscriber API
+
+#### Add subscriber
+
+Operation:
+
+```
+POST https://www.panhenio.pl/api/v1/subscribers
+```
+
+Request body format:
+
+```json
+{
+  "email": "maciej@panhenio.pl",
+  "preferredCityId": "wroclaw"
+}
+```
+
+Response codes:
+- `200 OK` — subscriber added successfully
+- `400 Bad Request` — invalid request body (e.g. missing required fields, invalid email format, already subscribed email, etc.)
+- `500 Internal Server Error` — server error while processing the request
+
+#### Activate subscriber
+
+Operation:
+
+```
+POST https://www.panhenio.pl/api/v1/subscribers/activations
+```
+
+Request body format:
+
+```json
+{
+  "activationCode": "123-456-789"
+}
+```
+
+Response codes:
+- `200 OK` — subscriber activated successfully
+- `400 Bad Request` — invalid request body (e.g. missing required fields, invalid email format, already activated subscriber, etc.)
+- `500 Internal Server Error` — server error while processing the request
+
