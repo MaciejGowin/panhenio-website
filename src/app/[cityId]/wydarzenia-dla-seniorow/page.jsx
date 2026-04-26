@@ -3,6 +3,7 @@ import styles from './page.module.css'
 import EventCard from '../../../components/EventCard/EventCard'
 import { cityTitles } from '../../../config/cityTitles'
 import { fetchCities } from '../../../lib/api'
+import { todayPL, tomorrowPL } from '../../../lib/dates'
 
 const BASE_URL = 'https://www.panhenio.pl'
 
@@ -25,16 +26,16 @@ async function fetchEvents(cityId, month, day) {
 }
 
 function getAvailableMonths() {
-  const now = new Date()
-  const current = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`
-  const next = new Date(now.getFullYear(), now.getMonth() + 1, 1)
+  const [year, month] = todayPL().split('-').map(Number)
+  const current = `${year}-${String(month).padStart(2, '0')}`
+  const next = new Date(year, month, 1)
   const nextMonth = `${next.getFullYear()}-${String(next.getMonth() + 1).padStart(2, '0')}`
   return [current, nextMonth]
 }
 
 function formatMonth(month) {
   const date = new Date(`${month}-01T00:00:00`)
-  return date.toLocaleDateString('pl-PL', { month: 'long', year: 'numeric' })
+  return date.toLocaleDateString('pl-PL', { month: 'long', year: 'numeric', timeZone: 'Europe/Warsaw' })
 }
 
 function groupByDate(events) {
@@ -48,7 +49,7 @@ function groupByDate(events) {
 
 function formatDate(dateStr) {
   const date = new Date(`${dateStr}T00:00:00`)
-  return date.toLocaleDateString('pl-PL', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
+  return date.toLocaleDateString('pl-PL', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Warsaw' })
 }
 
 export async function generateMetadata({ params }) {
@@ -74,8 +75,8 @@ export default async function CityEventsPage({ params, searchParams }) {
   const { miesiac: month, dzien: day } = await searchParams
   const months = getAvailableMonths()
   const activeMonth = month ?? months[0]
-  const today = new Date().toISOString().split('T')[0]
-  const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0]
+  const today = todayPL()
+  const tomorrow = tomorrowPL()
   const [cities, events] = await Promise.all([fetchCities(), fetchEvents(cityId, activeMonth, day)])
   const city = cities.find(c => c.id === cityId)
   if (!city) notFound()

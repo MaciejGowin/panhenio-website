@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import styles from './page.module.css'
 import CalendarGrid from './CalendarGrid'
 import EventCard from '../../../../components/EventCard/EventCard'
+import { todayPL, tomorrowPL } from '../../../../lib/dates'
 
 const BASE_URL = 'https://www.panhenio.pl'
 
@@ -48,7 +49,7 @@ async function fetchEvents(organizerId, month, day) {
 
 function formatMonth(month) {
   const date = new Date(`${month}-01T00:00:00`)
-  return date.toLocaleDateString('pl-PL', { month: 'long', year: 'numeric' })
+  return date.toLocaleDateString('pl-PL', { month: 'long', year: 'numeric', timeZone: 'Europe/Warsaw' })
 }
 
 function groupByDate(events) {
@@ -62,7 +63,7 @@ function groupByDate(events) {
 
 function formatDate(dateStr) {
   const date = new Date(`${dateStr}T00:00:00`)
-  return date.toLocaleDateString('pl-PL', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
+  return date.toLocaleDateString('pl-PL', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Warsaw' })
 }
 
 export async function generateMetadata({ params }) {
@@ -87,8 +88,8 @@ export default async function OrganizerEventsPage({ params, searchParams }) {
   const { organizerId } = await params
   const { miesiac: month, dzien: day, widok } = await searchParams
   const isCalendar = widok === 'kalendarz'
-  const today = new Date().toISOString().split('T')[0]
-  const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0]
+  const today = todayPL()
+  const tomorrow = tomorrowPL()
   const [organizers, months, events] = await Promise.all([
     fetchOrganizers(),
     fetchMonths(organizerId),

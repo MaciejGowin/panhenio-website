@@ -1,14 +1,15 @@
 import styles from './EventCard.module.css'
+import { todayPL, tomorrowPL } from '../../lib/dates'
 
 function formatEventDate(dateStr, startTime) {
   const d = new Date(`${dateStr}T00:00:00`)
-  const today = new Date().toISOString().split('T')[0]
-  const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0]
-  const date = d.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long' })
+  const today = todayPL()
+  const tomorrow = tomorrowPL()
+  const date = d.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', timeZone: 'Europe/Warsaw' })
   let dayLabel
   if (dateStr === today) dayLabel = 'dziś'
   else if (dateStr === tomorrow) dayLabel = 'jutro'
-  else dayLabel = d.toLocaleDateString('pl-PL', { weekday: 'long' })
+  else dayLabel = d.toLocaleDateString('pl-PL', { weekday: 'long', timeZone: 'Europe/Warsaw' })
   let label = `${dayLabel}, ${date}`
   if (startTime) label += `, godz. ${startTime}`
   return label

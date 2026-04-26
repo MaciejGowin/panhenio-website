@@ -1,6 +1,7 @@
 import styles from '../../../../../components/EventPage/EventPage.module.css'
 import { fetchEvent, fetchCities } from '../../../../../lib/api'
 import Newsletter from '../../../../../components/Newsletter/Newsletter'
+import { todayPL, tomorrowPL } from '../../../../../lib/dates'
 
 const BASE_URL = 'https://www.panhenio.pl'
 
@@ -25,13 +26,13 @@ export async function generateMetadata({ params, searchParams }) {
 
 function formatEventDate(dateStr, startTime, endTime) {
   const d = new Date(`${dateStr}T00:00:00`)
-  const today = new Date().toISOString().split('T')[0]
-  const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0]
-  const date = d.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' })
+  const today = todayPL()
+  const tomorrow = tomorrowPL()
+  const date = d.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Warsaw' })
   let dayLabel
   if (dateStr === today) dayLabel = 'dziś'
   else if (dateStr === tomorrow) dayLabel = 'jutro'
-  else dayLabel = d.toLocaleDateString('pl-PL', { weekday: 'long' })
+  else dayLabel = d.toLocaleDateString('pl-PL', { weekday: 'long', timeZone: 'Europe/Warsaw' })
   let label = `${dayLabel}, ${date}`
   if (startTime) label += `, godz. ${startTime}`
   if (endTime) label += `–${endTime}`

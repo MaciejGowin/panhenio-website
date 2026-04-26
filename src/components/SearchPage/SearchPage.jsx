@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './SearchPage.module.css'
 import EventCard from '../EventCard/EventCard'
+import { todayPL } from '../../lib/dates'
 
 export default function SearchPage({ initialCityId = '', initialCategoryId = '' }) {
   const [cityId, setCityId] = useState(initialCityId)
@@ -50,7 +51,7 @@ export default function SearchPage({ initialCityId = '', initialCategoryId = '' 
     const params = new URLSearchParams()
     if (c) params.set('cityId', c)
     if (cat) params.set('categoryId', cat)
-    params.set('dateFrom', new Date().toISOString().split('T')[0])
+    params.set('dateFrom', todayPL())
     setLoading(true)
     try {
       const res = await fetch(`/api/events?${params.toString()}`)
