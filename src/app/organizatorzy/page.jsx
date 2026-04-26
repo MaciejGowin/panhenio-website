@@ -1,4 +1,5 @@
 import styles from './page.module.css'
+import OrganizersList from './OrganizersList'
 
 const BASE_URL = 'https://www.panhenio.pl'
 
@@ -33,19 +34,7 @@ export default async function OrganizatorzyPage() {
         {organizers.length === 0 ? (
           <p className={styles.empty}>Brak organizatorów.</p>
         ) : (
-          <ul className={styles.list}>
-            {organizers.map(org => (
-              <li key={org.id}>
-                <a
-                  href={`/organizator/${encodeURIComponent(org.id)}/wydarzenia-dla-seniorow`}
-                  className={styles.card}
-                >
-                  <span className={styles.name}>{org.name}</span>
-                  <span className={styles.arrow}>→</span>
-                </a>
-              </li>
-            ))}
-          </ul>
+          <OrganizersList organizers={organizers} />
         )}
       </div>
     </div>
