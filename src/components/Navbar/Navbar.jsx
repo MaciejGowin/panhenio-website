@@ -4,8 +4,8 @@ import NavbarMobileMenu from './NavbarMobileMenu'
 import { fetchCities } from '../../lib/api'
 
 const navLinks = [
+  { label: 'Organizatorzy', href: '/organizatorzy' },
   { label: 'Cyfrowy Henio', href: '/cyfrowy-henio', bold: true },
-  { label: 'O projekcie', href: '/o-projekcie' },
 ]
 
 export default async function Navbar() {
