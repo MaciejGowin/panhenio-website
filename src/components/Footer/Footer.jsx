@@ -21,6 +21,28 @@ export default function Footer() {
             )}
           </span>
         ))}
+        <span className={styles.item}>
+          <span className={styles.dot} aria-hidden="true">·</span>
+          <a
+            href="https://www.facebook.com/panheniopl"
+            className={styles.link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Facebook
+          </a>
+        </span>
+        <span className={styles.item}>
+          <span className={styles.dot} aria-hidden="true">·</span>
+          <a
+            href="https://www.instagram.com/panheniopl"
+            className={styles.link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Instagram
+          </a>
+        </span>
       </nav>
     </footer>
   )
