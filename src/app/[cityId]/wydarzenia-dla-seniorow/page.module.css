@@ -51,30 +51,65 @@
   text-transform: capitalize;
 }
 
-.monthTabs {
+.dayNav {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  align-items: center;
+  gap: 16px;
   margin-bottom: 28px;
 }
 
-.monthTab {
+.dayNavArrow {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--navy);
+  text-decoration: none;
+  padding: 8px 14px;
+  border: 2px solid var(--gray-200);
+  border-radius: 20px;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+  line-height: 1;
+}
+
+.dayNavArrow:hover {
+  border-color: var(--navy);
+}
+
+.dayNavArrowDisabled {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--gray-200);
+  padding: 8px 14px;
+  border: 2px solid var(--gray-200);
+  border-radius: 20px;
+  line-height: 1;
+  cursor: default;
+}
+
+.dayNavLabel {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--navy);
+  min-width: 120px;
+  text-align: center;
+}
+
+.dayNavQuick {
   font-size: 1rem;
   font-weight: 600;
   color: var(--navy);
   background: var(--white);
   border: 2px solid var(--gray-200);
   border-radius: 20px;
-  padding: 10px 20px;
+  padding: 8px 16px;
   text-decoration: none;
   transition: border-color 0.15s, background 0.15s, color 0.15s;
 }
 
-.monthTab:hover {
+.dayNavQuick:hover {
   border-color: var(--navy);
 }
 
-.monthTabActive {
+.dayNavQuickActive {
   background: var(--navy);
   border-color: var(--navy);
   color: var(--white);

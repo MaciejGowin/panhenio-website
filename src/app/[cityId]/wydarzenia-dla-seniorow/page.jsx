@@ -25,32 +25,20 @@ async function fetchEvents(cityId, month, day) {
   }
 }
 
-function getAvailableMonths() {
-  const [year, month] = todayPL().split('-').map(Number)
-  const current = `${year}-${String(month).padStart(2, '0')}`
-  const next = new Date(year, month, 1)
-  const nextMonth = `${next.getFullYear()}-${String(next.getMonth() + 1).padStart(2, '0')}`
-  return [current, nextMonth]
+function offsetDay(dateStr, days) {
+  const d = new Date(`${dateStr}T00:00:00`)
+  d.setDate(d.getDate() + days)
+  return d.toLocaleDateString('en-CA', { timeZone: 'Europe/Warsaw' })
 }
 
-function formatMonth(month) {
-  const date = new Date(`${month}-01T00:00:00`)
-  return date.toLocaleDateString('pl-PL', { month: 'long', year: 'numeric', timeZone: 'Europe/Warsaw' })
-}
-
-function groupByDate(events) {
-  const map = new Map()
-  for (const event of events) {
-    if (!map.has(event.date)) map.set(event.date, [])
-    map.get(event.date).push(event)
-  }
-  return [...map.entries()]
-}
-
-function formatDate(dateStr) {
+function formatDayLabel(dateStr, today, tomorrow) {
   const date = new Date(`${dateStr}T00:00:00`)
-  return date.toLocaleDateString('pl-PL', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Warsaw' })
+  const datePart = date.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', timeZone: 'Europe/Warsaw' })
+  if (dateStr === today) return `dziś, ${datePart}`
+  if (dateStr === tomorrow) return `jutro, ${datePart}`
+  return date.toLocaleDateString('pl-PL', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Warsaw' }).toLowerCase()
 }
+
 
 export async function generateMetadata({ params }) {
   const { cityId } = await params
@@ -72,12 +60,13 @@ export async function generateMetadata({ params }) {
 
 export default async function CityEventsPage({ params, searchParams }) {
   const { cityId } = await params
-  const { miesiac: month, dzien: day } = await searchParams
-  const months = getAvailableMonths()
-  const activeMonth = month ?? months[0]
+  const { dzien: day } = await searchParams
   const today = todayPL()
   const tomorrow = tomorrowPL()
-  const [cities, events] = await Promise.all([fetchCities(), fetchEvents(cityId, activeMonth, day)])
+  const effectiveDay = day ?? today
+  const prevDay = offsetDay(effectiveDay, -1)
+  const nextDay = offsetDay(effectiveDay, 1)
+  const [cities, events] = await Promise.all([fetchCities(), fetchEvents(cityId, null, effectiveDay)])
   const city = cities.find(c => c.id === cityId)
   if (!city) notFound()
   const cityName = city.name
@@ -126,49 +115,31 @@ export default async function CityEventsPage({ params, searchParams }) {
           {cityTitles[cityId] ?? `Wydarzenia dla seniorów w lokalizacji ${cityName}`}
         </h1>
 
-        <div className={styles.monthTabs}>
-          <a
-            href={`/${cityId}/wydarzenia-dla-seniorow?dzien=${today}`}
-            className={`${styles.monthTab} ${day === today ? styles.monthTabActive : ''}`}
-          >
-            dziś
-          </a>
-          <a
-            href={`/${cityId}/wydarzenia-dla-seniorow?dzien=${tomorrow}`}
-            className={`${styles.monthTab} ${day === tomorrow ? styles.monthTabActive : ''}`}
-          >
-            jutro
-          </a>
-          {months.map(m => (
-            <a
-              key={m}
-              href={`/${cityId}/wydarzenia-dla-seniorow?miesiac=${m}`}
-              className={`${styles.monthTab} ${!day && activeMonth === m ? styles.monthTabActive : ''}`}
-            >
-              {formatMonth(m)}
-            </a>
-          ))}
+        <div className={styles.dayNav}>
+          {effectiveDay > today
+            ? <a href={`/${cityId}/wydarzenia-dla-seniorow?dzien=${prevDay}`} className={styles.dayNavArrow}>←</a>
+            : <span className={styles.dayNavArrowDisabled}>←</span>
+          }
+          <span className={styles.dayNavLabel}>{formatDayLabel(effectiveDay, today, tomorrow)}</span>
+          <a href={`/${cityId}/wydarzenia-dla-seniorow?dzien=${nextDay}`} className={styles.dayNavArrow}>→</a>
+          <a href={`/${cityId}/wydarzenia-dla-seniorow`} className={`${styles.dayNavQuick} ${effectiveDay === today ? styles.dayNavQuickActive : ''}`}>dziś</a>
+          <a href={`/${cityId}/wydarzenia-dla-seniorow?dzien=${tomorrow}`} className={`${styles.dayNavQuick} ${effectiveDay === tomorrow ? styles.dayNavQuickActive : ''}`}>jutro</a>
         </div>
 
         {events.length === 0 ? (
           <p className={styles.empty}>Brak nadchodzących wydarzeń w tym mieście.</p>
         ) : (
-          groupByDate(events).map(([date, group]) => (
-            <section key={date} className={styles.dateGroup}>
-              <h2 className={styles.dateHeading}>{formatDate(date)}</h2>
-              <ul className={styles.cards}>
-                {group.map((event, i) => (
-                  <li key={i}>
-                    <EventCard
-                      event={event}
-                      href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}`}
-                      organizerHref={`/organizator/${encodeURIComponent(event.organizer.id)}/wydarzenia-dla-seniorow?miesiac=${event.month}`}
-                    />
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ))
+          <ul className={styles.cards}>
+            {events.map((event, i) => (
+              <li key={i}>
+                <EventCard
+                  event={event}
+                  href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}`}
+                  organizerHref={`/organizator/${encodeURIComponent(event.organizer.id)}/wydarzenia-dla-seniorow?miesiac=${event.month}`}
+                />
+              </li>
+            ))}
+          </ul>
         )}
       </div>
     </div>

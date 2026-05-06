@@ -9,7 +9,7 @@ function formatEventDate(dateStr, startTime) {
   let dayLabel
   if (dateStr === today) dayLabel = 'dziś'
   else if (dateStr === tomorrow) dayLabel = 'jutro'
-  else dayLabel = d.toLocaleDateString('pl-PL', { weekday: 'long', timeZone: 'Europe/Warsaw' })
+  else dayLabel = d.toLocaleDateString('pl-PL', { weekday: 'long', timeZone: 'Europe/Warsaw' }).toLowerCase()
   let label = `${dayLabel}, ${date}`
   if (startTime) label += `, godz. ${startTime}`
   return label
