@@ -5,6 +5,7 @@ export const cityTitles = {
   warszawa: 'Wydarzenia dla seniorów w Warszawie',
   gdansk: 'Wydarzenia dla seniorów w Gdańsku',
   lodz: 'Wydarzenia dla seniorów w Łodzi',
+  bydgoszcz: 'Wydarzenia dla seniorów w Bydgoszczy',
 }
 
 export const cityAllEvents = {
@@ -14,4 +15,5 @@ export const cityAllEvents = {
   warszawa: 'Wszystkie w Warszawie',
   gdansk: 'Wszystkie w Gdańsku',
   lodz: 'Wszystkie w Łodzi',
+  bydgoszcz: 'Wszystkie w Bydgoszczy'
 }
