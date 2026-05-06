@@ -48,7 +48,7 @@
   margin-bottom: 12px;
   padding-bottom: 8px;
   border-bottom: 2px solid var(--gray-200);
-  text-transform: capitalize;
+  text-transform: lowercase;
 }
 
 .toolbar {
@@ -68,29 +68,32 @@
 
 .viewToggle {
   display: flex;
-  gap: 4px;
   flex-shrink: 0;
+  border: 2px solid var(--gray-200);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .viewTab {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--navy);
+  color: var(--gray-500);
   background: var(--white);
-  border: 2px solid var(--gray-200);
-  border-radius: 20px;
   padding: 10px 20px;
   text-decoration: none;
-  transition: border-color 0.15s, background 0.15s, color 0.15s;
+  transition: background 0.15s, color 0.15s;
+}
+
+.viewTab + .viewTab {
+  border-left: 2px solid var(--gray-200);
 }
 
 .viewTab:hover {
-  border-color: var(--navy);
+  color: var(--navy);
 }
 
 .viewTabActive {
-  background: var(--orange);
-  border-color: var(--orange);
+  background: var(--navy);
   color: var(--white);
 }
 

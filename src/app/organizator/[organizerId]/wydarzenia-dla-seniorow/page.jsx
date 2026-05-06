@@ -90,16 +90,15 @@ export default async function OrganizerEventsPage({ params, searchParams }) {
   const isCalendar = widok === 'kalendarz'
   const today = todayPL()
   const tomorrow = tomorrowPL()
-  const [organizers, months, events] = await Promise.all([
+  const [organizers, months] = await Promise.all([
     fetchOrganizers(),
     fetchMonths(organizerId),
-    fetchEvents(organizerId, month, day),
   ])
+  const effectiveMonth = month ?? months[0] ?? null
+  const events = await fetchEvents(organizerId, effectiveMonth, day)
   const organizer = organizers.find(o => o.id === organizerId)
   if (!organizer) notFound()
   const organizerName = organizer.name
-  // Calendar requires a month — default to first available when none selected
-  const calendarMonth = month ?? months[0] ?? null
 
   function buildUrl(overrides) {
     const p = new URLSearchParams()
@@ -174,7 +173,7 @@ export default async function OrganizerEventsPage({ params, searchParams }) {
               <a
                 key={m}
                 href={buildUrl({ miesiac: m, dzien: undefined })}
-                className={`${styles.monthTab} ${!day && (month ?? months[0]) === m ? styles.monthTabActive : ''}`}
+                className={`${styles.monthTab} ${!day && effectiveMonth === m ? styles.monthTabActive : ''}`}
               >
                 {formatMonth(m)}
               </a>
@@ -186,20 +185,20 @@ export default async function OrganizerEventsPage({ params, searchParams }) {
               href={buildUrl({ widok: 'lista' })}
               className={`${styles.viewTab} ${!isCalendar ? styles.viewTabActive : ''}`}
             >
-              Lista
+              lista
             </a>
             <a
               href={buildUrl({ widok: 'kalendarz' })}
               className={`${styles.viewTab} ${isCalendar ? styles.viewTabActive : ''}`}
             >
-              Kalendarz
+              kalendarz
             </a>
           </div>
         </div>
 
-        {isCalendar && calendarMonth ? (
+        {isCalendar && effectiveMonth ? (
           <CalendarGrid
-            month={calendarMonth}
+            month={effectiveMonth}
             events={events}
             organizerId={organizerId}
           />
