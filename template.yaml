@@ -9,6 +9,12 @@ Parameters:
     Type: String
 
 Resources:
+  WebsiteSsrFunctionLogGroup:
+    Type: 'AWS::Logs::LogGroup'
+    Properties:
+      LogGroupName: !Sub '/aws/lambda/${Project}-WEBSITE-SSR-${Environment}'
+      RetentionInDays: 3
+
   WebsiteSsrFunction:
     Type: 'AWS::Serverless::Function'
     Properties:
