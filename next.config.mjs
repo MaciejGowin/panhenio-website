@@ -23,6 +23,10 @@ const nextConfig = {
         headers: [{ key: 'Cache-Control', value: 's-maxage=86400, stale-while-revalidate=86400' }],
       },
       {
+        source: '/dla-organizatorow',
+        headers: [{ key: 'Cache-Control', value: 's-maxage=86400, stale-while-revalidate=86400' }],
+      },
+      {
         source: '/:cityId/wydarzenia-dla-seniorow',
         headers: [{ key: 'Cache-Control', value: 's-maxage=1800, stale-while-revalidate=3600' }],
       },

@@ -5,7 +5,7 @@ import { fetchCities } from '../../lib/api'
 
 const navLinks = [
   { label: 'Organizatorzy', href: '/organizatorzy' },
-  { label: 'Cyfrowy Henio', href: '/cyfrowy-henio', bold: true },
+  { label: 'Dla organizatorów', href: '/dla-organizatorow', bold: true },
 ]
 
 export default async function Navbar() {

@@ -21,6 +21,8 @@ export default async function sitemap() {
     { url: `${BASE_URL}/`, changeFrequency: 'daily', priority: 1.0 },
     { url: `${BASE_URL}/o-projekcie`, changeFrequency: 'monthly', priority: 0.5 },
     { url: `${BASE_URL}/cyfrowy-henio`, changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE_URL}/dla-organizatorow`, changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE_URL}/polityka-prywatnosci`, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${BASE_URL}/organizatorzy`, changeFrequency: 'weekly', priority: 0.6 },
     { url: `${BASE_URL}/miasta`, changeFrequency: 'weekly', priority: 0.6 },
   ]

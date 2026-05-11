@@ -1,0 +1,50 @@
+.page {
+  flex: 1;
+  padding: 56px 24px 80px;
+}
+
+.inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 20px;
+}
+
+.lead {
+  font-size: 1.05rem;
+  color: var(--gray-500);
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+.section {
+  margin-bottom: 36px;
+}
+
+.sectionTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+
+.section p {
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.75;
+}
+
+.link {
+  color: var(--orange);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link:hover {
+  color: var(--orange-dark);
+}
