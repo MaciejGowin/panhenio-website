@@ -1,7 +1,7 @@
 import styles from './page.module.css'
 import EventCard from '../../../components/EventCard/EventCard'
 import { cityTitles, cityDescriptions } from '../../../config/cityConfigs'
-import { toPolishUrl } from '../../../lib/polishDate'
+import { toPolishUrl, toPolishMonthUrl } from '../../../lib/polishDate'
 
 function offsetDay(dateStr, days) {
   const d = new Date(`${dateStr}T00:00:00`)
@@ -57,7 +57,7 @@ export default function CityEventsContent({ cityId, cityName, effectiveDay, even
               <EventCard
                 event={event}
                 href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}`}
-                organizerHref={`/organizator/${encodeURIComponent(event.organizer.id)}/wydarzenia-dla-seniorow?miesiac=${event.month}`}
+                organizerHref={`/organizator/${encodeURIComponent(event.organizer.id)}/wydarzenia-dla-seniorow/${toPolishMonthUrl(event.month)}`}
               />
             </li>
           ))}
