@@ -1,22 +1,17 @@
 import { notFound } from 'next/navigation'
 import styles from './page.module.css'
-import EventCard from '../../../components/EventCard/EventCard'
-import { cityTitles, cityDescriptions } from '../../../config/cityConfigs'
+import CityEventsContent from './CityEventsContent'
 import { fetchCities } from '../../../lib/api'
 import { todayPL, tomorrowPL } from '../../../lib/dates'
 
 const BASE_URL = 'https://www.panhenio.pl'
 
-async function fetchEvents(cityId, month, day) {
+async function fetchEvents(cityId, day) {
   try {
     const url = new URL(`${BASE_URL}/api/events`)
     url.searchParams.set('cityId', cityId)
-    if (day) {
-      url.searchParams.set('dateFrom', day)
-      url.searchParams.set('dateTo', day)
-    } else if (month) {
-      url.searchParams.set('month', month)
-    }
+    url.searchParams.set('dateFrom', day)
+    url.searchParams.set('dateTo', day)
     const res = await fetch(url.toString(), { cache: 'no-store' })
     if (!res.ok) return []
     return res.json()
@@ -24,21 +19,6 @@ async function fetchEvents(cityId, month, day) {
     return []
   }
 }
-
-function offsetDay(dateStr, days) {
-  const d = new Date(`${dateStr}T00:00:00`)
-  d.setDate(d.getDate() + days)
-  return d.toLocaleDateString('en-CA', { timeZone: 'Europe/Warsaw' })
-}
-
-function formatDayLabel(dateStr, today, tomorrow) {
-  const date = new Date(`${dateStr}T00:00:00`)
-  const datePart = date.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', timeZone: 'Europe/Warsaw' })
-  if (dateStr === today) return `dziś, ${datePart}`
-  if (dateStr === tomorrow) return `jutro, ${datePart}`
-  return date.toLocaleDateString('pl-PL', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Warsaw' }).toLowerCase()
-}
-
 
 export async function generateMetadata({ params }) {
   const { cityId } = await params
@@ -58,18 +38,15 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default async function CityEventsPage({ params, searchParams }) {
+export default async function CityEventsPage({ params }) {
   const { cityId } = await params
-  const { dzien: day } = await searchParams
   const today = todayPL()
   const tomorrow = tomorrowPL()
-  const effectiveDay = day ?? today
-  const prevDay = offsetDay(effectiveDay, -1)
-  const nextDay = offsetDay(effectiveDay, 1)
-  const [cities, events] = await Promise.all([fetchCities(), fetchEvents(cityId, null, effectiveDay)])
+  const [cities, events] = await Promise.all([fetchCities(), fetchEvents(cityId, today)])
   const city = cities.find(c => c.id === cityId)
   if (!city) notFound()
   const cityName = city.name
+
   const breadcrumbLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -110,42 +87,14 @@ export default async function CityEventsPage({ params, searchParams }) {
     <div className={styles.page}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <div className={styles.inner}>
-        <h1 className={styles.title}>
-          {cityTitles[cityId] ?? `Wydarzenia dla seniorów w lokalizacji ${cityName}`}
-        </h1>
-
-        {cityDescriptions[cityId] && (
-          <p className={styles.description}>{cityDescriptions[cityId]}</p>
-        )}
-
-        <div className={styles.dayNav}>
-          {effectiveDay > today
-            ? <a href={`/${cityId}/wydarzenia-dla-seniorow?dzien=${prevDay}`} className={styles.dayNavArrow}>←</a>
-            : <span className={styles.dayNavArrowDisabled}>←</span>
-          }
-          <span className={styles.dayNavLabel}>{formatDayLabel(effectiveDay, today, tomorrow)}</span>
-          <a href={`/${cityId}/wydarzenia-dla-seniorow?dzien=${nextDay}`} className={styles.dayNavArrow}>→</a>
-          <a href={`/${cityId}/wydarzenia-dla-seniorow`} className={`${styles.dayNavQuick} ${effectiveDay === today ? styles.dayNavQuickActive : ''}`}>dziś</a>
-          <a href={`/${cityId}/wydarzenia-dla-seniorow?dzien=${tomorrow}`} className={`${styles.dayNavQuick} ${effectiveDay === tomorrow ? styles.dayNavQuickActive : ''}`}>jutro</a>
-        </div>
-
-        {events.length === 0 ? (
-          <p className={styles.empty}>Brak nadchodzących wydarzeń w tym mieście.</p>
-        ) : (
-          <ul className={styles.cards}>
-            {events.map((event, i) => (
-              <li key={i}>
-                <EventCard
-                  event={event}
-                  href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}`}
-                  organizerHref={`/organizator/${encodeURIComponent(event.organizer.id)}/wydarzenia-dla-seniorow?miesiac=${event.month}`}
-                />
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      <CityEventsContent
+        cityId={cityId}
+        cityName={cityName}
+        effectiveDay={today}
+        events={events}
+        today={today}
+        tomorrow={tomorrow}
+      />
     </div>
   )
 }

@@ -1,7 +1,6 @@
 import styles from './Latest.module.css'
 import EventCard from '../EventCard/EventCard'
 import { cityAllEvents } from '../../config/cityConfigs'
-import { todayPL } from '../../lib/dates'
 
 const BASE_URL = 'https://www.panhenio.pl'
 
@@ -21,8 +20,7 @@ export default async function Latest({ cityId }) {
   const events = await fetchLatestEvents(cityId)
   if (events.length === 0) return null
 
-  const today = todayPL()
-  const cityHref = cityId ? `/${cityId}/wydarzenia-dla-seniorow?dzien=${today}` : '/szukaj-wydarzen'
+  const cityHref = cityId ? `/${cityId}/wydarzenia-dla-seniorow` : '/szukaj-wydarzen'
   const cityLabel = (cityId && cityAllEvents[cityId]) ?? `Wszystkie w lokalizacji ${cityId}`
 
   return (
