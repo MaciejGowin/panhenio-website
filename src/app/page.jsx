@@ -8,7 +8,7 @@ import Latest from '../components/Latest/Latest'
 import Promoted from '../components/Promoted/Promoted'
 import Newsletter from '../components/Newsletter/Newsletter'
 import styles from './page.module.css'
-import { cityTitles } from '../config/cityTitles'
+import { cityTitles } from '../config/cityConfigs'
 import { fetchCities } from '../lib/api'
 
 const websiteSchema = {

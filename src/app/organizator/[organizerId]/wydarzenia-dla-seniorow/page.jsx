@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import styles from './page.module.css'
+import { organizerDescriptions } from '../../../../config/organizerConfigs'
 import CalendarGrid from './CalendarGrid'
 import EventCard from '../../../../components/EventCard/EventCard'
 import { todayPL, tomorrowPL } from '../../../../lib/dates'
@@ -154,6 +155,10 @@ export default async function OrganizerEventsPage({ params, searchParams }) {
         <h1 className={styles.title}>
           Wydarzenia dla seniorów organizowane przez {organizerName}
         </h1>
+
+        {organizerDescriptions[organizerId] && (
+          <p className={styles.description}>{organizerDescriptions[organizerId]}</p>
+        )}
 
         <div className={styles.toolbar}>
           <div className={styles.monthTabs}>

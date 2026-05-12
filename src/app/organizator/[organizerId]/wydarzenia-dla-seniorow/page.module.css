@@ -51,6 +51,14 @@
   text-transform: lowercase;
 }
 
+.description {
+  font-size: 0.95rem;
+  color: var(--gray-500);
+  line-height: 1.6;
+  margin-top: -16px;
+  margin-bottom: 28px;
+}
+
 .toolbar {
   display: flex;
   flex-wrap: wrap;

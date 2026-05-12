@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import styles from './page.module.css'
 import EventCard from '../../../components/EventCard/EventCard'
-import { cityTitles, cityDescriptions } from '../../../config/cityTitles'
+import { cityTitles, cityDescriptions } from '../../../config/cityConfigs'
 import { fetchCities } from '../../../lib/api'
 import { todayPL, tomorrowPL } from '../../../lib/dates'
 

@@ -1,6 +1,6 @@
 import styles from './Latest.module.css'
 import EventCard from '../EventCard/EventCard'
-import { cityAllEvents } from '../../config/cityTitles'
+import { cityAllEvents } from '../../config/cityConfigs'
 import { todayPL } from '../../lib/dates'
 
 const BASE_URL = 'https://www.panhenio.pl'
