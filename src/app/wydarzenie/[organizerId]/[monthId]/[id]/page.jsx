@@ -226,6 +226,16 @@ export default async function WydarzeniePage({ params, searchParams }) {
             )}
           </article>
         )}
+        {event?.location && (
+          <iframe
+            className={styles.map}
+            src={`https://maps.google.com/maps?q=${encodeURIComponent([event.location, event.city?.name].filter(Boolean).join(', '))}&output=embed&hl=pl`}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Lokalizacja wydarzenia"
+          />
+        )}
       </div>
       <Newsletter cities={cities} defaultCityId={event?.city?.id ?? null} />
     </div>
