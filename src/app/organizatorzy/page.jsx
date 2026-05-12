@@ -1,5 +1,6 @@
 import styles from './page.module.css'
 import OrganizersList from './OrganizersList'
+import { organizerDescriptions } from '../../config/organizerConfigs'
 
 const BASE_URL = 'https://www.panhenio.pl'
 
@@ -52,7 +53,7 @@ export default async function OrganizatorzyPage() {
         {organizers.length === 0 ? (
           <p className={styles.empty}>Brak organizatorów.</p>
         ) : (
-          <OrganizersList organizers={organizers} />
+          <OrganizersList organizers={organizers} descriptions={organizerDescriptions} />
         )}
       </div>
     </div>

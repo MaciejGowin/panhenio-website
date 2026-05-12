@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import styles from './page.module.css'
 
-export default function OrganizersList({ organizers }) {
+export default function OrganizersList({ organizers, descriptions = {} }) {
   const [query, setQuery] = useState('')
 
   const filtered = query.trim()
@@ -33,7 +33,12 @@ export default function OrganizersList({ organizers }) {
                 href={`/organizator/${encodeURIComponent(org.id)}/wydarzenia-dla-seniorow`}
                 className={styles.card}
               >
-                <span className={styles.name}>{org.name}</span>
+                <span className={styles.cardBody}>
+                  <span className={styles.name}>{org.name}</span>
+                  {descriptions[org.id] && (
+                    <span className={styles.description}>{descriptions[org.id]}</span>
+                  )}
+                </span>
                 <span className={styles.arrow}>→</span>
               </a>
             </li>
