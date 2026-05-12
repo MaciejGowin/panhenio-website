@@ -68,6 +68,7 @@ export default function SearchPage({ initialCityId = '', initialCategoryId = '' 
     <div className={styles.page}>
       <div className={styles.inner}>
 <h1 className={styles.title}>Szukaj wszystkich wydarzeń dla seniorów</h1>
+        <p className={styles.description}>Przeglądaj warsztaty, spacery, spotkania i inne aktywności dla seniorów w Polsce. Wybierz miasto i kategorię, aby znaleźć coś dla siebie.</p>
 
         <form className={styles.form} onSubmit={handleSearch}>
           <div className={styles.filterRow}>

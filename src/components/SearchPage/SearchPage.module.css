@@ -28,6 +28,14 @@
   margin-bottom: 24px;
 }
 
+.description {
+  font-size: 0.95rem;
+  color: var(--gray-500);
+  line-height: 1.6;
+  margin-top: -12px;
+  margin-bottom: 28px;
+}
+
 .form {
   display: flex;
   flex-direction: column;
