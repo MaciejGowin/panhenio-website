@@ -30,7 +30,7 @@ Resources:
       Policies:
         - AWSLambdaBasicExecutionRole
         - AWSLambda_ReadOnlyAccess
-      Tracing: Active
+      Tracing: Disabled
     Metadata:
       BuildMethod: makefile
 
