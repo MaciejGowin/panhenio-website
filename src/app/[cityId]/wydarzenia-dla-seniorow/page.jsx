@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import styles from './page.module.css'
 import EventCard from '../../../components/EventCard/EventCard'
-import { cityTitles } from '../../../config/cityTitles'
+import { cityTitles, cityDescriptions } from '../../../config/cityTitles'
 import { fetchCities } from '../../../lib/api'
 import { todayPL, tomorrowPL } from '../../../lib/dates'
 
@@ -114,6 +114,10 @@ export default async function CityEventsPage({ params, searchParams }) {
         <h1 className={styles.title}>
           {cityTitles[cityId] ?? `Wydarzenia dla seniorów w lokalizacji ${cityName}`}
         </h1>
+
+        {cityDescriptions[cityId] && (
+          <p className={styles.description}>{cityDescriptions[cityId]}</p>
+        )}
 
         <div className={styles.dayNav}>
           {effectiveDay > today
