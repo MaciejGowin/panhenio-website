@@ -11,6 +11,18 @@ import styles from './page.module.css'
 import { cityTitles } from '../config/cityTitles'
 import { fetchCities } from '../lib/api'
 
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Pan Henio',
+  url: 'https://www.panhenio.pl',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: 'https://www.panhenio.pl/szukaj-wydarzen?miasto={city}',
+    'query-input': 'required name=city',
+  },
+}
+
 export default async function HomePage() {
   const cities = await fetchCities()
   const city = cities.find(c => c.default) ?? cities[0] ?? null
@@ -18,6 +30,7 @@ export default async function HomePage() {
 
   return (
     <main className={styles.main}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
       <Hero cityTitle={cityTitle} />
       <Latest cityId={city?.id} />
       <Newsletter cities={cities} defaultCityId={city?.id ?? null} />

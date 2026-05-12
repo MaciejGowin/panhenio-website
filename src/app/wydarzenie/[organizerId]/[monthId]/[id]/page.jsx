@@ -135,8 +135,14 @@ export default async function WydarzeniePage({ params, searchParams }) {
             addressCountry: 'PL',
           },
         },
-        ...(event.facilitator ? { organizer: { '@type': 'Person', name: event.facilitator } } : {}),
+        organizer: { '@type': 'Organization', name: event.organizer.name },
+        ...(event.facilitator ? { performer: { '@type': 'Person', name: event.facilitator } } : {}),
+        eventStatus: 'https://schema.org/EventScheduled',
+        eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
         isAccessibleForFree: event.entryCost === 'bezpłatnie' || event.entryCost === 'bezpłatne',
+        ...(event.entryCost === 'bezpłatnie' || event.entryCost === 'bezpłatne'
+          ? { offers: { '@type': 'Offer', price: 0, priceCurrency: 'PLN', availability: 'https://schema.org/InStock' } }
+          : {}),
         url: `${BASE_URL}/wydarzenie/${organizerId}/${monthId}/${id}`,
       }
     : null
