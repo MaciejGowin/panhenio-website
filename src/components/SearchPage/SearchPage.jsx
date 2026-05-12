@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import styles from './SearchPage.module.css'
 import EventCard from '../EventCard/EventCard'
 import { todayPL } from '../../lib/dates'
+import { toPolishMonthUrl } from '../../lib/polishDate'
 
 export default function SearchPage({ initialCityId = '', initialCategoryId = '' }) {
   const [cityId, setCityId] = useState(initialCityId)
@@ -115,7 +116,7 @@ export default function SearchPage({ initialCityId = '', initialCategoryId = '' 
                   <EventCard
                     event={event}
                     href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}`}
-                    organizerHref={`/organizator/${encodeURIComponent(event.organizer.id)}/wydarzenia-dla-seniorow?miesiac=${event.month}`}
+                    organizerHref={`/organizator/${encodeURIComponent(event.organizer.id)}/wydarzenia-dla-seniorow/${toPolishMonthUrl(event.month)}`}
                   />
                 </li>
               ))}

@@ -2,6 +2,7 @@ import styles from '../../../../../components/EventPage/EventPage.module.css'
 import { fetchEvent, fetchCities } from '../../../../../lib/api'
 import Newsletter from '../../../../../components/Newsletter/Newsletter'
 import { todayPL, tomorrowPL } from '../../../../../lib/dates'
+import { toPolishMonthUrl } from '../../../../../lib/polishDate'
 
 const BASE_URL = 'https://www.panhenio.pl'
 
@@ -167,7 +168,7 @@ export default async function WydarzeniePage({ params, searchParams }) {
                 ))}
               </div>
               <a
-                href={`/organizator/${encodeURIComponent(event.organizer.id)}/wydarzenia-dla-seniorow?miesiac=${event.month}`}
+                href={`/organizator/${encodeURIComponent(event.organizer.id)}/wydarzenia-dla-seniorow/${toPolishMonthUrl(event.month)}`}
                 className={styles.organizer}
               >
                 <OrganizerIcon />

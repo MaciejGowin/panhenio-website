@@ -1,6 +1,7 @@
 import styles from './Latest.module.css'
 import EventCard from '../EventCard/EventCard'
 import { cityAllEvents } from '../../config/cityConfigs'
+import { toPolishMonthUrl } from '../../lib/polishDate'
 
 const BASE_URL = 'https://www.panhenio.pl'
 
@@ -41,7 +42,7 @@ export default async function Latest({ cityId }) {
               <EventCard
                 event={event}
                 href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}`}
-                organizerHref={`/organizator/${encodeURIComponent(event.organizer.id)}/wydarzenia-dla-seniorow?miesiac=${event.month}`}
+                organizerHref={`/organizator/${encodeURIComponent(event.organizer.id)}/wydarzenia-dla-seniorow/${toPolishMonthUrl(event.month)}`}
               />
             </li>
           ))}

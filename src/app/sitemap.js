@@ -1,5 +1,5 @@
 import { todayPL } from '../lib/dates'
-import { toPolishUrl } from '../lib/polishDate'
+import { toPolishUrl, toPolishMonthUrl } from '../lib/polishDate'
 
 const BASE_URL = 'https://www.panhenio.pl'
 
@@ -57,6 +57,31 @@ export default async function sitemap() {
     priority: 0.7,
   }))
 
+  // One entry per unique (organizer, month) pair
+  const organizerMonthMap = new Map()
+  for (const event of events) {
+    const key = `${event.organizer.id}|${event.month}`
+    if (!organizerMonthMap.has(key)) organizerMonthMap.set(key, { organizerId: event.organizer.id, month: event.month })
+  }
+  const organizerMonthPages = [...organizerMonthMap.values()].map(({ organizerId, month }) => ({
+    url: `${BASE_URL}/organizator/${organizerId}/wydarzenia-dla-seniorow/${toPolishMonthUrl(month)}`,
+    changeFrequency: 'daily',
+    priority: 0.6,
+  }))
+
+  // One entry per unique (organizer, date) pair, excluding today (covered by root)
+  const organizerDayMap = new Map()
+  for (const event of events) {
+    if (event.date === today) continue
+    const key = `${event.organizer.id}|${event.date}`
+    if (!organizerDayMap.has(key)) organizerDayMap.set(key, { organizerId: event.organizer.id, date: event.date })
+  }
+  const organizerDayPages = [...organizerDayMap.values()].map(({ organizerId, date }) => ({
+    url: `${BASE_URL}/organizator/${organizerId}/wydarzenia-dla-seniorow/${toPolishUrl(date)}`,
+    changeFrequency: 'daily',
+    priority: 0.5,
+  }))
+
   const eventPages = events.map(event => ({
     url: `${BASE_URL}/wydarzenie/${event.organizer.id}/${event.month}/${event.id}`,
     changeFrequency: 'weekly',
@@ -64,5 +89,5 @@ export default async function sitemap() {
     ...(event.createdAt ? { lastModified: event.createdAt } : {}),
   }))
 
-  return [...staticPages, ...cityPages, ...cityDayPages, ...organizerPages, ...eventPages]
+  return [...staticPages, ...cityPages, ...cityDayPages, ...organizerPages, ...organizerMonthPages, ...organizerDayPages, ...eventPages]
 }

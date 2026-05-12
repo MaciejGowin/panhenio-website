@@ -1,8 +1,6 @@
 import { notFound } from 'next/navigation'
 import styles from './page.module.css'
-import { organizerDescriptions } from '../../../../config/organizerConfigs'
-import CalendarGrid from './CalendarGrid'
-import EventCard from '../../../../components/EventCard/EventCard'
+import OrganizerEventsContent from './OrganizerEventsContent'
 import { todayPL, tomorrowPL } from '../../../../lib/dates'
 
 const BASE_URL = 'https://www.panhenio.pl'
@@ -30,41 +28,18 @@ async function fetchMonths(organizerId) {
   }
 }
 
-async function fetchEvents(organizerId, month, day) {
+async function fetchEvents(organizerId, day) {
   try {
     const url = new URL(`${BASE_URL}/api/events`)
     url.searchParams.set('organizerId', organizerId)
-    if (day) {
-      url.searchParams.set('dateFrom', day)
-      url.searchParams.set('dateTo', day)
-    } else if (month) {
-      url.searchParams.set('month', month)
-    }
+    url.searchParams.set('dateFrom', day)
+    url.searchParams.set('dateTo', day)
     const res = await fetch(url.toString(), { cache: 'no-store' })
     if (!res.ok) return []
     return res.json()
   } catch {
     return []
   }
-}
-
-function formatMonth(month) {
-  const date = new Date(`${month}-01T00:00:00`)
-  return date.toLocaleDateString('pl-PL', { month: 'long', year: 'numeric', timeZone: 'Europe/Warsaw' })
-}
-
-function groupByDate(events) {
-  const map = new Map()
-  for (const event of events) {
-    if (!map.has(event.date)) map.set(event.date, [])
-    map.get(event.date).push(event)
-  }
-  return [...map.entries()]
-}
-
-function formatDate(dateStr) {
-  const date = new Date(`${dateStr}T00:00:00`)
-  return date.toLocaleDateString('pl-PL', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Warsaw' })
 }
 
 export async function generateMetadata({ params }) {
@@ -85,45 +60,30 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default async function OrganizerEventsPage({ params, searchParams }) {
+export default async function OrganizerEventsPage({ params }) {
   const { organizerId } = await params
-  const { miesiac: month, dzien: day, widok } = await searchParams
-  const isCalendar = widok === 'kalendarz'
   const today = todayPL()
   const tomorrow = tomorrowPL()
-  const [organizers, months] = await Promise.all([
-    fetchOrganizers(),
-    fetchMonths(organizerId),
-  ])
-  const effectiveMonth = month ?? months[0] ?? null
-  const events = await fetchEvents(organizerId, effectiveMonth, day)
+
+  const [organizers, months] = await Promise.all([fetchOrganizers(), fetchMonths(organizerId)])
   const organizer = organizers.find(o => o.id === organizerId)
   if (!organizer) notFound()
-  const organizerName = organizer.name
 
-  function buildUrl(overrides) {
-    const p = new URLSearchParams()
-    const merged = { miesiac: month, dzien: day, widok, ...overrides }
-    if (merged.dzien) p.set('dzien', merged.dzien)
-    else if (merged.miesiac) p.set('miesiac', merged.miesiac)
-    if (merged.widok && merged.widok !== 'lista') p.set('widok', merged.widok)
-    const qs = p.toString()
-    return `/organizator/${organizerId}/wydarzenia-dla-seniorow${qs ? `?${qs}` : ''}`
-  }
+  const events = await fetchEvents(organizerId, today)
 
   const breadcrumbLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Pan Henio', item: BASE_URL },
-      { '@type': 'ListItem', position: 2, name: organizerName, item: `${BASE_URL}/organizator/${organizerId}/wydarzenia-dla-seniorow` },
+      { '@type': 'ListItem', position: 2, name: organizer.name, item: `${BASE_URL}/organizator/${organizerId}/wydarzenia-dla-seniorow` },
     ],
   }
 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: `Wydarzenia dla seniorów – ${organizerName}`,
+    name: `Wydarzenia dla seniorów – ${organizer.name}`,
     url: `${BASE_URL}/organizator/${organizerId}/wydarzenia-dla-seniorow`,
     numberOfItems: events.length,
     itemListElement: events.map((event, i) => ({
@@ -151,83 +111,17 @@ export default async function OrganizerEventsPage({ params, searchParams }) {
     <div className={styles.page}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <div className={styles.inner}>
-        <h1 className={styles.title}>
-          Wydarzenia dla seniorów organizowane przez {organizerName}
-        </h1>
-
-        {organizerDescriptions[organizerId] && (
-          <p className={styles.description}>{organizerDescriptions[organizerId]}</p>
-        )}
-
-        <div className={styles.toolbar}>
-          <div className={styles.monthTabs}>
-            <a
-              href={buildUrl({ dzien: today, miesiac: undefined })}
-              className={`${styles.monthTab} ${day === today ? styles.monthTabActive : ''}`}
-            >
-              dziś
-            </a>
-            <a
-              href={buildUrl({ dzien: tomorrow, miesiac: undefined })}
-              className={`${styles.monthTab} ${day === tomorrow ? styles.monthTabActive : ''}`}
-            >
-              jutro
-            </a>
-            {months.map(m => (
-              <a
-                key={m}
-                href={buildUrl({ miesiac: m, dzien: undefined })}
-                className={`${styles.monthTab} ${!day && effectiveMonth === m ? styles.monthTabActive : ''}`}
-              >
-                {formatMonth(m)}
-              </a>
-            ))}
-          </div>
-
-          <div className={styles.viewToggle}>
-            <a
-              href={buildUrl({ widok: 'lista' })}
-              className={`${styles.viewTab} ${!isCalendar ? styles.viewTabActive : ''}`}
-            >
-              lista
-            </a>
-            <a
-              href={buildUrl({ widok: 'kalendarz' })}
-              className={`${styles.viewTab} ${isCalendar ? styles.viewTabActive : ''}`}
-            >
-              kalendarz
-            </a>
-          </div>
-        </div>
-
-        {isCalendar && effectiveMonth ? (
-          <CalendarGrid
-            month={effectiveMonth}
-            events={events}
-            organizerId={organizerId}
-          />
-        ) : events.length === 0 ? (
-          <p className={styles.empty}>Brak nadchodzących wydarzeń tego organizatora.</p>
-        ) : (
-          groupByDate(events).map(([date, group]) => (
-            <section key={date} className={styles.dateGroup}>
-              <h2 className={styles.dateHeading}>{formatDate(date)}</h2>
-              <ul className={styles.cards}>
-                {group.map((event, i) => (
-                  <li key={i}>
-                    <EventCard
-                      event={event}
-                      href={`/wydarzenie/${encodeURIComponent(event.organizer.id)}/${encodeURIComponent(event.month)}/${encodeURIComponent(event.id)}`}
-                      organizerHref={`/organizator/${encodeURIComponent(event.organizer.id)}/wydarzenia-dla-seniorow?miesiac=${event.month}`}
-                    />
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ))
-        )}
-      </div>
+      <OrganizerEventsContent
+        organizerId={organizerId}
+        organizerName={organizer.name}
+        months={months}
+        effectiveMonth={null}
+        effectiveDay={today}
+        events={events}
+        today={today}
+        tomorrow={tomorrow}
+        isCalendar={false}
+      />
     </div>
   )
 }
