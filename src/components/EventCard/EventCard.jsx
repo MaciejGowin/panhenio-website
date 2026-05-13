@@ -33,7 +33,13 @@ export default function EventCard({ event, href, organizerHref }) {
       <div className={styles.header}>
         <div className={styles.badges}>
           {event.categories?.map(c => (
-            <span key={c.id} className={styles.badge}>{c.name}</span>
+            <a
+              key={c.id}
+              href={`/szukaj-wydarzen?${new URLSearchParams({ ...(event.city?.id ? { miasto: event.city.id } : {}), kategoria: c.id })}`}
+              className={styles.badge}
+            >
+              {c.name}
+            </a>
           ))}
         </div>
         <a href={organizerHref} className={styles.organizer}>
