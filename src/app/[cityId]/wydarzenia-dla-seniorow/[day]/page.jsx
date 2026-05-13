@@ -4,6 +4,7 @@ import CityEventsContent from '../CityEventsContent'
 import { fetchCities } from '../../../../lib/api'
 import { todayPL, tomorrowPL } from '../../../../lib/dates'
 import { fromPolishUrl } from '../../../../lib/polishDate'
+import { cityInDeclination } from '../../../../config/cityConfigs'
 
 const BASE_URL = 'https://www.panhenio.pl'
 
@@ -31,8 +32,8 @@ export async function generateMetadata({ params }) {
   const date = new Date(`${iso}T00:00:00`).toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Warsaw' })
 
   return {
-    title: `Wydarzenia dla seniorów – ${cityName} – ${date} – Pan Henio`,
-    description: `Wydarzenia dla seniorów w ${cityName} w dniu ${date}. Znajdź coś dla siebie z Pan Henio.`,
+    title: `Wydarzenia dla seniorów w ${cityName}, ${date} – Pan Henio`,
+    description: `Warsztaty, spacery i spotkania dla seniorów ${cityInDeclination[cityId] ?? `w mieście ${cityName}`} w dniu ${date}. Sprawdź dostępne aktywności i zaplanuj swój dzień.`,
     alternates: { canonical: `${BASE_URL}/${cityId}/wydarzenia-dla-seniorow/${day}` },
   }
 }

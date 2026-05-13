@@ -22,27 +22,27 @@ const organizationSchema = {
   name: 'Pan Henio',
   url: 'https://www.panhenio.pl',
   logo: 'https://www.panhenio.pl/panhenio-logo.png',
-  description: 'Serwis z wydarzeniami dla seniorów w Polsce.',
+  description: 'Bezpłatny serwis z wydarzeniami dla seniorów w Polsce.',
 }
 
 export const metadata = {
   icons: { icon: '/favicon.ico' },
   metadataBase: new URL('https://www.panhenio.pl'),
-  title: 'Pan Henio – wydarzenia dla seniorów',
-  description: 'Pan Henio – znajdź spacery, warsztaty, spotkania i inne wydarzenia dla seniorów we Wrocławiu i innych miastach Polski.',
+  title: 'Pan Henio – bezpłatne wydarzenia dla seniorów w Polsce',
+  description: 'Znajdź bezpłatne warsztaty, spacery, spotkania i inne aktywności dla seniorów we Wrocławiu, Poznaniu, Krakowie i innych miastach Polski.',
   robots: { index: true, follow: true },
   openGraph: {
     type: 'website',
     url: 'https://www.panhenio.pl',
-    title: 'Pan Henio – wydarzenia dla seniorów',
-    description: 'Znajdź spacery, warsztaty, spotkania i inne wydarzenia dla seniorów we Wrocławiu i innych miastach Polski.',
+    title: 'Pan Henio – bezpłatne wydarzenia dla seniorów w Polsce',
+    description: 'Znajdź bezpłatne warsztaty, spacery, spotkania i inne aktywności dla seniorów we Wrocławiu, Poznaniu, Krakowie i innych miastach Polski.',
     images: ['/panhenio-logo-text.png'],
     locale: 'pl_PL',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Pan Henio – wydarzenia dla seniorów',
-    description: 'Znajdź spacery, warsztaty, spotkania i inne wydarzenia dla seniorów we Wrocławiu i innych miastach Polski.',
+    title: 'Pan Henio – bezpłatne wydarzenia dla seniorów w Polsce',
+    description: 'Znajdź bezpłatne warsztaty, spacery, spotkania i inne aktywności dla seniorów we Wrocławiu, Poznaniu, Krakowie i innych miastach Polski.',
     images: ['/panhenio-logo-text.png'],
   },
 }

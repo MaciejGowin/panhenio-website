@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import styles from './page.module.css'
 import CityEventsContent from './CityEventsContent'
 import { fetchCities } from '../../../lib/api'
+import { cityInDeclination } from '../../../config/cityConfigs'
 import { todayPL, tomorrowPL } from '../../../lib/dates'
 
 const BASE_URL = 'https://www.panhenio.pl'
@@ -27,12 +28,12 @@ export async function generateMetadata({ params }) {
   const cityName = city?.name ?? cityId
 
   return {
-    title: `Wydarzenia dla seniorów – ${cityName} – Pan Henio`,
-    description: `Aktualne wydarzenia, warsztaty i spotkania dla seniorów w ${cityName}. Znajdź coś dla siebie z Pan Henio.`,
+    title: `Dzisiejsze wydarzenia dla seniorów w ${cityName} – Pan Henio`,
+    description: `Sprawdź, co dziś dzieje się dla seniorów ${cityInDeclination[cityId] ?? `w mieście ${cityName}`} – warsztaty, spacery, spotkania i więcej. Wstęp często bezpłatny.`,
     alternates: { canonical: `${BASE_URL}/${cityId}/wydarzenia-dla-seniorow` },
     openGraph: {
-      title: `Wydarzenia dla seniorów – ${cityName} – Pan Henio`,
-      description: `Aktualne wydarzenia dla seniorów w ${cityName}.`,
+      title: `Dzisiejsze wydarzenia dla seniorów w ${cityName} – Pan Henio`,
+      description: `Sprawdź, co dziś dzieje się dla seniorów ${cityInDeclination[cityId] ?? `w mieście ${cityName}`} – warsztaty, spacery, spotkania i więcej.`,
       url: `${BASE_URL}/${cityId}/wydarzenia-dla-seniorow`,
     },
   }

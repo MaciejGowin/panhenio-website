@@ -1,6 +1,6 @@
 import styles from './Latest.module.css'
 import EventCard from '../EventCard/EventCard'
-import { cityAllEvents } from '../../config/cityConfigs'
+import { cityInDeclination } from '../../config/cityConfigs'
 import { toPolishMonthUrl } from '../../lib/polishDate'
 
 const BASE_URL = 'https://www.panhenio.pl'
@@ -22,7 +22,7 @@ export default async function Latest({ cityId }) {
   if (events.length === 0) return null
 
   const cityHref = cityId ? `/${cityId}/wydarzenia-dla-seniorow` : '/szukaj-wydarzen'
-  const cityLabel = (cityId && cityAllEvents[cityId]) ?? `Wszystkie w lokalizacji ${cityId}`
+  const cityLabel = cityId ? `Wszystkie ${cityInDeclination[cityId] ?? `w mieście ${cityId}`}` : 'Wszystkie wydarzenia'
 
   return (
     <section className={styles.section}>

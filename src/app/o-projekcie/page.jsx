@@ -3,8 +3,8 @@ import OProjekcie from '../../components/OProjekcie/OProjekcie'
 const BASE_URL = 'https://www.panhenio.pl'
 
 export const metadata = {
-  title: 'O projekcie – Pan Henio',
-  description: 'Pan Henio to projekt stworzony z myślą o seniorach, którzy chcą aktywnie spędzać czas i odkrywać ciekawe wydarzenia w swoim mieście.',
+  title: 'O projekcie Pan Henio – bezpłatny serwis wydarzeń dla seniorów',
+  description: 'Pan Henio to bezpłatny serwis pomagający seniorom znajdować warsztaty, spacery i spotkania w swoim mieście. Poznaj naszą misję.',
   alternates: { canonical: `${BASE_URL}/o-projekcie` },
 }
 
@@ -13,7 +13,7 @@ const jsonLd = {
   '@type': 'AboutPage',
   url: `${BASE_URL}/o-projekcie`,
   name: 'O projekcie – Pan Henio',
-  description: 'Pan Henio to projekt stworzony z myślą o seniorach, którzy chcą aktywnie spędzać czas i odkrywać ciekawe wydarzenia w swoim mieście.',
+  description: 'Pan Henio to bezpłatny serwis pomagający seniorom znajdować warsztaty, spacery i spotkania w swoim mieście. Poznaj naszą misję.',
 }
 
 export default function OProjekciePage() {

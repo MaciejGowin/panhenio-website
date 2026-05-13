@@ -1,6 +1,6 @@
 import styles from './page.module.css'
 import EventCard from '../../../components/EventCard/EventCard'
-import { cityTitles, cityDescriptions } from '../../../config/cityConfigs'
+import { cityInDeclination, cityDescriptions } from '../../../config/cityConfigs'
 import { toPolishUrl, toPolishMonthUrl } from '../../../lib/polishDate'
 
 function offsetDay(dateStr, days) {
@@ -30,7 +30,7 @@ export default function CityEventsContent({ cityId, cityName, effectiveDay, even
   return (
     <div className={styles.inner}>
       <h1 className={styles.title}>
-        {cityTitles[cityId] ?? `Wydarzenia dla seniorów w lokalizacji ${cityName}`}
+        {`Wydarzenia dla seniorów ${cityInDeclination[cityId] ?? `w mieście ${cityName}`}`}
       </h1>
 
       {cityDescriptions[cityId] && (

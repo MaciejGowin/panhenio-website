@@ -4,12 +4,12 @@ import { fetchCities } from '../../lib/api'
 const BASE_URL = 'https://www.panhenio.pl'
 
 export const metadata = {
-  title: 'Miasta – wydarzenia dla seniorów – Pan Henio',
-  description: 'Lista miast z wydarzeniami dla seniorów w Polsce. Znajdź warsztaty, spacery i spotkania w swoim mieście.',
+  title: 'Miasta z wydarzeniami dla seniorów – Pan Henio',
+  description: 'Przeglądaj bezpłatne wydarzenia dla seniorów według miasta – Wrocław, Poznań, Kraków, Warszawa i inne. Znajdź aktywności blisko siebie.',
   alternates: { canonical: `${BASE_URL}/miasta` },
   openGraph: {
-    title: 'Miasta – wydarzenia dla seniorów – Pan Henio',
-    description: 'Lista miast z wydarzeniami dla seniorów w Polsce.',
+    title: 'Miasta z wydarzeniami dla seniorów – Pan Henio',
+    description: 'Przeglądaj bezpłatne wydarzenia dla seniorów według miasta – Wrocław, Poznań, Kraków, Warszawa i inne.',
     url: `${BASE_URL}/miasta`,
   },
 }

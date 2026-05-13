@@ -60,19 +60,19 @@ export async function generateMetadata({ params }) {
   if (isoDay) {
     const date = new Date(`${isoDay}T00:00:00`).toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Warsaw' })
     return {
-      title: `${organizerName} – ${date} – Pan Henio`,
-      description: `Wydarzenia dla seniorów organizowane przez ${organizerName} w dniu ${date}.`,
+      title: `Zajęcia dla seniorów – ${organizerName}, ${date} – Pan Henio`,
+      description: `Warsztaty i spotkania dla seniorów od ${organizerName} w dniu ${date}. Sprawdź dostępną ofertę i zaplanuj swój dzień.`,
       alternates: { canonical: `${BASE_URL}/organizator/${organizerId}/wydarzenia-dla-seniorow/${segment}` },
     }
   }
 
   const monthLabel = new Date(`${isoMonth}-01T00:00:00`).toLocaleDateString('pl-PL', { month: 'long', year: 'numeric', timeZone: 'Europe/Warsaw' })
   return {
-    title: `${organizerName} – ${monthLabel} – Pan Henio`,
-    description: `Wydarzenia dla seniorów organizowane przez ${organizerName} w ${monthLabel}.`,
+    title: `Zajęcia dla seniorów – ${organizerName}, ${monthLabel} – Pan Henio`,
+    description: `Pełny program wydarzeń dla seniorów od ${organizerName} w ${monthLabel}. Warsztaty, spacery i spotkania – sprawdź harmonogram.`,
     alternates: { canonical: `${BASE_URL}/organizator/${organizerId}/wydarzenia-dla-seniorow/${segment}` },
     openGraph: {
-      title: `${organizerName} – ${monthLabel} – Pan Henio`,
+      title: `Zajęcia dla seniorów – ${organizerName}, ${monthLabel} – Pan Henio`,
       url: `${BASE_URL}/organizator/${organizerId}/wydarzenia-dla-seniorow/${segment}`,
     },
   }

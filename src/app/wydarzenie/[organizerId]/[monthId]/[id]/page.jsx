@@ -3,6 +3,7 @@ import { fetchEvent, fetchCities } from '../../../../../lib/api'
 import Newsletter from '../../../../../components/Newsletter/Newsletter'
 import { todayPL, tomorrowPL } from '../../../../../lib/dates'
 import { toPolishMonthUrl } from '../../../../../lib/polishDate'
+import { cityInDeclination } from '../../../../../config/cityConfigs'
 
 const BASE_URL = 'https://www.panhenio.pl'
 
@@ -10,10 +11,14 @@ export async function generateMetadata({ params, searchParams }) {
   const { organizerId, monthId, id } = await params
   const { previewAccessToken } = await searchParams
   const event = await fetchEvent(organizerId, monthId, id, previewAccessToken)
-  if (!event) return { title: 'Wydarzenie – Pan Henio' }
+  if (!event) return { title: 'Wydarzenie dla seniorów – Pan Henio' }
+  const cityPhrase = event.city?.id ? (cityInDeclination[event.city.id] ?? `w mieście ${event.city.name}`) : ''
+  const descriptionFallback = `Wydarzenie dla seniorów${cityPhrase ? ` ${cityPhrase}` : ''}: ${[event.location, event.date].filter(Boolean).join(', ')}.`
+  const rawDescription = event.description || descriptionFallback
+  const description = rawDescription.length > 155 ? rawDescription.slice(0, 152) + '…' : rawDescription
   return {
     title: `${event.title} – Pan Henio`,
-    description: event.description || `${event.date} · ${[event.location, event.city.name].filter(Boolean).join(', ')}`,
+    description,
     alternates: { canonical: `${BASE_URL}/wydarzenie/${organizerId}/${monthId}/${id}` },
     openGraph: {
       title: `${event.title} – Pan Henio`,

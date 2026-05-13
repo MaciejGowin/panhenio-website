@@ -15,12 +15,12 @@ async function fetchOrganizers() {
 }
 
 export const metadata = {
-  title: 'Organizatorzy wydarzeń dla seniorów – Pan Henio',
-  description: 'Lista organizatorów wydarzeń dla seniorów w Polsce. Znajdź warsztaty, spacery i spotkania w swoim mieście.',
+  title: 'Organizatorzy zajęć dla seniorów w Polsce – Pan Henio',
+  description: 'Domy kultury, centra aktywności, fundacje i stowarzyszenia organizujące zajęcia dla seniorów. Znajdź warsztaty i spotkania blisko siebie.',
   alternates: { canonical: `${BASE_URL}/organizatorzy` },
   openGraph: {
-    title: 'Organizatorzy wydarzeń dla seniorów – Pan Henio',
-    description: 'Lista organizatorów wydarzeń dla seniorów w Polsce.',
+    title: 'Organizatorzy zajęć dla seniorów w Polsce – Pan Henio',
+    description: 'Domy kultury, centra aktywności, fundacje i stowarzyszenia organizujące zajęcia dla seniorów w Polsce.',
     url: `${BASE_URL}/organizatorzy`,
   },
 }

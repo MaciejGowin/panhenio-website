@@ -49,12 +49,12 @@ export async function generateMetadata({ params }) {
   const organizerName = organizer?.name ?? organizerId
 
   return {
-    title: `Wydarzenia dla seniorów – ${organizerName} – Pan Henio`,
-    description: `Aktualne wydarzenia, warsztaty i spotkania dla seniorów organizowane przez ${organizerName}. Znajdź coś dla siebie z Pan Henio.`,
+    title: `Dzisiejsze zajęcia dla seniorów – ${organizerName} – Pan Henio`,
+    description: `Sprawdź dzisiejszą ofertę dla seniorów od ${organizerName}. Warsztaty, spotkania i aktywności – wstęp często bezpłatny.`,
     alternates: { canonical: `${BASE_URL}/organizator/${organizerId}/wydarzenia-dla-seniorow` },
     openGraph: {
-      title: `Wydarzenia dla seniorów – ${organizerName} – Pan Henio`,
-      description: `Aktualne wydarzenia dla seniorów organizowane przez ${organizerName}.`,
+      title: `Dzisiejsze zajęcia dla seniorów – ${organizerName} – Pan Henio`,
+      description: `Sprawdź dzisiejszą ofertę dla seniorów od ${organizerName}. Warsztaty, spotkania i aktywności – wstęp często bezpłatny.`,
       url: `${BASE_URL}/organizator/${organizerId}/wydarzenia-dla-seniorow`,
     },
   }

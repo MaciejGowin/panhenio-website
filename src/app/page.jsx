@@ -8,7 +8,7 @@ import Latest from '../components/Latest/Latest'
 import Promoted from '../components/Promoted/Promoted'
 import Newsletter from '../components/Newsletter/Newsletter'
 import styles from './page.module.css'
-import { cityTitles } from '../config/cityConfigs'
+import { cityInDeclination } from '../config/cityConfigs'
 import { fetchCities } from '../lib/api'
 
 const websiteSchema = {
@@ -26,7 +26,7 @@ const websiteSchema = {
 export default async function HomePage() {
   const cities = await fetchCities()
   const city = cities.find(c => c.default) ?? cities[0] ?? null
-  const cityTitle = city ? (cityTitles[city.id] ?? `Wydarzenia dla seniorów w ${city.name}`) : null
+  const cityTitle = city ? `Wydarzenia dla seniorów ${cityInDeclination[city.id] ?? `w mieście ${city.name}`}` : null
 
   return (
     <main className={styles.main}>
