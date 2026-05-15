@@ -48,3 +48,35 @@
 .link:hover {
   color: var(--orange-dark);
 }
+
+.faqList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 4px;
+}
+
+.faqItem {
+  border-top: 1px solid var(--gray-200);
+}
+
+.faqItem:last-child {
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.faqQuestion {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--navy);
+  padding: 14px 0 6px;
+  margin: 0;
+  line-height: 1.45;
+}
+
+.faqAnswer {
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.75;
+  padding-bottom: 14px;
+  margin: 0;
+}
