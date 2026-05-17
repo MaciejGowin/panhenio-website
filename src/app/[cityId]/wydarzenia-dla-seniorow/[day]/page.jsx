@@ -1,26 +1,12 @@
 import { notFound, redirect } from 'next/navigation'
 import styles from '../page.module.css'
 import CityEventsContent from '../CityEventsContent'
-import { fetchCities } from '../../../../lib/api'
+import { fetchCities, fetchEvents } from '../../../../lib/api'
 import { todayPL, tomorrowPL } from '../../../../lib/dates'
 import { fromPolishUrl } from '../../../../lib/polishDate'
 import { cityInDeclination } from '../../../../config/cityConfigs'
 
 const BASE_URL = 'https://www.panhenio.pl'
-
-async function fetchEvents(cityId, iso) {
-  try {
-    const url = new URL(`${BASE_URL}/api/events`)
-    url.searchParams.set('cityId', cityId)
-    url.searchParams.set('dateFrom', iso)
-    url.searchParams.set('dateTo', iso)
-    const res = await fetch(url.toString(), { cache: 'no-store' })
-    if (!res.ok) return []
-    return res.json()
-  } catch {
-    return []
-  }
-}
 
 export async function generateMetadata({ params }) {
   const { cityId, day } = await params
@@ -47,7 +33,7 @@ export default async function CityDayPage({ params }) {
   if (iso === today) redirect(`/${cityId}/wydarzenia-dla-seniorow`)
 
   const tomorrow = tomorrowPL()
-  const [cities, events] = await Promise.all([fetchCities(), fetchEvents(cityId, iso)])
+  const [cities, events] = await Promise.all([fetchCities(), fetchEvents({ cityId, dateFrom: iso, dateTo: iso })])
   const city = cities.find(c => c.id === cityId)
   if (!city) notFound()
 

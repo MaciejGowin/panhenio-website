@@ -1,20 +1,7 @@
 import styles from './Promoted.module.css'
 import EventCard from '../EventCard/EventCard'
 import { toPolishMonthUrl } from '../../lib/polishDate'
-
-const BASE_URL = 'https://www.panhenio.pl'
-
-async function fetchPromotedEvents(cityId) {
-  try {
-    const url = new URL(`${BASE_URL}/api/events/promoted`)
-    if (cityId) url.searchParams.set('cityId', cityId)
-    const res = await fetch(url.toString(), { cache: 'no-store' })
-    if (!res.ok) return []
-    return res.json()
-  } catch {
-    return []
-  }
-}
+import { fetchPromotedEvents } from '../../lib/api'
 
 export default async function Promoted({ cityId }) {
   const events = await fetchPromotedEvents(cityId)

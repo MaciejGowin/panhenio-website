@@ -1,25 +1,11 @@
 import { notFound } from 'next/navigation'
 import styles from './page.module.css'
 import CityEventsContent from './CityEventsContent'
-import { fetchCities } from '../../../lib/api'
+import { fetchCities, fetchEvents } from '../../../lib/api'
 import { cityInDeclination } from '../../../config/cityConfigs'
 import { todayPL, tomorrowPL } from '../../../lib/dates'
 
 const BASE_URL = 'https://www.panhenio.pl'
-
-async function fetchEvents(cityId, day) {
-  try {
-    const url = new URL(`${BASE_URL}/api/events`)
-    url.searchParams.set('cityId', cityId)
-    url.searchParams.set('dateFrom', day)
-    url.searchParams.set('dateTo', day)
-    const res = await fetch(url.toString(), { cache: 'no-store' })
-    if (!res.ok) return []
-    return res.json()
-  } catch {
-    return []
-  }
-}
 
 export async function generateMetadata({ params }) {
   const { cityId } = await params
@@ -43,7 +29,7 @@ export default async function CityEventsPage({ params }) {
   const { cityId } = await params
   const today = todayPL()
   const tomorrow = tomorrowPL()
-  const [cities, events] = await Promise.all([fetchCities(), fetchEvents(cityId, today)])
+  const [cities, events] = await Promise.all([fetchCities(), fetchEvents({ cityId, dateFrom: today, dateTo: today })])
   const city = cities.find(c => c.id === cityId)
   if (!city) notFound()
   const cityName = city.name

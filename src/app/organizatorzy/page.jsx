@@ -1,18 +1,9 @@
 import styles from './page.module.css'
 import OrganizersList from './OrganizersList'
 import { organizerDescriptions } from '../../config/organizerConfigs'
+import { fetchOrganizers } from '../../lib/api'
 
 const BASE_URL = 'https://www.panhenio.pl'
-
-async function fetchOrganizers() {
-  try {
-    const res = await fetch(`${BASE_URL}/api/organizers`, { cache: 'no-store' })
-    if (!res.ok) return []
-    return res.json()
-  } catch {
-    return []
-  }
-}
 
 export const metadata = {
   title: 'Organizatorzy zajęć dla seniorów w Polsce – Pan Henio',

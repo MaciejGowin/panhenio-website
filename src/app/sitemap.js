@@ -1,23 +1,14 @@
 import { todayPL } from '../lib/dates'
 import { toPolishUrl, toPolishMonthUrl } from '../lib/polishDate'
+import { fetchCities, fetchOrganizers, fetchEvents } from '../lib/api'
 
 const BASE_URL = 'https://www.panhenio.pl'
 
-async function fetchAll(path) {
-  try {
-    const res = await fetch(`${BASE_URL}${path}`, { cache: 'no-store' })
-    if (!res.ok) return []
-    return res.json()
-  } catch {
-    return []
-  }
-}
-
 export default async function sitemap() {
   const [cities, organizers, events] = await Promise.all([
-    fetchAll('/api/cities'),
-    fetchAll('/api/organizers'),
-    fetchAll('/api/events'),
+    fetchCities(),
+    fetchOrganizers(),
+    fetchEvents(),
   ])
 
   const today = todayPL()

@@ -2,45 +2,9 @@ import { notFound } from 'next/navigation'
 import styles from './page.module.css'
 import OrganizerEventsContent from './OrganizerEventsContent'
 import { todayPL, tomorrowPL } from '../../../../lib/dates'
+import { fetchOrganizers, fetchOrganizerMonths, fetchEvents } from '../../../../lib/api'
 
 const BASE_URL = 'https://www.panhenio.pl'
-
-async function fetchOrganizers() {
-  try {
-    const res = await fetch(`${BASE_URL}/api/organizers`, { cache: 'no-store' })
-    if (!res.ok) return []
-    return res.json()
-  } catch {
-    return []
-  }
-}
-
-async function fetchMonths(organizerId) {
-  try {
-    const res = await fetch(
-      `${BASE_URL}/api/organizers/${encodeURIComponent(organizerId)}/months`,
-      { cache: 'no-store' }
-    )
-    if (!res.ok) return []
-    return res.json()
-  } catch {
-    return []
-  }
-}
-
-async function fetchEvents(organizerId, day) {
-  try {
-    const url = new URL(`${BASE_URL}/api/events`)
-    url.searchParams.set('organizerId', organizerId)
-    url.searchParams.set('dateFrom', day)
-    url.searchParams.set('dateTo', day)
-    const res = await fetch(url.toString(), { cache: 'no-store' })
-    if (!res.ok) return []
-    return res.json()
-  } catch {
-    return []
-  }
-}
 
 export async function generateMetadata({ params }) {
   const { organizerId } = await params
@@ -65,11 +29,11 @@ export default async function OrganizerEventsPage({ params }) {
   const today = todayPL()
   const tomorrow = tomorrowPL()
 
-  const [organizers, months] = await Promise.all([fetchOrganizers(), fetchMonths(organizerId)])
+  const [organizers, months] = await Promise.all([fetchOrganizers(), fetchOrganizerMonths(organizerId)])
   const organizer = organizers.find(o => o.id === organizerId)
   if (!organizer) notFound()
 
-  const events = await fetchEvents(organizerId, today)
+  const events = await fetchEvents({ organizerId, dateFrom: today, dateTo: today })
 
   const breadcrumbLd = {
     '@context': 'https://schema.org',

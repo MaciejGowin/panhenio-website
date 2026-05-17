@@ -2,20 +2,7 @@ import styles from './Latest.module.css'
 import EventCard from '../EventCard/EventCard'
 import { cityInDeclination } from '../../config/cityConfigs'
 import { toPolishMonthUrl } from '../../lib/polishDate'
-
-const BASE_URL = 'https://www.panhenio.pl'
-
-async function fetchLatestEvents(cityId) {
-  try {
-    const url = new URL(`${BASE_URL}/api/events/latest`)
-    if (cityId) url.searchParams.set('cityId', cityId)
-    const res = await fetch(url.toString(), { cache: 'no-store' })
-    if (!res.ok) return []
-    return res.json()
-  } catch {
-    return []
-  }
-}
+import { fetchLatestEvents } from '../../lib/api'
 
 export default async function Latest({ cityId }) {
   const events = await fetchLatestEvents(cityId)
