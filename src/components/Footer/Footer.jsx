@@ -5,6 +5,7 @@ const links = [
   { label: 'Organizatorzy', href: '/organizatorzy' },
   { label: 'Cyfrowy Henio', href: '/cyfrowy-henio' },
   { label: 'O projekcie', href: '/o-projekcie' },
+  { label: 'FAQ', href: '/czesto-zadawane-pytania' },
   { label: 'Dla organizatorów', href: '/dla-organizatorow' },
   { label: 'Polityka prywatności', href: '/polityka-prywatnosci' },
 ]
