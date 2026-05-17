@@ -7,7 +7,6 @@ import Categories from '../components/Categories/Categories'
 import Latest from '../components/Latest/Latest'
 import Promoted from '../components/Promoted/Promoted'
 import Newsletter from '../components/Newsletter/Newsletter'
-import Faq, { faqSchema } from '../components/Faq/Faq'
 import styles from './page.module.css'
 import { cityInDeclination } from '../config/cityConfigs'
 import { fetchCities } from '../lib/api'
@@ -32,13 +31,11 @@ export default async function HomePage() {
   return (
     <main className={styles.main}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <Hero cityTitle={cityTitle} />
+<Hero cityTitle={cityTitle} />
       <Latest cityId={city?.id} />
       <Newsletter cities={cities} defaultCityId={city?.id ?? null} />
       <Promoted cityId={city?.id} />
       <Categories />
-      <Faq />
     </main>
   )
 }

@@ -47,6 +47,10 @@ const nextConfig = {
         headers: [{ key: 'Cache-Control', value: 's-maxage=3600, stale-while-revalidate=86400' }],
       },
       {
+        source: '/czesto-zadawane-pytania',
+        headers: [{ key: 'Cache-Control', value: 's-maxage=86400, stale-while-revalidate=86400' }],
+      },
+      {
         source: '/polityka-prywatnosci',
         headers: [{ key: 'Cache-Control', value: 's-maxage=86400, stale-while-revalidate=86400' }],
       },
