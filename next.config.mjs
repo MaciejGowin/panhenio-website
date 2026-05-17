@@ -31,12 +31,32 @@ const nextConfig = {
         headers: [{ key: 'Cache-Control', value: 's-maxage=1800, stale-while-revalidate=3600' }],
       },
       {
+        source: '/:cityId/wydarzenia-dla-seniorow/:day',
+        headers: [{ key: 'Cache-Control', value: 's-maxage=1800, stale-while-revalidate=3600' }],
+      },
+      {
         source: '/organizator/:organizerId/wydarzenia-dla-seniorow',
+        headers: [{ key: 'Cache-Control', value: 's-maxage=1800, stale-while-revalidate=3600' }],
+      },
+      {
+        source: '/organizator/:organizerId/wydarzenia-dla-seniorow/:segment',
         headers: [{ key: 'Cache-Control', value: 's-maxage=1800, stale-while-revalidate=3600' }],
       },
       {
         source: '/wydarzenie/:path*',
         headers: [{ key: 'Cache-Control', value: 's-maxage=3600, stale-while-revalidate=86400' }],
+      },
+      {
+        source: '/polityka-prywatnosci',
+        headers: [{ key: 'Cache-Control', value: 's-maxage=86400, stale-while-revalidate=86400' }],
+      },
+      {
+        source: '/miasta',
+        headers: [{ key: 'Cache-Control', value: 's-maxage=86400, stale-while-revalidate=86400' }],
+      },
+      {
+        source: '/organizatorzy',
+        headers: [{ key: 'Cache-Control', value: 's-maxage=86400, stale-while-revalidate=86400' }],
       },
       {
         source: '/sitemap.xml',
