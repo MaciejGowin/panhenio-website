@@ -19,11 +19,11 @@ const faqItems = [
   },
   {
     q: 'Skąd pochodzą informacje o wydarzeniach?',
-    a: 'Samodzielnie przeszukujemy strony organizatorów – domów kultury, fundacji, stowarzyszeń i innych instytucji działających na rzecz seniorów. Nie współpracujemy z organizatorami ani nie jesteśmy przez nich finansowani.',
+    a: 'Samodzielnie przeszukujemy strony organizatorów – domów kultury, fundacji, stowarzyszeń i innych instytucji działających na rzecz seniorów. Jesteśmy otwarci na współpracę z organizatorami ale nie jesteśmy przez nich finansowani.',
   },
   {
     q: 'Jak często aktualizujecie ofertę wydarzeń?',
-    a: 'Nowe wydarzenia pojawiają się na bieżąco – zazwyczaj kilka razy w tygodniu. Organizatorzy samodzielnie dodają i aktualizują swoje propozycje, więc oferta jest zawsze aktualna.',
+    a: 'Staramy się aktualizować ofertę kilka razy w tygodniu. Samodzielnie zbieramy informacje ze stron organizatorów – to żmudny proces, który wymaga czasu. Tylko niewielka część organizatorów samodzielnie zarządza swoją ofertą w serwisie.',
   },
   {
     q: 'Czy mogę otrzymywać powiadomienia o nowych wydarzeniach?',
