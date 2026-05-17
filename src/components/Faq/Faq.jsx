@@ -3,7 +3,7 @@ import styles from './Faq.module.css'
 const faqItems = [
   {
     q: 'Czy udział w wydarzeniach jest bezpłatny?',
-    a: 'Większość wydarzeń na Pan Henio jest całkowicie bezpłatna. Przy każdym wydarzeniu podajemy informację o ewentualnych kosztach wstępu – jeśli nie ma takiej adnotacji, udział jest darmowy.',
+    a: 'Pan Henio nie organizuje wydarzeń. Zbieramy informacje o nich ze stron organizatorów. Przy każdym wydarzeniu podajemy informację o ewentualnych kosztach wstępu – jeśli nie ma takiej adnotacji, sprawdź stronę organizatora.',
   },
   {
     q: 'Jak się zapisać na wydarzenie?',
@@ -19,7 +19,7 @@ const faqItems = [
   },
   {
     q: 'Skąd pochodzą informacje o wydarzeniach?',
-    a: 'Współpracujemy bezpośrednio z organizatorami: domami kultury, fundacjami, stowarzyszeniami i innymi instytucjami działającymi na rzecz seniorów. Każde wydarzenie jest weryfikowane przed publikacją.',
+    a: 'Samodzielnie przeszukujemy strony organizatorów – domów kultury, fundacji, stowarzyszeń i innych instytucji działających na rzecz seniorów. Nie współpracujemy z organizatorami ani nie jesteśmy przez nich finansowani.',
   },
   {
     q: 'Jak często aktualizujecie ofertę wydarzeń?',
